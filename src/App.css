@@ -313,80 +313,70 @@
   margin: 0 auto;
 }
 
-.hero__program {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.55rem;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-weight: 600;
-  color: #8a8fa3;
-  margin: 0 0 2rem;
-}
-
-.hero__program a {
-  color: #c5d4ff;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(138, 180, 255, 0.4);
-  padding-bottom: 1px;
-}
-
-.hero__program a:hover {
-  border-bottom-color: #c5d4ff;
-}
-
-.hero__sep {
-  color: #2a2f3e;
-}
-
-.hero__tag {
-  color: #6e7388;
-}
-
 .hero__title {
-  font-size: clamp(2rem, 5.2vw, 3.4rem);
+  font-size: clamp(1.7rem, 4.2vw, 2.9rem);
   font-weight: 700;
-  line-height: 1.04;
-  letter-spacing: -0.026em;
-  margin: 0 0 1.6rem;
+  line-height: 1.08;
+  letter-spacing: -0.022em;
+  margin: 0 0 1.4rem;
   color: #f5f6fa;
-  max-width: 18ch;
+  max-width: 22ch;
 }
 
-.hero__title em {
-  font-style: italic;
-  color: #c5d4ff;
-  font-weight: 700;
-}
-
-.hero__tagline {
-  font-size: 1.1rem;
+.hero__subheader {
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
   line-height: 1.55;
   color: #c5c8d4;
-  margin: 0 0 2rem;
-  max-width: 60ch;
+  margin: 0 0 1.5rem;
+  max-width: 64ch;
 }
 
-.hero__credits {
-  font-size: 0.88rem;
-  color: #8a8fa3;
-  margin: 0;
-  line-height: 1.65;
-  max-width: 60ch;
-}
-
-.hero__credits a {
-  color: #d3deff;
+.hero__subheader a {
+  color: #c5d4ff;
   text-decoration: none;
-  border-bottom: 1px solid transparent;
+  border-bottom: 1px solid rgba(138, 180, 255, 0.35);
+  padding-bottom: 1px;
   transition: border-color 0.15s ease, color 0.15s ease;
 }
 
-.hero__credits a:hover {
-  border-bottom-color: #5a7fbf;
+.hero__subheader a:hover {
+  border-bottom-color: #c5d4ff;
   color: #f5f6fa;
+}
+
+.hero__intro {
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #b6bcc8;
+  margin: 0 0 1.5rem;
+  max-width: 64ch;
+}
+
+.hero__intro a {
+  color: #c5d4ff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(138, 180, 255, 0.3);
+  padding-bottom: 1px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.hero__intro a:hover {
+  border-bottom-color: #c5d4ff;
+  color: #f5f6fa;
+}
+
+.hero__meta {
+  font-size: 0.82rem;
+  color: #6e7388;
+  margin: 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid #181b25;
+  max-width: 64ch;
+}
+
+.hero__meta em {
+  font-style: italic;
+  color: #8a8fa3;
 }
 
 /* ──────────────────────────────────────────────────────────────

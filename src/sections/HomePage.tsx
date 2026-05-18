@@ -11,37 +11,21 @@ export function HomePage() {
       <section className="hero" aria-label="Project introduction">
         <div className="hero__glow" aria-hidden="true" />
         <div className="hero__inner">
-          <p className="hero__program">
-            An{" "}
-            <a href="https://www.careersintech.us" target="_blank" rel="noopener noreferrer">
-              AT³
-            </a>{" "}
-            Student Space Experiment Program project
-            <span className="hero__sep">·</span>
-            <span className="hero__tag">SSEP Mission 21 — Honorable Mention</span>
-          </p>
-
           <h1 className="hero__title">
-            Comparative Capture of <em>E. coli</em> by
-            <br />
-            Antimicrobial-Peptide Biosensors
-            <br />
-            in Microgravity
+            AT³'s honorable mention in the Student Space Experiment Program.
           </h1>
 
-          <p className="hero__tagline">
-            A theoretical experiment about whether AMP-based bacteria sensors still work
-            in orbit — or whether losing gravity quietly breaks them. Designed by a
-            student team, submitted to SSEP, didn't fly. Everything on this site is what
-            we wanted to test and why.
-          </p>
-
-          <p className="hero__credits">
-            Supported by{" "}
-            <a href="https://pasadena.edu/" target="_blank" rel="noopener noreferrer">
-              Pasadena City College
+          <p className="hero__subheader">
+            By{" "}
+            <a
+              href="https://ncesse.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              NCESSE
             </a>
-            . Advised by Michael Pham at the{" "}
+            , the National Center for Earth and Space Science Education. Advised by
+            Michael Pham at the{" "}
             <a
               href="https://www.cpp.edu/engineering/labs/bronco-space-lab.shtml"
               target="_blank"
@@ -59,21 +43,54 @@ export function HomePage() {
             </a>{" "}
             of BioCubic.
           </p>
+
+          <p className="hero__intro">
+            We're a student team from the{" "}
+            <a
+              href="https://www.careersintech.us"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              AT³ Micro and Nanotechnology Program
+            </a>{" "}
+            at Cal Poly Pomona, with support from{" "}
+            <a
+              href="https://pasadena.edu/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pasadena City College
+            </a>
+            . We pitched an experiment for SSEP Mission 21 — honorable mention means
+            it didn't get selected to fly, but the idea is the part we still wanted to
+            share. Briefly: we wanted to know whether antimicrobial-peptide biosensors
+            (basically, surfaces that catch bacteria) still work the same way in
+            orbit, or whether losing gravity quietly breaks them. We designed an
+            experiment to check. This site is the walkthrough.
+          </p>
+
+          <p className="hero__meta">
+            Proposal:{" "}
+            <em>
+              Comparative Capture of E. coli by Antimicrobial-Peptide Biosensors in
+              Microgravity
+            </em>
+          </p>
         </div>
       </section>
 
       <section className="start-here">
-        <p className="start-here__label">Start here</p>
+        <p className="start-here__label">Start reading</p>
         {firstSection && (
           <a href={`#${firstSection.id}`} className="start-here__cta">
-            <span className="start-here__direction">Begin reading →</span>
+            <span className="start-here__direction">Begin →</span>
             <span className="start-here__title">{firstSection.title}</span>
             <span className="start-here__summary">{firstSection.summary}</span>
           </a>
         )}
         <p className="start-here__alt">
-          Or use the sidebar to jump around — pages are organized by topic and each one
-          stands on its own.
+          Or open the sidebar (the ☰ menu on the next page) to jump around — each
+          page stands on its own.
         </p>
       </section>
     </>
