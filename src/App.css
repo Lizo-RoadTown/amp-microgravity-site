@@ -45,8 +45,121 @@ main {
 }
 
 .site-header {
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   padding-top: 2rem;
+}
+
+.home-intro {
+  margin: 0 0 2rem;
+  color: #8a8fa3;
+  font-size: 0.95rem;
+}
+
+.section-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin: 0 0 4rem;
+}
+
+.section-card {
+  display: block;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid #1f2230;
+  border-radius: 8px;
+  background: #0a0d14;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.section-card:hover {
+  border-color: #3a4a6e;
+  background: #0e131e;
+  transform: translateY(-1px);
+}
+
+.section-card h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+  color: #c5d4ff;
+}
+
+.section-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #8a8fa3;
+  line-height: 1.5;
+  max-width: none;
+}
+
+.section--page {
+  padding-top: 0.5rem;
+}
+
+.section-page__crumb {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+}
+
+.section-page__crumb a {
+  color: #8a8fa3;
+  text-decoration: none;
+}
+
+.section-page__crumb a:hover {
+  color: #c5d4ff;
+}
+
+.section-pagination {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 4rem 0 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #1f2230;
+}
+
+.section-pagination__slot {
+  min-height: 1px;
+}
+
+.section-pagination__slot--next {
+  text-align: right;
+}
+
+.section-pagination__link {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #1f2230;
+  border-radius: 6px;
+  color: inherit;
+  text-decoration: none;
+  max-width: 100%;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.section-pagination__link:hover {
+  border-color: #3a4a6e;
+  background: #0e131e;
+}
+
+.section-pagination__link--right {
+  text-align: right;
+}
+
+.section-pagination__direction {
+  font-size: 0.7rem;
+  color: #6e7388;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.section-pagination__title {
+  font-size: 0.95rem;
+  color: #c5d4ff;
 }
 
 .eyebrow {
