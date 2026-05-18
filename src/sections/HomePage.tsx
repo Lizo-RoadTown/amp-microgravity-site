@@ -63,8 +63,24 @@ export function HomePage() {
               rel="noopener noreferrer"
             >
               Dr. Jared Ashcroft
+            </a>{" "}
+            (Director of{" "}
+            <a
+              href="https://www.careersintech.us"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              AT³
             </a>
-            .
+            ,{" "}
+            <a
+              href="https://pasadena.edu/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Pasadena City College
+            </a>
+            ).
           </p>
 
           <p className="hero__intro">

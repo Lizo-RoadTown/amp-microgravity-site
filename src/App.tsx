@@ -88,8 +88,8 @@ function Footer() {
           rel="noopener noreferrer"
         >
           Dr. Jared Ashcroft
-        </a>
-        .
+        </a>{" "}
+        (Director of AT³, Pasadena City College).
       </p>
       <p>
         Source proposal: <em>Comparative Capture of E. coli by Antimicrobial-Peptide
