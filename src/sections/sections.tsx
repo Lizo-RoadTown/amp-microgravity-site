@@ -5,6 +5,7 @@ import { ElisaDiagram } from "../components/ElisaDiagram";
 import { TubeDiagram } from "../components/TubeDiagram";
 import { CrewTimeline } from "../components/CrewTimeline";
 import { MechanismCard } from "../components/MechanismComparison";
+import { BiofilmModule } from "../components/BiofilmModule";
 
 export interface SectionDef {
   id: string;
@@ -15,18 +16,25 @@ export interface SectionDef {
 }
 
 const MicrogravityBody: FC = () => (
-  <p>
-    The International Space Station has been continuously inhabited since 2000, and
-    microbial surveys keep turning up the same kinds of communities living on cabin
-    walls, air filters, and the water systems: <em>Staphylococcus</em>,{" "}
-    <em>Bacillus</em>, and gut-flora relatives like <em>E. coli</em>. They don't just
-    survive up there — they grow into <strong>biofilms</strong> (sticky surface-bound
-    mats of cells), and once they're on a surface they're notoriously hard to kill.
-    Worse, ISS biofilms have been documented growing in patterns and showing
-    antimicrobial-resistance levels that don't match what the same strains do on Earth.
-    That's the part that pulled us in — it's not a theoretical concern, it's an ongoing
-    operational one for crew health and equipment reliability.
-  </p>
+  <>
+    <p>
+      The International Space Station has been continuously inhabited since 2000, and
+      microbial surveys keep turning up the same kinds of communities living on cabin
+      walls, air filters, and the water systems: <em>Staphylococcus</em>,{" "}
+      <em>Bacillus</em>, and gut-flora relatives like <em>E. coli</em>. They don't
+      just survive up there — they grow into <strong>biofilms</strong> (sticky
+      surface-bound mats of cells), and once they're on a surface they're notoriously
+      hard to kill. Worse, ISS biofilms have been documented growing in patterns and
+      showing antimicrobial-resistance levels that don't match what the same strains
+      do on Earth. That's the part that pulled us in — it's not a theoretical
+      concern, it's an ongoing operational one for crew health and equipment
+      reliability.
+    </p>
+    <p>
+      Click a colored patch on the module below to see what's been found where.
+    </p>
+    <BiofilmModule />
+  </>
 );
 
 const BiosensorsBody: FC = () => (
