@@ -1,4 +1,9 @@
-import { SECTIONS } from "./sections";
+import { SECTIONS, SECTION_GROUPS } from "./sections";
+
+const FIRST_SECTION_ID = SECTION_GROUPS[0]?.sectionIds[0] ?? null;
+const firstSection = FIRST_SECTION_ID
+  ? SECTIONS.find((s) => s.id === FIRST_SECTION_ID)
+  : null;
 
 export function HomePage() {
   return (
@@ -57,22 +62,20 @@ export function HomePage() {
         </div>
       </section>
 
-      <div className="home-intro">
-        <p>
-          The site is broken into short pages — pick a question to start with. The
-          natural order is roughly top-left to bottom-right, but each page stands on
-          its own, so jump around as you like.
-        </p>
-      </div>
-
-      <div className="section-card-grid">
-        {SECTIONS.map((s) => (
-          <a key={s.id} href={`#${s.id}`} className="section-card">
-            <h3>{s.title}</h3>
-            <p>{s.summary}</p>
+      <section className="start-here">
+        <p className="start-here__label">Start here</p>
+        {firstSection && (
+          <a href={`#${firstSection.id}`} className="start-here__cta">
+            <span className="start-here__direction">Begin reading →</span>
+            <span className="start-here__title">{firstSection.title}</span>
+            <span className="start-here__summary">{firstSection.summary}</span>
           </a>
-        ))}
-      </div>
+        )}
+        <p className="start-here__alt">
+          Or use the sidebar to jump around — pages are organized by topic and each one
+          stands on its own.
+        </p>
+      </section>
     </>
   );
 }

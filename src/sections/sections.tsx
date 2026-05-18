@@ -322,6 +322,40 @@ const OutcomesBody: FC = () => (
   </>
 );
 
+export interface SectionGroup {
+  label: string;
+  blurb?: string;
+  sectionIds: string[];
+}
+
+export const SECTION_GROUPS: SectionGroup[] = [
+  {
+    label: "The question",
+    blurb: "Why this matters, and what we wanted to try.",
+    sectionIds: ["microgravity", "biosensors"],
+  },
+  {
+    label: "The hardware",
+    blurb: "The pieces laid out on the table — bacteria, chip, tube.",
+    sectionIds: ["strain", "chip", "tube"],
+  },
+  {
+    label: "The procedure",
+    blurb: "What happens once it's on orbit and how we'd read the result.",
+    sectionIds: ["crew", "return", "counting", "risk"],
+  },
+  {
+    label: "The physics",
+    blurb: "The actual question the experiment tests — visualized.",
+    sectionIds: ["bacteria-move", "watch"],
+  },
+  {
+    label: "What we'd have learned",
+    blurb: "If we'd flown it.",
+    sectionIds: ["outcomes"],
+  },
+];
+
 export const SECTIONS: SectionDef[] = [
   {
     id: "microgravity",
