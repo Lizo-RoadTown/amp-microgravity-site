@@ -6,6 +6,7 @@ import { TubeDiagram } from "../components/TubeDiagram";
 import { CrewTimeline } from "../components/CrewTimeline";
 import { MechanismCard } from "../components/MechanismComparison";
 import { BiofilmModule } from "../components/BiofilmModule";
+import { AmpCaptureDemo } from "../components/AmpCaptureDemo";
 
 export interface SectionDef {
   id: string;
@@ -38,17 +39,24 @@ const MicrogravityBody: FC = () => (
 );
 
 const BiosensorsBody: FC = () => (
-  <p>
-    The approach we wanted to try is a sensor built out of{" "}
-    <strong>antimicrobial peptides</strong> (AMPs) — short chains of amino acids
-    (basically small proteins) that carry a positive electrical charge. Bacterial cell
-    membranes carry a negative one. Opposite charges attract, so when an AMP and a
-    bacterium meet they stick. The idea is to coat a chip's surface with a dense lawn
-    of immobilized AMPs and use that lawn as a kind of biological velcro: bacteria
-    drifting past get caught, and a detector reads out how many landed. This kind of
-    design has been demonstrated on Earth. What we wanted to ask is whether it still
-    works in orbit — and if it doesn't, by how much.
-  </p>
+  <>
+    <p>
+      The approach we wanted to try is a sensor built out of{" "}
+      <strong>antimicrobial peptides</strong> (AMPs) — short chains of amino acids
+      (basically small proteins) that carry a positive electrical charge. Bacterial
+      cell membranes carry a negative one. Opposite charges attract, so when an AMP
+      and a bacterium meet they stick. The idea is to coat a chip's surface with a
+      dense lawn of immobilized AMPs and use that lawn as a kind of biological
+      velcro: bacteria drifting past get caught, and a detector reads out how many
+      landed.
+    </p>
+    <p>Click <em>Release bacterium</em> below to see the idea in motion.</p>
+    <AmpCaptureDemo />
+    <p>
+      This kind of design has been demonstrated on Earth. What we wanted to ask is
+      whether it still works in orbit — and if it doesn't, by how much.
+    </p>
+  </>
 );
 
 const HowTheyMoveBody: FC = () => (

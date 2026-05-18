@@ -824,6 +824,155 @@
 }
 
 /* ──────────────────────────────────────────────────────────────
+   AMP capture demo (Detection page)
+   ────────────────────────────────────────────────────────────── */
+
+.amp-demo {
+  margin: 1.5rem 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid #1a1d28;
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: #05070b;
+}
+
+.amp-demo__svg {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.amp-demo__bact {
+  transform-origin: 300px 70px;
+}
+
+.amp-demo__bact--idle {
+  /* gentle drift while waiting */
+  animation: amp-bact-hover 4s ease-in-out infinite;
+}
+
+.amp-demo__bact--dropping {
+  animation: amp-bact-fall 2.2s cubic-bezier(0.55, 0.05, 0.65, 1) forwards;
+}
+
+.amp-demo__bact--captured {
+  transform: translate(0, 160px) scale(0.92);
+}
+
+@keyframes amp-bact-hover {
+  0%, 100% { transform: translate(0, 0); }
+  50%      { transform: translate(0, -6px); }
+}
+
+@keyframes amp-bact-fall {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  70%  { transform: translate(0, 130px) rotate(-3deg); }
+  100% { transform: translate(0, 160px) scale(0.92); }
+}
+
+.amp-demo__field {
+  animation: amp-field-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes amp-field-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%      { opacity: 0.85; }
+}
+
+.amp-demo__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.4rem;
+}
+
+.amp-demo__status {
+  font-size: 0.95rem;
+  color: #c5c8d4;
+  line-height: 1.45;
+  flex: 1 1 320px;
+  min-width: 240px;
+}
+
+.amp-demo__status--active {
+  color: #c5d4ff;
+}
+
+.amp-demo__status--done {
+  color: #a3e4c4;
+}
+
+.amp-demo__buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.amp-demo__btn {
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  border: 1px solid #2c3447;
+  background: #11161f;
+  color: #c5d4ff;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.amp-demo__btn:hover {
+  border-color: #5a7fbf;
+  background: #131a26;
+}
+
+.amp-demo__btn:active {
+  transform: translateY(1px);
+}
+
+.amp-demo__btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.amp-demo__btn--primary {
+  background: linear-gradient(180deg, #2a4070 0%, #1e2f55 100%);
+  border-color: #5a7fbf;
+  color: #f5f6fa;
+}
+
+.amp-demo__btn--primary:hover {
+  background: linear-gradient(180deg, #314a82 0%, #233763 100%);
+  border-color: #7a98d8;
+}
+
+.amp-demo__counter {
+  font-size: 0.85rem;
+  color: #8a8fa3;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.amp-demo__counter strong {
+  color: #f5f6fa;
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amp-demo__bact,
+  .amp-demo__field,
+  .amp-demo__flash {
+    animation: none;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────
    Biofilm module visual (Why microgravity? page)
    ────────────────────────────────────────────────────────────── */
 
