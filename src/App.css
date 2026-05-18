@@ -412,15 +412,16 @@
   max-width: 22ch;
 }
 
-.hero__subheader {
-  font-size: clamp(1rem, 1.6vw, 1.15rem);
-  line-height: 1.55;
-  color: #c5c8d4;
-  margin: 0 0 1.5rem;
+.hero__byline {
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  line-height: 1.5;
+  color: #8a8fa3;
+  margin: -0.6rem 0 1.6rem;
   max-width: 64ch;
+  font-weight: 400;
 }
 
-.hero__subheader a {
+.hero__byline a {
   color: #c5d4ff;
   text-decoration: none;
   border-bottom: 1px solid rgba(138, 180, 255, 0.35);
@@ -428,7 +429,7 @@
   transition: border-color 0.15s ease, color 0.15s ease;
 }
 
-.hero__subheader a:hover {
+.hero__byline a:hover {
   border-bottom-color: #c5d4ff;
   color: #f5f6fa;
 }

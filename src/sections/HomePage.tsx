@@ -14,8 +14,28 @@ export function HomePage() {
         <div className="hero__inner">
           <div className="hero__content">
           <h1 className="hero__title">
-            AT³'s honorable mention in the Student Space Experiment Program.
+            Welcome to the Space Experiment Walkthru
           </h1>
+
+          <p className="hero__byline">
+            by{" "}
+            <a
+              href="https://www.careersintech.us"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              AT³
+            </a>
+            's honorable mention in the SSEP Challenge by the{" "}
+            <a
+              href="https://ncesse.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              NCESSE
+            </a>
+            .
+          </p>
 
           <p className="hero__intro">
             We're a student team from the{" "}
