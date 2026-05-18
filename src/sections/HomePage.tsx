@@ -126,10 +126,6 @@ export function HomePage() {
             <span className="start-here__summary">{firstSection.summary}</span>
           </a>
         )}
-        <p className="start-here__alt">
-          Or open the sidebar (the ☰ menu on the next page) to jump around — each
-          page stands on its own.
-        </p>
       </section>
     </>
   );

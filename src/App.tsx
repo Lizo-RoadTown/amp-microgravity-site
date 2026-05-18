@@ -74,6 +74,33 @@ function Footer() {
         </a>
         .
       </p>
+      <p>
+        Advised by{" "}
+        <a
+          href="https://www.linkedin.com/in/michael-pham-04743a161/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Michael Pham
+        </a>{" "}
+        (Bronco Space Lab, Cal Poly Pomona),{" "}
+        <a
+          href="https://www.linkedin.com/in/chris-buser-phd/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Dr. Chris Buser
+        </a>{" "}
+        (BioCubic), and{" "}
+        <a
+          href="https://www.linkedin.com/in/jared-ashcroft-44801a87/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Dr. Jared Ashcroft
+        </a>{" "}
+        (Director of AT³, Pasadena City College).
+      </p>
     </footer>
   );
 }

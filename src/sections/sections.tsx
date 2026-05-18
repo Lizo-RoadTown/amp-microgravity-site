@@ -234,9 +234,8 @@ const CountingBody: FC = () => (
 const TubeBody: FC = () => (
   <>
     <p>
-      We didn't get to pick the hardware shape — SSEP gives you a Rhodium RhFET-01 tube
-      and you fit your experiment inside it. The whole thing is about the size of a
-      sturdy marker pen. Three chambers, two crew-operated valves, 20 mL of total fluid
+      SSEP gives every team the same hardware: a Rhodium RhFET-01 tube about the
+      size of a sturdy marker pen, and your job is to fit your experiment inside it. Three chambers, two crew-operated valves, 20 mL of total fluid
       capacity. Everything you've read about — the freeze-dried bacteria, the AMP chips
       and PBS/BS3 solution, the formalin — has to fit in this volume.
     </p>
@@ -275,9 +274,8 @@ const RiskBody: FC = () => (
 const OutcomesBody: FC = () => (
   <>
     <p>
-      The honest answer is: we don't know. We didn't get to fly it. But the reason we
-      cared about this question — and the reason we'd still like to see somebody run
-      it — is that <em>both</em> possible outcomes are useful.
+      Both possible outcomes from this experiment are useful. Here's what each one
+      would tell us about how AMP biosensors behave in space.
     </p>
 
     <h3>If microgravity reduces capture</h3>
@@ -293,31 +291,29 @@ const OutcomesBody: FC = () => (
     <h3>If capture is statistically equivalent</h3>
     <p>
       That would mean active bacterial swimming is doing enough work on its own to
-      compensate for the missing transport modes, and current Earth-tested designs can
-      probably deploy as-is. It would also be quietly interesting on its own terms: it
-      would say something specific about how much active microbial transport
-      contributes relative to the passive mechanisms, which isn't well characterized.
+      compensate for the missing transport modes, and current Earth-tested designs
+      can probably deploy as-is. It would also be quietly interesting on its own
+      terms: it would say something specific about how much active microbial
+      transport contributes relative to the passive mechanisms, which isn't well
+      characterized.
     </p>
 
-    <h3>What we couldn't have answered even with a flight</h3>
+    <h3>Where this experiment would stop</h3>
     <p>
-      A few things we'd want to know but couldn't, even with the experiment as
-      designed: whether different bacterial species behave differently (we picked one
-      strain to keep the variable count down); whether longer exposures change the
-      picture (our window is three days, which is short for biofilm formation);
-      whether the formalin fixation itself perturbs the count (it shouldn't, but we
-      can't verify on orbit). If this ever does fly — ours or someone else's — those
-      would be the natural next questions.
+      A few questions are bigger than our design. Whether different bacterial species
+      behave differently — we picked one strain to keep the variable count down.
+      Whether longer exposures change the picture — our window is three days, which
+      is short for biofilm formation. Whether the formalin fixation itself perturbs
+      the count — it shouldn't, but verifying that needs its own experiment. Those
+      are the natural follow-ups.
     </p>
 
-    <h3>Why we're putting this up anyway</h3>
+    <h3>Why this matters</h3>
     <p>
-      A project that didn't fly is easy to file away and forget. We think this
-      particular question is worth keeping in front of people — both because biofilm
-      monitoring in long-duration spaceflight is a real problem someone will need to
-      solve, and because the transport-vs-chemistry distinction we kept coming back to
-      seems load-bearing. If you read this and have a way to get it tested for real,
-      we'd love to hear about it.
+      Biofilm monitoring in long-duration spaceflight is a real problem someone will
+      need to solve, and the transport-vs-chemistry distinction we kept coming back
+      to seems load-bearing. We think the question is worth keeping in front of
+      people. If you read this and want to talk about it, we'd love that.
     </p>
   </>
 );
