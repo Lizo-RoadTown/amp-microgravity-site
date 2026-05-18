@@ -10,10 +10,11 @@ body,
   margin: 0;
   padding: 0;
   min-height: 100%;
-  background: #0b0d12;
+  background: #07090e;
   color: #e6e8ee;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
+  font-feature-settings: "cv11", "ss03", "ss01";
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -28,9 +29,20 @@ h2,
 h3 {
   color: #f5f6fa;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.018em;
+}
+
+h1 {
+  line-height: 1.1;
 }
 
 p {
   margin: 0 0 1em 0;
+}
+
+code,
+kbd,
+samp,
+.tabular {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 }
