@@ -1,4 +1,5 @@
 import { SECTIONS, SECTION_GROUPS } from "./sections";
+import { HeroVisual } from "../components/HeroVisual";
 
 const FIRST_SECTION_ID = SECTION_GROUPS[0]?.sectionIds[0] ?? null;
 const firstSection = FIRST_SECTION_ID
@@ -11,6 +12,7 @@ export function HomePage() {
       <section className="hero" aria-label="Project introduction">
         <div className="hero__glow" aria-hidden="true" />
         <div className="hero__inner">
+          <div className="hero__content">
           <h1 className="hero__title">
             AT³'s honorable mention in the Student Space Experiment Program.
           </h1>
@@ -115,6 +117,11 @@ export function HomePage() {
               Microgravity
             </em>
           </p>
+          </div>
+
+          <div className="hero__visual-wrap" aria-hidden="false">
+            <HeroVisual />
+          </div>
         </div>
       </section>
 
