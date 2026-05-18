@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { TopBar } from "./components/TopBar";
 import { Sidebar } from "./components/Sidebar";
 import { SECTIONS } from "./sections/sections";
 import { HomePage } from "./sections/HomePage";
@@ -11,8 +12,28 @@ function getRouteFromHash(): string | null {
   return SECTIONS.some((s) => s.id === hash) ? hash : null;
 }
 
+function Footer() {
+  return (
+    <footer className="site-footer">
+      <p>
+        Built by a student team from the AT³ Micro and Nanotechnology Program at Cal
+        Poly Pomona — PI Elizabeth Osborn, with Frank Puga-Raya, Steven Picazo, Jesus
+        Coca, Alejandro Lopez, Damian Palacios-Rosas, and Maya Ramirez — advised by
+        Michael Pham (Bronco Space Lab, Cal Poly Pomona) and Dr. Chris Buser
+        (BioCubic).
+      </p>
+      <p>
+        Source proposal: <em>Comparative Capture of E. coli by Antimicrobial-Peptide
+        Biosensors in Microgravity.</em> Submitted to SSEP Mission 21 (NCESSE),
+        honorable mention — not selected to fly.
+      </p>
+    </footer>
+  );
+}
+
 function App() {
   const [currentId, setCurrentId] = useState<string | null>(() => getRouteFromHash());
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     const onHashChange = () => {
@@ -24,31 +45,32 @@ function App() {
   }, []);
 
   const current = currentId ? SECTIONS.find((s) => s.id === currentId) ?? null : null;
+  const isHome = current === null;
 
   return (
-    <div className="app-layout">
-      <Sidebar currentId={currentId} />
-      <main className="app-main">
-        <div className="page-shell">
-          {current ? <SectionPage section={current} /> : <HomePage />}
+    <>
+      <TopBar currentId={currentId} onToggleSidebar={() => setSidebarOpen((v) => !v)} />
+      {isHome ? (
+        <main className="home-shell">
+          <HomePage />
+          <Footer />
+        </main>
+      ) : (
+        <div className="docs-layout">
+          <Sidebar
+            currentId={currentId}
+            open={sidebarOpen}
+            onClose={() => setSidebarOpen(false)}
+          />
+          <main className="docs-main">
+            <div className="page-shell">
+              {current && <SectionPage section={current} />}
+            </div>
+            <Footer />
+          </main>
         </div>
-
-        <footer className="site-footer">
-          <p>
-            Built by a student team from the AT³ Micro and Nanotechnology Program at
-            Cal Poly Pomona — PI Elizabeth Osborn, with Frank Puga-Raya, Steven Picazo,
-            Jesus Coca, Alejandro Lopez, Damian Palacios-Rosas, and Maya Ramirez —
-            advised by Michael Pham (Bronco Space Lab, Cal Poly Pomona) and Dr. Chris
-            Buser (BioCubic).
-          </p>
-          <p>
-            Source proposal: <em>Comparative Capture of E. coli by Antimicrobial-Peptide
-            Biosensors in Microgravity.</em> Submitted to SSEP Mission 21 (NCESSE),
-            honorable mention — not selected to fly.
-          </p>
-        </footer>
-      </main>
-    </div>
+      )}
+    </>
   );
 }
 

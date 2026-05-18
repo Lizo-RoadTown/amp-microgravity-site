@@ -1,45 +1,30 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { SECTIONS, SECTION_GROUPS } from "../sections/sections";
 
 interface Props {
   currentId: string | null;
+  open: boolean;
+  onClose: () => void;
 }
 
-export function Sidebar({ currentId }: Props) {
-  const [open, setOpen] = useState(false);
-
+export function Sidebar({ currentId, open, onClose }: Props) {
   // Close drawer when navigating
   useEffect(() => {
-    setOpen(false);
+    onClose();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentId]);
 
   // Close on Escape
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") onClose();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [onClose]);
 
   return (
     <>
-      <div className="site-header-bar">
-        <button
-          type="button"
-          className="site-header-bar__toggle"
-          aria-label={open ? "Close menu" : "Open menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span aria-hidden="true">☰</span>
-        </button>
-        <a href="#" className="site-header-bar__brand">
-          AMP Capture in Microgravity
-        </a>
-        <span className="site-header-bar__program">AT³ SSEP — Honorable Mention</span>
-      </div>
-
       <aside
         className={open ? "sidebar sidebar--open" : "sidebar"}
         aria-label="Section navigation"
@@ -84,7 +69,7 @@ export function Sidebar({ currentId }: Props) {
       {open && (
         <div
           className="sidebar-overlay"
-          onClick={() => setOpen(false)}
+          onClick={onClose}
           aria-hidden="true"
         />
       )}
