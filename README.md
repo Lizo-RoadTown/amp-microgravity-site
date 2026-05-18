@@ -6,9 +6,10 @@ The site communicates the scientific reasoning behind the proposed experiment: t
 
 ## Structure
 
-- Problem — why microgravity changes the calculus for AMP biosensors
-- Mechanism — interactive 3D chamber comparing 1g vs µg transport of bacteria toward an AMP-coated surface
-- Scientific narrative — chip design, strain choice, ELISA readout, control logic
+- Problem — biofilms on the ISS, AMP biosensors, and a plain-language breakdown of the four bacterial transport mechanisms (two of which vanish in microgravity)
+- See it run — interactive 3D chamber comparing 1g vs µg transport, with toggleable mechanisms and a gravity slider
+- Why the experiment is designed this way — chip stack, strain choice, valve-gated hardware, sandwich ELISA readout
+- What it has to fit through — the tube at scale, the crew interaction timeline, and the no-do-overs nature of spaceflight
 - Outcomes — what either result would mean for spacecraft biosensor design
 
 ## Stack

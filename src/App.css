@@ -186,11 +186,12 @@ main {
 .chip-stack-diagram,
 .elisa-diagram,
 .tube-diagram,
-.crew-timeline {
+.crew-timeline,
+.mechanism-comparison {
   display: block;
   width: 100%;
   height: auto;
-  max-width: 760px;
+  max-width: 780px;
   margin: 0 auto;
 }
 

@@ -3,6 +3,7 @@ import { ChipStackDiagram } from "./components/ChipStackDiagram";
 import { ElisaDiagram } from "./components/ElisaDiagram";
 import { TubeDiagram } from "./components/TubeDiagram";
 import { CrewTimeline } from "./components/CrewTimeline";
+import { MechanismComparison } from "./components/MechanismComparison";
 import "./App.css";
 
 function App() {
@@ -20,34 +21,116 @@ function App() {
 
       <section id="problem" className="section">
         <h2>The Problem</h2>
+
+        <h3>Bacteria don't politely stay on Earth</h3>
         <p>
-          Biofilms are a recurring presence on the International Space Station, detected on
-          cabin walls, air filters, and water-handling equipment. They grow differently than
-          they do on Earth and show elevated antimicrobial resistance — a documented threat to
-          crew health and equipment reliability.
+          The International Space Station has been continuously inhabited since 2000, and
+          microbial surveys keep turning up the same kinds of communities living on cabin
+          walls, air filters, and the water systems: <em>Staphylococcus</em>,{" "}
+          <em>Bacillus</em>, and gut-flora relatives like <em>E. coli</em>. They don't
+          just survive up there — they grow into <strong>biofilms</strong> (sticky
+          surface-bound mats of cells), and once they're on a surface they're notoriously
+          hard to kill. Worse, ISS biofilms have been documented growing in patterns and
+          showing antimicrobial-resistance levels that don't match what the same strains
+          do on Earth. This is a real, ongoing operational concern for crew health and
+          equipment reliability — not a theoretical one.
         </p>
+
+        <h3>What we have to detect them</h3>
         <p>
-          Antimicrobial peptides (AMPs) bind negatively charged bacterial membranes and are
-          increasingly used as the capture layer in optical biosensors for microbial detection.
-          They work on Earth. Nobody has measured whether they still work the same way in
-          orbit — and the suspicion is that the physics of <em>getting bacteria to the
-          surface</em> changes enough that the sensor's calibration may not survive the trip up.
+          One of the most promising tools for catching bacteria on a surface is an{" "}
+          <strong>antimicrobial-peptide biosensor</strong>. Antimicrobial peptides (AMPs)
+          are short chains of amino acids — small proteins — that carry a positive
+          electrical charge. Bacterial cell membranes carry a negative one. Opposite
+          charges attract, so when an AMP and a bacterium meet they stick. Biosensor
+          chips coat their surfaces with a dense lawn of immobilized AMPs and use that
+          lawn as a kind of biological velcro: bacteria drifting past get caught, and a
+          detector reads out how many landed. This works well on Earth. The question this
+          experiment asks is whether it still works the same way in orbit.
+        </p>
+
+        <h3>Why this is even a question — gravity changes how bacteria move</h3>
+        <p>
+          The chemistry of "AMP grabs bacterium" doesn't care about gravity. But for the
+          chemistry to happen, the bacterium has to physically <em>reach</em> the AMP
+          first. On Earth, four different processes nudge bacteria toward a nearby
+          surface. <strong>Two of them only work because gravity exists.</strong> In low
+          earth orbit you're not actually "weightless" — the ISS is falling around the
+          planet — but you and everything inside the station are falling at the same
+          rate, so locally the effect is the same: no <em>down</em>.
+        </p>
+
+        <div className="diagram-frame">
+          <MechanismComparison />
+        </div>
+
+        <p>
+          The four mechanisms, in plain language:
+        </p>
+
+        <h3>Sedimentation — dense stuff falls</h3>
+        <p>
+          Drop a handful of sand into a glass of water and the grains drift to the
+          bottom. They drift because they are denser than water, and gravity pulls denser
+          things down through less dense ones. A bacterium is slightly denser than the
+          salt solution it lives in, so it does the same thing — much more slowly (about
+          half a micrometer per second for a 1-µm E. coli cell), but continuously,
+          forever, as long as gravity is on. In orbit, there is no down. The sand stays
+          suspended, the bacteria stop drifting, and one of the two main ways cells reach
+          a surface from across a chamber simply turns off.
+        </p>
+
+        <h3>Buoyant convection — bubbles rise, currents form</h3>
+        <p>
+          If you heat the bottom of a pot of soup, the warm liquid at the bottom expands,
+          becomes less dense, and rises; the cooler liquid at the top sinks to take its
+          place. That's a convection current. The same physics is why air bubbles rise in
+          carbonated water — the gas is less dense than the liquid around it. In any real
+          chamber on Earth, tiny density gradients (from temperature, from dissolved
+          stuff, from the bacteria themselves) drive slow bulk flows that constantly stir
+          the fluid and carry cells around. Take gravity away and those flows stop. The
+          bubbles stay where they are. The soup just sits there.
+        </p>
+
+        <h3>Brownian diffusion — molecular jiggling (still works)</h3>
+        <p>
+          Even perfectly still water isn't actually still at small scales. Water
+          molecules are in constant thermal motion, and they collide randomly with
+          anything small enough to feel the impact — including bacteria. The result is a
+          jittery, unpredictable drift called Brownian motion. A bacterium suspended in
+          water is being kicked in every direction many thousands of times per second,
+          and the net effect is a slow random walk through the fluid. This is unchanged
+          in orbit. The molecules don't care about gravity.
+        </p>
+
+        <h3>Flagellar swimming — bacteria with little tails (still works)</h3>
+        <p>
+          Many bacteria, including E. coli, grow long whip-like appendages called{" "}
+          <strong>flagella</strong>. They spin them like propellers to push themselves
+          through liquid. E. coli swims at roughly 20 micrometers per second — much
+          faster than diffusion drifts it at the same scale. Every second or so it
+          tumbles randomly and takes off in a new direction. This is also unchanged in
+          orbit. The flagella work the same in free-fall as they do on a lab bench.
+        </p>
+
+        <h3>So what's left?</h3>
+        <p>
+          On Earth, all four mechanisms combine to deliver bacteria onto surfaces. In
+          orbit, you're down to the bottom two: random thermal drift, and active
+          swimming. The experiment this site is about asks one question:{" "}
+          <strong>is that enough?</strong> Does an AMP biosensor catch bacteria as
+          efficiently when it's lost the two transport mechanisms it depended on the
+          most? If yes, every Earth-tested spacecraft biosensor deploys as-is. If no,
+          every one of them needs to be redesigned.
         </p>
       </section>
 
       <section id="mechanism" className="section">
-        <h2>The Mechanism</h2>
+        <h2>See it run</h2>
         <p>
-          On Earth, bacteria reach a surface through three combined mechanisms: sedimentation
-          under gravity, buoyant convection driven by density gradients, and molecular
-          diffusion supplemented by active flagellar swimming. In microgravity, the first
-          two vanish.
-        </p>
-        <p>
-          Toggle each mechanism on or off below, and slide gravity from 1g toward
-          microgravity. In the 1g column (left), sedimentation and convection do most of
-          the work delivering bacteria to the chip. In the µg column (right) only diffusion
-          and active swimming remain — same chemistry, very different transport regime.
+          Here are the four mechanisms running side by side — 1g on the left, microgravity
+          on the right. Drag the gravity slider toward zero and watch sedimentation fall
+          off. Toggle individual mechanisms to see how each one contributes (or doesn't).
         </p>
         <div className="scene-frame">
           <ChamberScene />
