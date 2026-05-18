@@ -17,18 +17,6 @@ export function HomePage() {
             AT³'s honorable mention in the Student Space Experiment Program.
           </h1>
 
-          <p className="hero__subheader">
-            By{" "}
-            <a
-              href="https://ncesse.org/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              NCESSE
-            </a>
-            , the National Center for Earth and Space Science Education.
-          </p>
-
           <p className="hero__intro">
             We're a student team from the{" "}
             <a
@@ -54,13 +42,6 @@ export function HomePage() {
             and what we wanted to learn.
           </p>
 
-          <p className="hero__meta">
-            Proposal:{" "}
-            <em>
-              Comparative Capture of E. coli by Antimicrobial-Peptide Biosensors in
-              Microgravity
-            </em>
-          </p>
           </div>
 
           <div className="hero__visual-wrap" aria-hidden="false">

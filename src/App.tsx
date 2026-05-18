@@ -101,6 +101,14 @@ function Footer() {
         </a>{" "}
         (Director of AT³, Pasadena City College).
       </p>
+      <p>
+        Proposal:{" "}
+        <em>
+          Comparative Capture of E. coli by Antimicrobial-Peptide Biosensors in
+          Microgravity
+        </em>
+        .
+      </p>
     </footer>
   );
 }
