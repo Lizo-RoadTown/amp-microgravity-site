@@ -17,7 +17,15 @@ function Footer() {
     <footer className="site-footer">
       <p>
         Built by a student team from the AT³ Micro and Nanotechnology Program at Cal
-        Poly Pomona — PI Elizabeth Osborn, with{" "}
+        Poly Pomona — PI{" "}
+        <a
+          href="https://www.linkedin.com/in/elizosborn/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Elizabeth Osborn
+        </a>
+        , with{" "}
         <a
           href="https://www.linkedin.com/in/frank-puga-raya-895568283/"
           target="_blank"
