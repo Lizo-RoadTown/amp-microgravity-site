@@ -1,5 +1,6 @@
 import { ChamberScene } from "./scenes/ChamberScene";
 import { ChipStackDiagram } from "./components/ChipStackDiagram";
+import { ElisaDiagram } from "./components/ElisaDiagram";
 import "./App.css";
 
 function App() {
@@ -84,15 +85,38 @@ function App() {
 
         <h3>The hardware — three-chamber valve-gated mini-lab</h3>
         <p>
-          SSEP payloads are passive: no power, no crew interaction beyond turning
-          crew-operated valves at scheduled times. The tube has three sealed chambers
-          separated by valves. Crew opens valve 1 to mix bacteria with growth medium and
-          start the experiment in microgravity. After the exposure window, crew opens
-          valve 2 to release fixative — formaldehyde stops binding kinetics where they
-          are. Cells return to Earth chemically frozen in the state they reached in orbit,
-          so all the imaging and quantification happens on the ground without confounding
-          the result with re-entry conditions.
+          SSEP payloads are passive: no power, no real-time crew interaction beyond
+          turning two valves at scheduled times. The Rhodium RhFET-01 tube has three
+          sealed chambers — freeze-dried bacteria in chamber 1, the AMP chips in chamber
+          2 (immersed in PBS with BS3 crosslinker), formalin in chamber 3. On Day U-5
+          (five days before undocking) crew opens Valve A — bacteria rehydrate and reach
+          the chips. On Day U-2, crew opens Valve B — formalin floods chamber 2 and
+          chemically locks every bound cell in place. The chips return to Earth fixed in
+          the state they reached on orbit, so all the imaging and quantification happens
+          on the ground without confounding the result with re-entry.
         </p>
+
+        <h3>How you read the result — sandwich ELISA</h3>
+        <p>
+          The capture itself happens on orbit; the <em>counting</em> happens later on the
+          bench. The fixed chips come back to Earth and go through a sandwich ELISA: a
+          primary antibody specific to E. coli surface antigens binds any bacterium stuck
+          to the chip; a secondary antibody linked to horseradish peroxidase binds the
+          primary; a colorless TMB substrate is added and the enzyme turns it blue. The
+          intensity of the blue, read at 450 nm in a spectrophotometer, is proportional
+          to how much enzyme is on the chip, which is proportional to how many bacteria
+          were captured. A standard curve — built from chips dosed with known cell
+          concentrations — converts the absorbance number into <strong>cells per square
+          centimeter</strong>.
+        </p>
+        <p>
+          That last step is what makes the flight-vs-ground comparison quantitative
+          rather than qualitative. The chamber scene above shows you the difference; the
+          ELISA gives you the number.
+        </p>
+        <div className="diagram-frame">
+          <ElisaDiagram />
+        </div>
       </section>
 
       <section id="outcomes" className="section">
