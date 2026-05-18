@@ -26,63 +26,7 @@ export function HomePage() {
             >
               NCESSE
             </a>
-            , the National Center for Earth and Space Science Education. Advised by{" "}
-            <a
-              href="https://www.linkedin.com/in/michael-pham-04743a161/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Michael Pham
-            </a>{" "}
-            (
-            <a
-              href="https://www.cpp.edu/engineering/labs/bronco-space-lab.shtml"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Bronco Space Lab
-            </a>
-            ,{" "}
-            <a href="https://cpp.edu" target="_blank" rel="noopener noreferrer">
-              Cal Poly Pomona
-            </a>
-            ),{" "}
-            <a
-              href="https://www.linkedin.com/in/chris-buser-phd/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Dr. Chris Buser
-            </a>{" "}
-            (
-            <a href="https://biocubic.com/" target="_blank" rel="noopener noreferrer">
-              BioCubic
-            </a>
-            ), and{" "}
-            <a
-              href="https://www.linkedin.com/in/jared-ashcroft-44801a87/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Dr. Jared Ashcroft
-            </a>{" "}
-            (Director of{" "}
-            <a
-              href="https://www.careersintech.us"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              AT³
-            </a>
-            ,{" "}
-            <a
-              href="https://pasadena.edu/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Pasadena City College
-            </a>
-            ).
+            , the National Center for Earth and Space Science Education.
           </p>
 
           <p className="hero__intro">
