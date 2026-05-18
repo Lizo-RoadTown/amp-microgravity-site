@@ -31,15 +31,15 @@ const MicrogravityBody: FC = () => (
 
 const BiosensorsBody: FC = () => (
   <p>
-    One of the most promising tools for catching bacteria on a surface is an{" "}
-    <strong>antimicrobial-peptide biosensor</strong>. Antimicrobial peptides (AMPs) are
-    short chains of amino acids — small proteins — that carry a positive electrical
-    charge. Bacterial cell membranes carry a negative one. Opposite charges attract, so
-    when an AMP and a bacterium meet they stick. Biosensor chips coat their surfaces
-    with a dense lawn of immobilized AMPs and use that lawn as a kind of biological
-    velcro: bacteria drifting past get caught, and a detector reads out how many landed.
-    This works well on Earth. What we wanted to ask is whether it still works the same
-    way in orbit — and if it doesn't, by how much.
+    The approach we wanted to try is a sensor built out of{" "}
+    <strong>antimicrobial peptides</strong> (AMPs) — short chains of amino acids
+    (basically small proteins) that carry a positive electrical charge. Bacterial cell
+    membranes carry a negative one. Opposite charges attract, so when an AMP and a
+    bacterium meet they stick. The idea is to coat a chip's surface with a dense lawn
+    of immobilized AMPs and use that lawn as a kind of biological velcro: bacteria
+    drifting past get caught, and a detector reads out how many landed. This kind of
+    design has been demonstrated on Earth. What we wanted to ask is whether it still
+    works in orbit — and if it doesn't, by how much.
   </p>
 );
 
