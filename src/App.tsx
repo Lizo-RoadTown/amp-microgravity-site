@@ -38,7 +38,7 @@ function App() {
           Cal Poly Pomona — PI Elizabeth Osborn, with Frank Puga-Raya, Steven Picazo,
           Jesus Coca, Alejandro Lopez, Damian Palacios-Rosas, and Maya Ramirez —
           advised by Michael Pham (Bronco Space Lab, Cal Poly Pomona) and Dr. Chris
-          Buser (BioCubic / Bridgeport University faculty).
+          Buser (BioCubic).
         </p>
         <p>
           Source proposal: <em>Comparative Capture of E. coli by Antimicrobial-Peptide
