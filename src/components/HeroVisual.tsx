@@ -174,20 +174,6 @@ export function HeroVisual() {
         </g>
       ))}
 
-      {/* Label */}
-      <g opacity="0.7">
-        <text
-          x="200"
-          y="395"
-          fill="#6e7388"
-          fontSize="9"
-          textAnchor="middle"
-          letterSpacing="0.16em"
-          fontWeight="600"
-        >
-          AMP CHIP · CAPTURED CELLS BELOW · DRIFTING ABOVE
-        </text>
-      </g>
     </svg>
   );
 }

@@ -93,21 +93,13 @@ export function HomePage() {
               rel="noopener noreferrer"
             >
               AT³ Micro and Nanotechnology Program
-            </a>{" "}
-            at Cal Poly Pomona, with support from{" "}
-            <a
-              href="https://pasadena.edu/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Pasadena City College
             </a>
-            . We pitched an experiment for SSEP Mission 21 — honorable mention means
-            it didn't get selected to fly, but the idea is the part we still wanted to
-            share. Briefly: we wanted to know whether antimicrobial-peptide biosensors
-            (basically, surfaces that catch bacteria) still work the same way in
-            orbit, or whether losing gravity quietly breaks them. We designed an
-            experiment to check. This site is the walkthrough.
+            , and we want to show you what we built. Briefly: we wanted to know
+            whether antimicrobial-peptide biosensors (basically, surfaces that catch
+            bacteria) still work the same way in orbit, or whether losing gravity
+            quietly breaks them. We designed an experiment to find out. This site
+            walks through the whole thing — what it is, how it works, and what we
+            wanted to learn.
           </p>
 
           <p className="hero__meta">
