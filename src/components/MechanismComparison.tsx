@@ -169,8 +169,7 @@ const COLUMNS: Column[] = [
 ];
 
 const COL_WIDTH = 195;
-const VIEW_W = COL_WIDTH * COLUMNS.length;
-const VIEW_H = 340;
+const COL_HEIGHT = 340;
 
 const NAME_Y = 24;
 const TAG_Y = 42;
@@ -181,110 +180,133 @@ const ORBIT_ROW_Y = 220;
 const ORBIT_LABEL_Y = 282;
 const STATUS_Y = 314;
 
+function ColumnGroup({ col, x0, showSeparator }: { col: Column; x0: number; showSeparator: boolean }) {
+  const cx = x0 + COL_WIDTH / 2;
+  return (
+    <g>
+      {showSeparator && (
+        <line x1={x0} y1={12} x2={x0} y2={COL_HEIGHT - 12} stroke="#1f2230" strokeWidth={1} />
+      )}
+
+      <text x={cx} y={NAME_Y} fill="#c5d4ff" fontSize={14} textAnchor="middle" fontWeight="600">
+        {col.name}
+      </text>
+      <text x={cx} y={TAG_Y} fill="#8a8fa3" fontSize={11} textAnchor="middle" fontStyle="italic">
+        {col.tagline}
+      </text>
+
+      <text x={x0 + 10} y={EARTH_ROW_Y - 32} fill="#6e7388" fontSize={10} fontWeight="600" letterSpacing="0.05em">
+        ON EARTH
+      </text>
+      {col.earthIcon(cx, EARTH_ROW_Y)}
+      <text x={cx} y={EARTH_LABEL_Y} fill="#c5c8d4" fontSize={11} textAnchor="middle">
+        <Wrap text={col.earthLabel} cx={cx} y={EARTH_LABEL_Y} />
+      </text>
+
+      <line
+        x1={x0 + 14}
+        y1={DIVIDER_Y}
+        x2={x0 + COL_WIDTH - 14}
+        y2={DIVIDER_Y}
+        stroke="#1f2230"
+        strokeWidth={1}
+        strokeDasharray="3 3"
+      />
+
+      <text x={x0 + 10} y={ORBIT_ROW_Y - 32} fill="#6e7388" fontSize={10} fontWeight="600" letterSpacing="0.05em">
+        IN ORBIT
+      </text>
+      <g opacity={col.vanishes ? 0.32 : 1}>
+        {col.orbitIcon(cx, ORBIT_ROW_Y)}
+      </g>
+      {col.vanishes && (
+        <line
+          x1={cx - 30}
+          y1={ORBIT_ROW_Y - 22}
+          x2={cx + 30}
+          y2={ORBIT_ROW_Y + 22}
+          stroke={ACCENT_GONE}
+          strokeWidth={1.5}
+        />
+      )}
+      <text x={cx} y={ORBIT_LABEL_Y} fill="#c5c8d4" fontSize={11} textAnchor="middle">
+        <Wrap text={col.orbitLabel} cx={cx} y={ORBIT_LABEL_Y} />
+      </text>
+
+      <g transform={`translate(${cx} ${STATUS_Y})`}>
+        <rect
+          x={-46}
+          y={-10}
+          width={92}
+          height={18}
+          rx={9}
+          fill={col.vanishes ? "rgba(196,122,138,0.15)" : "rgba(163,228,196,0.15)"}
+          stroke={col.vanishes ? ACCENT_GONE : ACCENT_LIVE}
+          strokeWidth={1}
+        />
+        <text
+          x={0}
+          y={3}
+          fill={col.vanishes ? ACCENT_GONE : ACCENT_LIVE}
+          fontSize={10.5}
+          textAnchor="middle"
+          fontWeight="600"
+          letterSpacing="0.04em"
+        >
+          {col.vanishes ? "VANISHES IN µG" : "STILL WORKS IN µG"}
+        </text>
+      </g>
+    </g>
+  );
+}
+
 export function MechanismComparison() {
+  const viewW = COL_WIDTH * COLUMNS.length;
   return (
     <svg
-      viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+      viewBox={`0 0 ${viewW} ${COL_HEIGHT}`}
       className="mechanism-comparison"
       role="img"
       aria-labelledby="mechCompTitle mechCompDesc"
     >
       <title id="mechCompTitle">Four mechanisms compared — Earth vs orbit</title>
       <desc id="mechCompDesc">
-        Side-by-side comparison of the four ways bacteria reach a surface. The top row of
-        each column shows the mechanism operating in 1g (on Earth). The bottom row shows
-        what happens in microgravity. Sedimentation and buoyant convection vanish in
-        microgravity; Brownian diffusion and flagellar swimming are unchanged.
+        Side-by-side comparison of the four ways bacteria reach a surface. Sedimentation
+        and buoyant convection vanish in microgravity; Brownian diffusion and flagellar
+        swimming are unchanged.
       </desc>
+      {COLUMNS.map((col, i) => (
+        <ColumnGroup key={col.name} col={col} x0={i * COL_WIDTH} showSeparator={i > 0} />
+      ))}
+    </svg>
+  );
+}
 
-      {/* Earth / orbit row labels (left margin) — implicit via the divider line */}
+interface MechanismCardProps {
+  name: "Sedimentation" | "Buoyant convection" | "Brownian diffusion" | "Flagellar swimming";
+}
 
-      {COLUMNS.map((col, i) => {
-        const x0 = i * COL_WIDTH;
-        const cx = x0 + COL_WIDTH / 2;
-        return (
-          <g key={col.name}>
-            {/* Column separator */}
-            {i > 0 && (
-              <line x1={x0} y1={12} x2={x0} y2={VIEW_H - 12} stroke="#1f2230" strokeWidth={1} />
-            )}
-
-            {/* Header */}
-            <text x={cx} y={NAME_Y} fill="#c5d4ff" fontSize={14} textAnchor="middle" fontWeight="600">
-              {col.name}
-            </text>
-            <text x={cx} y={TAG_Y} fill="#8a8fa3" fontSize={11} textAnchor="middle" fontStyle="italic">
-              {col.tagline}
-            </text>
-
-            {/* Earth row icon */}
-            <text x={x0 + 10} y={EARTH_ROW_Y - 32} fill="#6e7388" fontSize={10} fontWeight="600" letterSpacing="0.05em">
-              ON EARTH
-            </text>
-            {col.earthIcon(cx, EARTH_ROW_Y)}
-            <text x={cx} y={EARTH_LABEL_Y} fill="#c5c8d4" fontSize={11} textAnchor="middle">
-              <Wrap text={col.earthLabel} cx={cx} y={EARTH_LABEL_Y} />
-            </text>
-
-            {/* Divider */}
-            <line
-              x1={x0 + 14}
-              y1={DIVIDER_Y}
-              x2={x0 + COL_WIDTH - 14}
-              y2={DIVIDER_Y}
-              stroke="#1f2230"
-              strokeWidth={1}
-              strokeDasharray="3 3"
-            />
-
-            {/* Orbit row icon */}
-            <text x={x0 + 10} y={ORBIT_ROW_Y - 32} fill="#6e7388" fontSize={10} fontWeight="600" letterSpacing="0.05em">
-              IN ORBIT
-            </text>
-            <g opacity={col.vanishes ? 0.32 : 1}>
-              {col.orbitIcon(cx, ORBIT_ROW_Y)}
-            </g>
-            {col.vanishes && (
-              <line
-                x1={cx - 30}
-                y1={ORBIT_ROW_Y - 22}
-                x2={cx + 30}
-                y2={ORBIT_ROW_Y + 22}
-                stroke={ACCENT_GONE}
-                strokeWidth={1.5}
-              />
-            )}
-            <text x={cx} y={ORBIT_LABEL_Y} fill="#c5c8d4" fontSize={11} textAnchor="middle">
-              <Wrap text={col.orbitLabel} cx={cx} y={ORBIT_LABEL_Y} />
-            </text>
-
-            {/* Status pill */}
-            <g transform={`translate(${cx} ${STATUS_Y})`}>
-              <rect
-                x={-46}
-                y={-10}
-                width={92}
-                height={18}
-                rx={9}
-                fill={col.vanishes ? "rgba(196,122,138,0.15)" : "rgba(163,228,196,0.15)"}
-                stroke={col.vanishes ? ACCENT_GONE : ACCENT_LIVE}
-                strokeWidth={1}
-              />
-              <text
-                x={0}
-                y={3}
-                fill={col.vanishes ? ACCENT_GONE : ACCENT_LIVE}
-                fontSize={10.5}
-                textAnchor="middle"
-                fontWeight="600"
-                letterSpacing="0.04em"
-              >
-                {col.vanishes ? "VANISHES IN µG" : "STILL WORKS IN µG"}
-              </text>
-            </g>
-          </g>
-        );
-      })}
+export function MechanismCard({ name }: MechanismCardProps) {
+  const col = COLUMNS.find((c) => c.name === name);
+  if (!col) return null;
+  return (
+    <svg
+      viewBox={`0 0 ${COL_WIDTH} ${COL_HEIGHT}`}
+      className="mechanism-card"
+      role="img"
+      aria-label={`${col.name} — ${col.vanishes ? "vanishes" : "still works"} in microgravity`}
+    >
+      <rect
+        x={2}
+        y={2}
+        width={COL_WIDTH - 4}
+        height={COL_HEIGHT - 4}
+        rx={6}
+        fill="none"
+        stroke="#1f2230"
+        strokeWidth={1}
+      />
+      <ColumnGroup col={col} x0={0} showSeparator={false} />
     </svg>
   );
 }

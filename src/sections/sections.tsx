@@ -4,7 +4,7 @@ import { ChipStackDiagram } from "../components/ChipStackDiagram";
 import { ElisaDiagram } from "../components/ElisaDiagram";
 import { TubeDiagram } from "../components/TubeDiagram";
 import { CrewTimeline } from "../components/CrewTimeline";
-import { MechanismComparison } from "../components/MechanismComparison";
+import { MechanismCard } from "../components/MechanismComparison";
 
 export interface SectionDef {
   id: string;
@@ -55,65 +55,74 @@ const HowTheyMoveBody: FC = () => (
       effect is the same: no <em>down</em>.
     </p>
 
-    <div className="diagram-frame">
-      <MechanismComparison />
-    </div>
-
     <p>The four mechanisms, in plain language:</p>
 
     <h3>Sedimentation — dense stuff falls</h3>
-    <p>
-      Drop a handful of sand into a glass of water and the grains drift to the bottom.
-      They drift because they're denser than water, and gravity pulls denser things down
-      through less dense ones. A bacterium is slightly denser than the salt solution it
-      lives in, so it does the same thing — much more slowly (about half a micrometer
-      per second for a 1-µm E. coli cell), but continuously, forever, as long as gravity
-      is on. In orbit, there is no down. The sand stays suspended, the bacteria stop
-      drifting, and one of the two main ways cells reach a surface from across a chamber
-      simply turns off.
-    </p>
+    <div className="mechanism-inline">
+      <MechanismCard name="Sedimentation" />
+      <p>
+        Drop a handful of sand into a glass of water and the grains drift to the
+        bottom. They drift because they're denser than water, and gravity pulls denser
+        things down through less dense ones. A bacterium is slightly denser than the
+        salt solution it lives in, so it does the same thing — much more slowly (about
+        half a micrometer per second for a 1-µm E. coli cell), but continuously,
+        forever, as long as gravity is on. In orbit, there is no down. The sand stays
+        suspended, the bacteria stop drifting, and one of the two main ways cells
+        reach a surface from across a chamber simply turns off.
+      </p>
+    </div>
 
     <h3>Buoyant convection — bubbles rise, currents form</h3>
-    <p>
-      If you heat the bottom of a pot of soup, the warm liquid at the bottom expands,
-      becomes less dense, and rises; the cooler liquid at the top sinks to take its
-      place. That's a convection current. The same physics is why air bubbles rise in
-      carbonated water — the gas is less dense than the liquid around it. In any real
-      chamber on Earth, tiny density gradients (from temperature, from dissolved stuff,
-      from the bacteria themselves) drive slow bulk flows that constantly stir the fluid
-      and carry cells around. Take gravity away and those flows stop. The bubbles stay
-      where they are. The soup just sits there.
-    </p>
+    <div className="mechanism-inline">
+      <MechanismCard name="Buoyant convection" />
+      <p>
+        If you heat the bottom of a pot of soup, the warm liquid at the bottom
+        expands, becomes less dense, and rises; the cooler liquid at the top sinks to
+        take its place. That's a convection current. The same physics is why air
+        bubbles rise in carbonated water — the gas is less dense than the liquid
+        around it. In any real chamber on Earth, tiny density gradients (from
+        temperature, from dissolved stuff, from the bacteria themselves) drive slow
+        bulk flows that constantly stir the fluid and carry cells around. Take gravity
+        away and those flows stop. The bubbles stay where they are. The soup just sits
+        there.
+      </p>
+    </div>
 
     <h3>Brownian diffusion — molecular jiggling (still works)</h3>
-    <p>
-      Even perfectly still water isn't actually still at small scales. Water molecules
-      are in constant thermal motion, and they collide randomly with anything small
-      enough to feel the impact — including bacteria. The result is a jittery,
-      unpredictable drift called Brownian motion. A bacterium suspended in water is
-      being kicked in every direction many thousands of times per second, and the net
-      effect is a slow random walk through the fluid. This is unchanged in orbit. The
-      molecules don't care about gravity.
-    </p>
+    <div className="mechanism-inline">
+      <MechanismCard name="Brownian diffusion" />
+      <p>
+        Even perfectly still water isn't actually still at small scales. Water
+        molecules are in constant thermal motion, and they collide randomly with
+        anything small enough to feel the impact — including bacteria. The result is a
+        jittery, unpredictable drift called Brownian motion. A bacterium suspended in
+        water is being kicked in every direction many thousands of times per second,
+        and the net effect is a slow random walk through the fluid. This is unchanged
+        in orbit. The molecules don't care about gravity.
+      </p>
+    </div>
 
     <h3>Flagellar swimming — bacteria with little tails (still works)</h3>
-    <p>
-      Many bacteria, including E. coli, grow long whip-like appendages called{" "}
-      <strong>flagella</strong>. They spin them like propellers to push themselves
-      through liquid. E. coli swims at roughly 20 micrometers per second — much faster
-      than diffusion drifts it at the same scale. Every second or so it tumbles randomly
-      and takes off in a new direction. This is also unchanged in orbit. The flagella
-      work the same in free-fall as they do on a lab bench.
-    </p>
+    <div className="mechanism-inline">
+      <MechanismCard name="Flagellar swimming" />
+      <p>
+        Many bacteria, including E. coli, grow long whip-like appendages called{" "}
+        <strong>flagella</strong>. They spin them like propellers to push themselves
+        through liquid. E. coli swims at roughly 20 micrometers per second — much
+        faster than diffusion drifts it at the same scale. Every second or so it
+        tumbles randomly and takes off in a new direction. This is also unchanged in
+        orbit. The flagella work the same in free-fall as they do on a lab bench.
+      </p>
+    </div>
 
     <p>
       So on Earth, all four mechanisms combine to deliver bacteria onto surfaces. In
       orbit, you're down to the bottom two: random thermal drift, and active swimming.
       Our experiment asks one question: <strong>is that enough?</strong> Does an AMP
       biosensor still catch bacteria when it's lost the two transport mechanisms it
-      depended on the most? If yes, every Earth-tested spacecraft biosensor can deploy
-      as-is. If no, every one of them probably needs to be rethought. Either way,
-      somebody should check — and that's what we proposed to do.
+      depended on the most? If yes, Earth-tested spacecraft biosensor designs can
+      probably deploy as-is. If no, they'd need to be rethought. Either way, somebody
+      should check — and that's what we proposed to do.
     </p>
   </>
 );
@@ -239,10 +248,10 @@ const TubeBody: FC = () => (
 const CrewBody: FC = () => (
   <>
     <p>
-      Astronaut time on the ISS is one of the most expensive resources in the solar
-      system. The experiment is designed around the assumption that crew can spare
-      almost none of it. The entire interactive portion of the protocol is two valve
-      turns, fifteen seconds of gentle shaking each.
+      Astronaut time on the ISS is rationed in minutes. SSEP experiments in particular
+      are designed assuming crew can spare almost none of it — they're essentially
+      passive once installed. Our entire interactive protocol is two valve turns,
+      fifteen seconds of gentle shaking each.
     </p>
     <div className="diagram-frame diagram-frame--narrow">
       <CrewTimeline />

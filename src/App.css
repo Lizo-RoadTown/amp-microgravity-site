@@ -2,6 +2,19 @@ main {
   max-width: 880px;
   margin: 0 auto;
   padding: 0 1.5rem 6rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-shell {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.section-pagination {
+  margin-top: auto;
 }
 
 .section-nav {
@@ -358,6 +371,36 @@ main {
   height: auto;
   max-width: 780px;
   margin: 0 auto;
+}
+
+.mechanism-inline {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  margin: 0.25rem 0 2.25rem;
+}
+
+.mechanism-inline .mechanism-card {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+}
+
+.mechanism-inline p {
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .mechanism-inline {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .mechanism-inline .mechanism-card {
+    max-width: 220px;
+    margin: 0 auto;
+  }
 }
 
 .diagram-frame--narrow {

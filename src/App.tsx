@@ -28,7 +28,9 @@ function App() {
   return (
     <main>
       <SectionNav currentId={currentId} />
-      {current ? <SectionPage section={current} /> : <HomePage />}
+      <div className="page-shell">
+        {current ? <SectionPage section={current} /> : <HomePage />}
+      </div>
 
       <footer className="site-footer">
         <p>
