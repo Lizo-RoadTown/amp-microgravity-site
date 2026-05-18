@@ -38,12 +38,20 @@ export function HomePage() {
             >
               AT³ Micro and Nanotechnology Program
             </a>
-            , and we want to show you what we built. Briefly: we wanted to know
-            whether antimicrobial-peptide biosensors (basically, surfaces that catch
-            bacteria) still work the same way in orbit, or whether losing gravity
-            quietly breaks them. We designed an experiment to find out. This site
-            walks through the whole thing — what it is, how it works, and what we
-            wanted to learn.
+            , and were invited to participate in the{" "}
+            <a
+              href="https://ncesse.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              NCESSE
+            </a>{" "}
+            Student Space Experiment Program. Our team submitted a proposal about
+            antimicrobial-peptide biosensors (basically, surfaces that catch bacteria)
+            that asked if they still worked the same way in orbit, or whether losing
+            gravity made them less effective. So we designed an experiment to find
+            out. This site walks through the whole thing — what it is, how it works,
+            and what we wanted to learn.
           </p>
 
           <p className="hero__meta">
