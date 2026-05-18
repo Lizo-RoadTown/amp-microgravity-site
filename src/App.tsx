@@ -4,11 +4,13 @@ import { ElisaDiagram } from "./components/ElisaDiagram";
 import { TubeDiagram } from "./components/TubeDiagram";
 import { CrewTimeline } from "./components/CrewTimeline";
 import { MechanismComparison } from "./components/MechanismComparison";
+import { SectionNav } from "./components/SectionNav";
 import "./App.css";
 
 function App() {
   return (
     <main>
+      <SectionNav />
       <header className="site-header">
         <p className="eyebrow">SSEP Mission 21 · Cal Poly Pomona · Honorable Mention</p>
         <h1>Comparative Capture of E. coli by Antimicrobial-Peptide Biosensors in Microgravity</h1>

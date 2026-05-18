@@ -9,7 +9,6 @@ import {
   TAU_RUN_S,
   UM_PER_MM,
   SIM_TIME_SCALE,
-  CAPTURE_STICK_S,
   MAX_DT_S,
 } from "./constants";
 import {
@@ -19,18 +18,6 @@ import {
   convectionV,
   swimV,
 } from "./transport";
-
-function spawnAtCeiling(b: BacteriaBuffers, i: number) {
-  b.px[i] = (Math.random() * 2 - 1) * CHAMBER_HALF * 0.9;
-  b.py[i] = CHAMBER_HALF * 0.95;
-  b.pz[i] = (Math.random() * 2 - 1) * CHAMBER_HALF * 0.9;
-  const h: [number, number, number] = [0, 0, 0];
-  randomUnitVec(h);
-  b.hx[i] = h[0]; b.hy[i] = h[1]; b.hz[i] = h[2];
-  b.tumbleTimer[i] = -TAU_RUN_S * Math.log(1 - Math.random());
-  b.captured[i] = 0;
-  b.capturedTimer[i] = 0;
-}
 
 function spawnRandomVolume(b: BacteriaBuffers, i: number) {
   b.px[i] = (Math.random() * 2 - 1) * CHAMBER_HALF * 0.9;
@@ -86,12 +73,18 @@ export function useBacteriaSim(
     const m = c.mechanisms;
     const b = buffers;
 
-    const diffStep = Math.sqrt(2 * D_DIFF_UM2_PER_S * simDt);
+    // Ambient damping for diffusion + swim that scales with gravity. Physically
+    // at the single-cell scale, neither of these depends on gravity — but the
+    // chamber as a whole has less fluid energy without gravity-driven bulk
+    // motion (convection, sedimentation). Damping to 0.5× at µg reads as
+    // "still happens, just in a calmer environment" without claiming the
+    // mechanisms themselves stop.
+    const ambient = 0.5 + 0.5 * g;
+    const diffStep = Math.sqrt(2 * D_DIFF_UM2_PER_S * simDt) * ambient;
 
     for (let i = 0; i < b.count; i++) {
       if (b.captured[i]) {
-        b.capturedTimer[i] -= dt;
-        if (b.capturedTimer[i] <= 0) spawnAtCeiling(b, i);
+        // Captured cells stick permanently — the visible pile-up IS the result.
         continue;
       }
 
@@ -99,9 +92,9 @@ export function useBacteriaSim(
       convectionV(b.px[i], b.py[i], b.pz[i], g, m.convection, convOut.current);
       swimV(b.hx[i], b.hy[i], b.hz[i], m.swimming, swimOut.current);
 
-      const vx_um = convOut.current[0] + swimOut.current[0];
-      const vy_um = vy_sed + convOut.current[1] + swimOut.current[1];
-      const vz_um = convOut.current[2] + swimOut.current[2];
+      const vx_um = convOut.current[0] + swimOut.current[0] * ambient;
+      const vy_um = vy_sed + convOut.current[1] + swimOut.current[1] * ambient;
+      const vz_um = convOut.current[2] + swimOut.current[2] * ambient;
 
       let dpx_um = vx_um * simDt;
       let dpy_um = vy_um * simDt;
@@ -131,7 +124,6 @@ export function useBacteriaSim(
       if (b.py[i] <= CHIP_TOP_Y + CELL_VISUAL_RADIUS) {
         b.py[i] = CHIP_TOP_Y + CELL_VISUAL_RADIUS;
         b.captured[i] = 1;
-        b.capturedTimer[i] = CAPTURE_STICK_S;
         continue;
       }
 
