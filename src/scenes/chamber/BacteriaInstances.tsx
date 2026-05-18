@@ -9,6 +9,7 @@ interface Props {
   controls: SceneControls;
   columnGravity: number;
   cellColor: string;
+  onCountChange?: (captured: number) => void;
 }
 
 const tmpMatrix = new THREE.Matrix4();
@@ -16,9 +17,11 @@ const tmpPos = new THREE.Vector3();
 const tmpQuat = new THREE.Quaternion();
 const tmpScale = new THREE.Vector3(1, 1, 1);
 
-export function BacteriaInstances({ controls, columnGravity, cellColor }: Props) {
+export function BacteriaInstances({ controls, columnGravity, cellColor, onCountChange }: Props) {
   const meshRef = useRef<THREE.InstancedMesh>(null);
   const { buffers, tick } = useBacteriaSim(controls, columnGravity);
+  const frameCounter = useRef(0);
+  const lastCount = useRef(-1);
 
   const writeMatrices = () => {
     const mesh = meshRef.current;
@@ -39,6 +42,17 @@ export function BacteriaInstances({ controls, columnGravity, cellColor }: Props)
   useFrame((_, delta) => {
     tick(delta);
     writeMatrices();
+    frameCounter.current++;
+    if (onCountChange && frameCounter.current % 30 === 0) {
+      let count = 0;
+      for (let i = 0; i < BACTERIA_COUNT; i++) {
+        if (buffers.captured[i]) count++;
+      }
+      if (count !== lastCount.current) {
+        lastCount.current = count;
+        onCountChange(count);
+      }
+    }
   });
 
   return (

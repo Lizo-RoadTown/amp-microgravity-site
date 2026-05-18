@@ -1,10 +1,18 @@
 import { useEffect, useState } from "react";
 
 const SECTIONS = [
-  { id: "problem", label: "The Problem" },
-  { id: "mechanism", label: "See it run" },
-  { id: "narrative", label: "Why this design" },
-  { id: "constraints", label: "Constraints" },
+  { id: "microgravity", label: "Why µg?" },
+  { id: "biosensors", label: "Detection" },
+  { id: "bacteria-move", label: "How they move" },
+  { id: "watch", label: "Watch it" },
+  { id: "design", label: "Why this design" },
+  { id: "strain", label: "Strain" },
+  { id: "chip", label: "The chip" },
+  { id: "return", label: "Coming back" },
+  { id: "elisa", label: "Counting" },
+  { id: "tube", label: "Tube" },
+  { id: "crew", label: "Crew time" },
+  { id: "risk", label: "If things break" },
   { id: "outcomes", label: "Outcomes" },
 ];
 

@@ -5,7 +5,7 @@ import { ChamberShell } from "./chamber/ChamberShell";
 import { BacteriaInstances } from "./chamber/BacteriaInstances";
 import { SceneControls } from "./chamber/SceneControls";
 import type { SceneControls as Controls } from "./chamber/types";
-import { COLUMN_OFFSET_X, CHAMBER_HALF } from "./chamber/constants";
+import { COLUMN_OFFSET_X, CHAMBER_HALF, BACTERIA_COUNT } from "./chamber/constants";
 
 const INITIAL_CONTROLS: Controls = {
   gravity: 1,
@@ -19,6 +19,8 @@ const INITIAL_CONTROLS: Controls = {
 
 export function ChamberScene() {
   const [controls, setControls] = useState<Controls>(INITIAL_CONTROLS);
+  const [count1g, setCount1g] = useState(0);
+  const [countUg, setCountUg] = useState(0);
 
   return (
     <div className="chamber-scene">
@@ -33,11 +35,15 @@ export function ChamberScene() {
               controls={controls}
               columnGravity={controls.gravity}
               cellColor="#c5d4ff"
+              onCountChange={setCount1g}
             />
             <Html position={[0, CHAMBER_HALF + 0.35, 0]} center distanceFactor={6}>
               <div className="chamber-label">
                 <strong>1g</strong>
                 <span>Earth column</span>
+                <span className="chamber-label__count">
+                  {count1g} / {BACTERIA_COUNT} captured
+                </span>
               </div>
             </Html>
           </group>
@@ -48,11 +54,15 @@ export function ChamberScene() {
               controls={controls}
               columnGravity={0}
               cellColor="#a3e4c4"
+              onCountChange={setCountUg}
             />
             <Html position={[0, CHAMBER_HALF + 0.35, 0]} center distanceFactor={6}>
               <div className="chamber-label">
                 <strong>µg</strong>
                 <span>Microgravity column</span>
+                <span className="chamber-label__count">
+                  {countUg} / {BACTERIA_COUNT} captured
+                </span>
               </div>
             </Html>
           </group>
