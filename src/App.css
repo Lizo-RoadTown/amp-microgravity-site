@@ -184,12 +184,18 @@ main {
 }
 
 .chip-stack-diagram,
-.elisa-diagram {
+.elisa-diagram,
+.tube-diagram,
+.crew-timeline {
   display: block;
   width: 100%;
   height: auto;
   max-width: 760px;
   margin: 0 auto;
+}
+
+.diagram-frame--narrow {
+  padding: 1rem 0.5rem;
 }
 
 .site-footer {

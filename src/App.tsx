@@ -1,6 +1,8 @@
 import { ChamberScene } from "./scenes/ChamberScene";
 import { ChipStackDiagram } from "./components/ChipStackDiagram";
 import { ElisaDiagram } from "./components/ElisaDiagram";
+import { TubeDiagram } from "./components/TubeDiagram";
+import { CrewTimeline } from "./components/CrewTimeline";
 import "./App.css";
 
 function App() {
@@ -117,6 +119,48 @@ function App() {
         <div className="diagram-frame">
           <ElisaDiagram />
         </div>
+      </section>
+
+      <section id="constraints" className="section">
+        <h2>What it has to fit through</h2>
+        <p>
+          The constraints on a student ISS experiment are severe, and they shape every
+          decision above. Three of them are worth seeing directly: the tube, the crew
+          time, and the no-do-overs nature of spaceflight.
+        </p>
+
+        <h3>The tube</h3>
+        <p>
+          The whole experiment lives inside a Rhodium RhFET-01 tube — about the size of
+          a sturdy marker pen. Three chambers, two crew-operated valves, 20 mL of total
+          fluid capacity. Everything you have read about — the bacteria, the AMP chips,
+          the fixative — fits in this volume.
+        </p>
+        <div className="diagram-frame">
+          <TubeDiagram />
+        </div>
+
+        <h3>The crew time</h3>
+        <p>
+          Astronaut time on the ISS is one of the most expensive resources in the solar
+          system. The experiment is designed around the assumption that crew can spare
+          almost none of it. The entire interactive portion of the protocol is two valve
+          turns, fifteen seconds of gentle shaking each.
+        </p>
+        <div className="diagram-frame diagram-frame--narrow">
+          <CrewTimeline />
+        </div>
+
+        <h3>No do-overs</h3>
+        <p>
+          A ground-based experiment can be repeated when something goes wrong. This one
+          cannot. If a valve sticks, if a chip detaches, if the fixative leaks early —
+          there is no second sample on orbit, no way to send a correction. Every choice
+          in the proposal (freeze-drying the bacteria so they survive launch dormant,
+          the BS3 crosslinker that covalently locks captured cells in place, the
+          formalin fixation before re-entry) is a hedge against a single point of
+          failure. The design is disciplined because it has to be.
+        </p>
       </section>
 
       <section id="outcomes" className="section">
