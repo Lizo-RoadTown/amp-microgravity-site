@@ -779,3 +779,15 @@
   margin-right: auto;
   width: 100%;
 }
+
+.site-footer a {
+  color: #b6bcc8;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.site-footer a:hover {
+  color: #f5f6fa;
+  border-bottom-color: #2c3447;
+}

@@ -17,10 +17,79 @@ function Footer() {
     <footer className="site-footer">
       <p>
         Built by a student team from the AT³ Micro and Nanotechnology Program at Cal
-        Poly Pomona — PI Elizabeth Osborn, with Frank Puga-Raya, Steven Picazo, Jesus
-        Coca, Alejandro Lopez, Damian Palacios-Rosas, and Maya Ramirez — advised by
-        Michael Pham (Bronco Space Lab, Cal Poly Pomona) and Dr. Chris Buser
-        (BioCubic).
+        Poly Pomona — PI Elizabeth Osborn, with{" "}
+        <a
+          href="https://www.linkedin.com/in/frank-puga-raya-895568283/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Frank Puga-Raya
+        </a>
+        ,{" "}
+        <a
+          href="https://www.linkedin.com/in/steven-picazo-994042225/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Steven Picazo
+        </a>
+        ,{" "}
+        <a
+          href="https://www.linkedin.com/in/jesus-coca-706191258/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Jesus Coca
+        </a>
+        ,{" "}
+        <a
+          href="https://www.linkedin.com/in/alejandro-lopez-lepe/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Alejandro Lopez
+        </a>
+        ,{" "}
+        <a
+          href="https://www.linkedin.com/in/damian-palacios-rosas-44767b257/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Damian Palacios-Rosas
+        </a>
+        , and{" "}
+        <a
+          href="https://www.linkedin.com/in/maya-evelia-ramirez/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Maya Ramirez
+        </a>{" "}
+        — advised by{" "}
+        <a
+          href="https://www.linkedin.com/in/michael-pham-04743a161/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Michael Pham
+        </a>{" "}
+        (Bronco Space Lab, Cal Poly Pomona),{" "}
+        <a
+          href="https://www.linkedin.com/in/chris-buser-phd/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Dr. Chris Buser
+        </a>{" "}
+        (BioCubic), and{" "}
+        <a
+          href="https://www.linkedin.com/in/jared-ashcroft-44801a87/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Dr. Jared Ashcroft
+        </a>
+        .
       </p>
       <p>
         Source proposal: <em>Comparative Capture of E. coli by Antimicrobial-Peptide

@@ -24,8 +24,15 @@ export function HomePage() {
             >
               NCESSE
             </a>
-            , the National Center for Earth and Space Science Education. Advised by
-            Michael Pham at the{" "}
+            , the National Center for Earth and Space Science Education. Advised by{" "}
+            <a
+              href="https://www.linkedin.com/in/michael-pham-04743a161/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Michael Pham
+            </a>{" "}
+            (
             <a
               href="https://www.cpp.edu/engineering/labs/bronco-space-lab.shtml"
               target="_blank"
@@ -37,11 +44,27 @@ export function HomePage() {
             <a href="https://cpp.edu" target="_blank" rel="noopener noreferrer">
               Cal Poly Pomona
             </a>
-            , and{" "}
-            <a href="https://biocubic.com/" target="_blank" rel="noopener noreferrer">
-              Chris Buser
+            ),{" "}
+            <a
+              href="https://www.linkedin.com/in/chris-buser-phd/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Dr. Chris Buser
             </a>{" "}
-            of BioCubic.
+            (
+            <a href="https://biocubic.com/" target="_blank" rel="noopener noreferrer">
+              BioCubic
+            </a>
+            ), and{" "}
+            <a
+              href="https://www.linkedin.com/in/jared-ashcroft-44801a87/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Dr. Jared Ashcroft
+            </a>
+            .
           </p>
 
           <p className="hero__intro">
