@@ -148,27 +148,28 @@ const WatchBody: FC = () => (
   </>
 );
 
-const DesignBody: FC = () => (
-  <p>
-    Each of the design choices in the following sections comes back to the same
-    question we kept asking ourselves: how do we make sure microgravity is the{" "}
-    <em>only</em> thing that could explain a difference in capture? If two of our chips
-    end up different, we want it to be because of gravity — not the strain, not the
-    chip prep, not calibration drift between flight and ground. Use the cards on the
-    home page (or the nav at the top) to walk through each piece.
-  </p>
-);
-
 const StrainBody: FC = () => (
-  <p>
-    Wild-type E. coli reach surfaces two ways: the passive transport mechanisms in the
-    chamber scene, and active adhesion through fimbriae — hair-like appendages that
-    bind to almost any surface. If we let fimbriae contribute, we'd never know whether
-    a cell stuck because of the AMP or because it's just naturally sticky. So we picked
-    a ΔfimA knockout strain — specifically <em>E. coli</em> K-12 (Keio Collection
-    JW1881) — that lacks the major fimbrial subunit. Anything that reaches the chip
-    and stays there has to be AMP-mediated.
-  </p>
+  <>
+    <p>
+      For this experiment we needed bacteria that would behave themselves — meaning,
+      anything that ended up stuck to the chip should have stuck because of the AMPs,
+      not because the cells were just naturally clingy. Wild-type <em>E. coli</em> get
+      to surfaces two ways: passive transport (drifting, swimming, the physics we get
+      into later) and active adhesion through fimbriae — hair-like appendages that
+      bind to almost any surface. The fimbriae would muddy our results. So we picked
+      a ΔfimA knockout strain — specifically <em>E. coli</em> K-12 (Keio Collection
+      JW1881) — that lacks the major fimbrial subunit. Anything that reaches the chip
+      and stays there has to be AMP-mediated.
+    </p>
+    <p>
+      There's a second problem: living bacteria don't sit still. If we just packed a
+      tube of <em>E. coli</em> onto a rocket, they'd be growing, dying, and sticking
+      to things the whole way up. The experiment would be over before the experiment
+      started. So we freeze-dry them. They go dormant — alive but inert — until
+      astronauts rehydrate them on orbit by opening the first valve on the tube. Once
+      water hits them, they wake up and the clock starts.
+    </p>
+  </>
 );
 
 const ChipBody: FC = () => (
@@ -331,37 +332,16 @@ export const SECTIONS: SectionDef[] = [
   },
   {
     id: "biosensors",
-    label: "Detection",
-    title: "How do you detect bacteria?",
-    summary: "Antimicrobial peptides act like biological velcro for bacteria. The chip uses them as a capture layer.",
+    label: "The approach",
+    title: "What we wanted to try",
+    summary: "Antimicrobial peptides as a capture layer — biological velcro for bacteria. The thing we wanted to see flown in microgravity.",
     Body: BiosensorsBody,
   },
   {
-    id: "bacteria-move",
-    label: "How they move",
-    title: "How do bacteria move toward a surface?",
-    summary: "Four transport mechanisms, two of which only exist because of gravity. Comparison visual + plain-language breakdown.",
-    Body: HowTheyMoveBody,
-  },
-  {
-    id: "watch",
-    label: "Watch it",
-    title: "Watch what happens",
-    summary: "Interactive 3D chamber showing 1g vs microgravity side by side. Toggle the mechanisms, drag the gravity slider, see the capture pile up.",
-    Body: WatchBody,
-  },
-  {
-    id: "design",
-    label: "Why this design",
-    title: "Why we designed it this way",
-    summary: "Every design choice points back to one question: how do we isolate microgravity as the only variable?",
-    Body: DesignBody,
-  },
-  {
     id: "strain",
-    label: "Strain",
+    label: "The bacteria",
     title: "Which bacteria, and why that one?",
-    summary: "A ΔfimA knockout strain — no fimbriae, so anything that sticks must have stuck via the AMPs.",
+    summary: "A ΔfimA knockout strain — no fimbriae, so anything that sticks must have stuck via the AMPs. Plus the freeze-drying step so they survive launch.",
     Body: StrainBody,
   },
   {
@@ -370,6 +350,20 @@ export const SECTIONS: SectionDef[] = [
     title: "What's on the chip?",
     summary: "Layered stack: glass, streptavidin, biotinylated AMPs (LL-37 and Magainin I), PEG backfill. Plus the controls.",
     Body: ChipBody,
+  },
+  {
+    id: "tube",
+    label: "The tube",
+    title: "What does the testing tube look like?",
+    summary: "The Rhodium RhFET-01 tube — three chambers, two valves, 20 mL total. About the size of a sturdy marker pen. Everything has to fit inside.",
+    Body: TubeBody,
+  },
+  {
+    id: "crew",
+    label: "Crew time",
+    title: "How much crew time does it take?",
+    summary: "Two valve turns, fifteen seconds of shaking each. About thirty total seconds of astronaut interaction across two days.",
+    Body: CrewBody,
   },
   {
     id: "return",
@@ -386,20 +380,6 @@ export const SECTIONS: SectionDef[] = [
     Body: CountingBody,
   },
   {
-    id: "tube",
-    label: "The tube",
-    title: "What does the testing tube look like?",
-    summary: "The Rhodium RhFET-01 tube — three chambers, two valves, 20 mL total. About the size of a sturdy marker pen.",
-    Body: TubeBody,
-  },
-  {
-    id: "crew",
-    label: "Crew time",
-    title: "How much crew time does it take?",
-    summary: "Two valve turns, fifteen seconds of shaking each. About thirty total seconds of astronaut interaction across two days.",
-    Body: CrewBody,
-  },
-  {
     id: "risk",
     label: "If things break",
     title: "What if something goes wrong?",
@@ -407,9 +387,23 @@ export const SECTIONS: SectionDef[] = [
     Body: RiskBody,
   },
   {
+    id: "bacteria-move",
+    label: "How they move",
+    title: "How do bacteria move toward a surface?",
+    summary: "Now the physics question. Four transport mechanisms, two of which only exist because of gravity.",
+    Body: HowTheyMoveBody,
+  },
+  {
+    id: "watch",
+    label: "Watch it",
+    title: "Watch what would happen",
+    summary: "Interactive 3D chamber showing 1g vs microgravity side by side. Toggle the mechanisms, drag the gravity slider, see the capture pile up.",
+    Body: WatchBody,
+  },
+  {
     id: "outcomes",
     label: "Outcomes",
-    title: "What would either result have meant?",
+    title: "What we hoped to learn",
     summary: "We didn't get to fly it, but both possible outcomes were useful. Here's what each would have told us — and what we still wouldn't have known.",
     Body: OutcomesBody,
   },
