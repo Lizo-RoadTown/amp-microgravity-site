@@ -1,4 +1,5 @@
 import { ChamberScene } from "./scenes/ChamberScene";
+import { ChipStackDiagram } from "./components/ChipStackDiagram";
 import "./App.css";
 
 function App() {
@@ -40,8 +41,10 @@ function App() {
           two vanish.
         </p>
         <p>
-          <em>Placeholder 3D scene below — this is where the side-by-side 1g vs µg chamber
-          comparison will live.</em>
+          Toggle each mechanism on or off below, and slide gravity from 1g toward
+          microgravity. In the 1g column (left), sedimentation and convection do most of
+          the work delivering bacteria to the chip. In the µg column (right) only diffusion
+          and active swimming remain — same chemistry, very different transport regime.
         </p>
         <div className="scene-frame">
           <ChamberScene />
@@ -51,13 +54,45 @@ function App() {
       <section id="narrative" className="section">
         <h2>Why the experiment is designed this way</h2>
         <p>
-          Each design choice answers a question about isolating microgravity as the sole
-          variable: a fimbriae-knockout E. coli strain so observed capture is AMP-mediated
-          only; two different AMPs (LL-37, Magainin I) plus PEG-only and scrambled-peptide
-          controls; a three-chamber tube with crew-operated valves so bacteria are activated
-          on orbit and fixed in microgravity before return.
+          Each design choice answers the same question: how do we isolate microgravity as
+          the sole variable that could explain a difference in capture?
         </p>
-        <p><em>Detail and chip-stack diagram coming next.</em></p>
+
+        <h3>The strain — ΔfimA E. coli</h3>
+        <p>
+          Wild-type E. coli reach surfaces through two routes: passive transport (the
+          mechanisms in the chamber above) and active adhesion through fimbriae — hair-like
+          appendages that bind glycoproteins on almost any surface. If we let fimbriae
+          contribute, any observed capture conflates AMP binding with non-specific
+          stickiness. We use a ΔfimA knockout strain that lacks the major fimbrial subunit,
+          so what reaches the chip and stays there has to be AMP-mediated.
+        </p>
+
+        <h3>The chip — AMP capture layer with controls</h3>
+        <p>
+          The capture surface is a layered stack. Streptavidin tetramers anchor to the
+          sensor; biotinylated AMPs lock into the streptavidin (one of the strongest known
+          non-covalent bonds); polyethylene glycol fills the gaps to block anything that
+          isn't AMP-binding from sticking. The same chip carries two distinct AMPs (LL-37,
+          a human peptide, and Magainin I, from frog skin) and two controls (PEG-only and
+          a scrambled-sequence peptide), so on-orbit results are interpreted against
+          on-orbit negative controls — no flight-vs-ground calibration drift.
+        </p>
+        <div className="diagram-frame">
+          <ChipStackDiagram />
+        </div>
+
+        <h3>The hardware — three-chamber valve-gated mini-lab</h3>
+        <p>
+          SSEP payloads are passive: no power, no crew interaction beyond turning
+          crew-operated valves at scheduled times. The tube has three sealed chambers
+          separated by valves. Crew opens valve 1 to mix bacteria with growth medium and
+          start the experiment in microgravity. After the exposure window, crew opens
+          valve 2 to release fixative — formaldehyde stops binding kinetics where they
+          are. Cells return to Earth chemically frozen in the state they reached in orbit,
+          so all the imaging and quantification happens on the ground without confounding
+          the result with re-entry conditions.
+        </p>
       </section>
 
       <section id="outcomes" className="section">

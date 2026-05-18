@@ -46,6 +46,10 @@ The proposal document's section order is bureaucratic (cover page, team, materia
 - [`src/scenes/ChamberScene.tsx`](src/scenes/ChamberScene.tsx) — r3f scene. Currently a placeholder (wireframe chamber + chip plane + single bacterium). To be expanded into the side-by-side 1g/µg comparison.
 - [`src/App.css`](src/App.css), [`src/index.css`](src/index.css) — styling. Dark theme.
 - [`AMP_Capture_Final_Submission.pdf`](AMP_Capture_Final_Submission.pdf) — source proposal. The authoritative reference for any scientific claim on the site.
+- [`.mcp.json`](.mcp.json) — project-pinned MCP servers: Serena (semantic code retrieval), Context7 (live library docs — use for three.js / r3f / drei), GitHub.
+- [`docs/proposals/`](docs/proposals/) — architectural decisions before code (e.g. the chamber-scene transport math). Template in [`docs/proposals/TEMPLATE.md`](docs/proposals/TEMPLATE.md).
+- [`docs/plans/`](docs/plans/) — time-bounded execution plans for in-flight work. Template in [`docs/plans/TEMPLATE.md`](docs/plans/TEMPLATE.md).
+- [`docs/test-runs/`](docs/test-runs/) — friction-surface logs from real end-to-end runs (cold-load tests, walkthroughs, perf checks).
 
 ## Dev commands
 

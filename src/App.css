@@ -47,8 +47,148 @@ main {
   border: 1px solid #1f2230;
   border-radius: 8px;
   overflow: hidden;
-  height: 480px;
   background: #06080c;
+}
+
+.chamber-scene {
+  display: flex;
+  flex-direction: column;
+}
+
+.chamber-canvas {
+  height: 480px;
+  border-bottom: 1px solid #1f2230;
+}
+
+.chamber-label {
+  font-size: 0.75rem;
+  text-align: center;
+  color: #c5c8d4;
+  pointer-events: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.chamber-label strong {
+  display: block;
+  font-size: 1rem;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.chamber-label span {
+  display: block;
+  color: #8a8fa3;
+  font-size: 0.7rem;
+}
+
+.chamber-caption {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.8rem;
+  color: #8a8fa3;
+  border-top: 1px solid #1f2230;
+  background: #0a0d14;
+}
+
+.scene-controls {
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background: #0a0d14;
+}
+
+.scene-controls__row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.scene-controls__row--toggles {
+  gap: 1rem 1.5rem;
+}
+
+.scene-controls__slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1 1 100%;
+  min-width: 240px;
+}
+
+.scene-controls__label {
+  font-size: 0.85rem;
+  color: #c5c8d4;
+}
+
+.scene-controls__label strong {
+  color: #fff;
+  font-weight: 600;
+  margin-left: 0.25rem;
+}
+
+.scene-controls__slider input[type="range"] {
+  width: 100%;
+  accent-color: #5a7fbf;
+}
+
+.scene-controls__legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: #6e7388;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.scene-controls__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: #c5c8d4;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.scene-controls__toggle input {
+  accent-color: #5a7fbf;
+}
+
+.scene-controls__tag {
+  font-size: 0.65rem;
+  color: #6e7388;
+  background: #161a26;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.section h3 {
+  font-size: 1.1rem;
+  margin: 2rem 0 0.6rem 0;
+  color: #c5d4ff;
+  font-weight: 600;
+}
+
+.diagram-frame {
+  margin: 1.5rem 0;
+  border: 1px solid #1f2230;
+  border-radius: 8px;
+  background: #06080c;
+  padding: 1.5rem 1rem;
+}
+
+.chip-stack-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 .site-footer {
