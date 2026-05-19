@@ -215,16 +215,63 @@ const StrainBody: FC = () => (
 const ChipBody: FC = () => (
   <>
     <p>
-      The capture surface is a layered stack. Streptavidin tetramers anchor to a glass
-      chip; biotinylated AMPs lock into the streptavidin (the biotin–streptavidin bond
-      is one of the strongest known non-covalent bonds, which is why this kind of
-      construction is everywhere in lab biology); polyethylene glycol fills the gaps
-      to block anything that isn't AMP-binding from sticking. We carry two different
-      AMPs — LL-37, which humans make, and Magainin I, which comes from frog skin —
-      plus streptavidin-only chips as a "what would stick if there were no AMP at all?"
-      negative control. The point of having the controls on the same flight is so the
-      comparison is on-orbit vs on-orbit, not on-orbit vs lab — no calibration drift
-      to argue about.
+      The chip is the trap. Its job is to <strong>catch any bacterium that
+      drifts close enough to touch it</strong> — and to <em>not</em> catch
+      anything else, like random proteins floating around in the buffer.
+    </p>
+    <p>
+      To do that, the chip is built up in layers, and every layer has a
+      specific job. Some layers are deliberately <strong>sticky</strong>;
+      others are deliberately <strong>slippery</strong>. The trick is
+      choosing layers that work <em>with</em> each other instead of against
+      each other — if you pick the wrong layers, they cancel each other out
+      and the trap stops working.
+    </p>
+    <p>
+      Bottom to top:
+    </p>
+    <ul>
+      <li>
+        <strong>Glass square.</strong> Neutral. Gives everything else
+        something flat to anchor to.
+      </li>
+      <li>
+        <strong>Streptavidin layer.</strong> The molecular anchor point.
+        Streptavidin grips something called biotin really, really hard —
+        one of the strongest bonds in lab biology — so anything we attach
+        via biotin stays put.
+      </li>
+      <li>
+        <strong>AMPs (with biotin tags).</strong> The actual capture
+        molecules, locked onto the streptavidin by their biotin tags. AMPs
+        are positively charged; bacteria are negatively charged; opposite
+        charges attract. This is the <strong>sticky</strong> layer — what
+        the chip is supposed to catch with.
+      </li>
+      <li>
+        <strong>PEG backfill.</strong> Polyethylene glycol fills every
+        empty gap between AMPs. PEG is famously <strong>slippery</strong>
+        — nothing sticks to it. So anything floating past the chip can
+        only stick if it lands on an AMP, not on the empty space between
+        AMPs.
+      </li>
+    </ul>
+    <p>
+      That last layer is doing more work than it looks like. If we'd used
+      a polymer in the gaps that was also a little sticky, random proteins
+      in the buffer would coat the whole chip and we couldn't tell what
+      was actually caught by the AMPs. The PEG has to be slippery for the
+      AMP's stickiness to mean anything. That's why each substrate is
+      picked carefully — the layers have to do opposite jobs without
+      undoing each other.
+    </p>
+    <p>
+      We carry two different AMPs — LL-37 (humans make it) and Magainin I
+      (comes from frog skin) — plus streptavidin-only chips as a "what
+      would stick if there were no AMP at all?" negative control. The
+      controls fly alongside the real chips so the comparison is on-orbit
+      vs on-orbit, not on-orbit vs lab — no calibration drift to argue
+      about.
     </p>
     <InteractiveChipStack />
   </>
