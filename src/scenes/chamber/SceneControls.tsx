@@ -22,10 +22,19 @@ export function SceneControls({ value, onChange }: Props) {
 
   return (
     <div className="scene-controls">
+      <p className="scene-controls__guide">
+        The <strong className="scene-controls__guide--earth">left chamber</strong> uses the
+        gravity slider's value. The{" "}
+        <strong className="scene-controls__guide--orbit">right chamber</strong> is
+        permanently at microgravity (0g). The toggles below turn each mechanism on
+        or off in <strong>both chambers</strong> at the same time.
+      </p>
+
       <div className="scene-controls__row">
         <label className="scene-controls__slider">
           <span className="scene-controls__label">
-            Gravity <strong>{value.gravity.toFixed(2)} g</strong>
+            Gravity for left chamber:{" "}
+            <strong>{value.gravity.toFixed(2)} g</strong>
           </span>
           <input
             type="range"
@@ -39,6 +48,10 @@ export function SceneControls({ value, onChange }: Props) {
             <span>µg</span><span>1g</span>
           </span>
         </label>
+      </div>
+
+      <div className="scene-controls__toggles-header">
+        Mechanisms (affect both chambers)
       </div>
       <div className="scene-controls__row scene-controls__row--toggles">
         {MECHANISM_LABELS.map(({ key, label, gScaled }) => (

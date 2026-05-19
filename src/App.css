@@ -735,6 +735,40 @@
   gap: 1rem 1.5rem;
 }
 
+.scene-controls__guide {
+  margin: 0 0 0.5rem;
+  padding: 0.7rem 0.9rem;
+  background: rgba(90, 127, 191, 0.06);
+  border-left: 3px solid #5a7fbf;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  color: #c5c8d4;
+  line-height: 1.55;
+  max-width: none;
+}
+
+.scene-controls__guide strong {
+  font-weight: 600;
+  color: #f5f6fa;
+}
+
+.scene-controls__guide--earth {
+  color: #c5d4ff;
+}
+
+.scene-controls__guide--orbit {
+  color: #a3e4c4;
+}
+
+.scene-controls__toggles-header {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #6e7388;
+  margin-top: 0.4rem;
+}
+
 .scene-controls__slider {
   display: flex;
   flex-direction: column;
