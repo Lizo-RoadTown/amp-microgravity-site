@@ -824,6 +824,167 @@
 }
 
 /* ──────────────────────────────────────────────────────────────
+   Interactive ELISA build (How do you count? page)
+   ────────────────────────────────────────────────────────────── */
+
+.ielisa {
+  margin: 1.5rem 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  border: 1px solid #1a1d28;
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: #05070b;
+}
+
+.ielisa__svg {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.ie-layer {
+  transition: opacity 0.55s ease, transform 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
+  transform-box: fill-box;
+}
+
+.ie-layer--off {
+  opacity: 0;
+  transform: translateY(6px);
+  pointer-events: none;
+}
+
+.ie-layer--on {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ie-fade-in {
+  animation: ie-fade 0.7s ease-out both;
+}
+
+@keyframes ie-fade {
+  0%   { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.ielisa__caption {
+  padding: 0.75rem 0.9rem;
+  border-left: 3px solid #5a7fbf;
+  background: rgba(90, 127, 191, 0.06);
+  border-radius: 4px;
+  min-height: 5rem;
+}
+
+.ielisa__step-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #c5d4ff;
+  margin-bottom: 0.25rem;
+}
+
+.ielisa__step-detail {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #c5c8d4;
+  line-height: 1.55;
+  max-width: none;
+}
+
+.ielisa__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ielisa__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ielisa__btn {
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.45rem 0.95rem;
+  border-radius: 7px;
+  border: 1px solid #2c3447;
+  background: #11161f;
+  color: #c5d4ff;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.ielisa__btn:hover:not(:disabled) {
+  border-color: #5a7fbf;
+  background: #131a26;
+}
+
+.ielisa__btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.ielisa__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ielisa__btn--primary {
+  background: linear-gradient(180deg, #2a4070 0%, #1e2f55 100%);
+  border-color: #5a7fbf;
+  color: #f5f6fa;
+}
+
+.ielisa__btn--primary:hover:not(:disabled) {
+  background: linear-gradient(180deg, #314a82 0%, #233763 100%);
+  border-color: #7a98d8;
+}
+
+.ielisa__btn--ghost {
+  background: transparent;
+  color: #8a8fa3;
+  border-color: #1a1d28;
+}
+
+.ielisa__btn--ghost:hover {
+  color: #c5d4ff;
+  border-color: #2c3447;
+}
+
+.ielisa__progress {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.ielisa__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1a1d28;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.ielisa__dot--on {
+  background: #5a7fbf;
+  transform: scale(1.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ie-layer {
+    transition: opacity 0.2s ease;
+    transform: none !important;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────
    Return journey (How does it come back? page)
    ────────────────────────────────────────────────────────────── */
 

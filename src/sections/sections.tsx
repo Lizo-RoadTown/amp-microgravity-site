@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { ChamberScene } from "../scenes/ChamberScene";
 import { InteractiveChipStack } from "../components/InteractiveChipStack";
-import { ElisaDiagram } from "../components/ElisaDiagram";
+import { InteractiveElisa } from "../components/InteractiveElisa";
 import { InteractiveTube } from "../components/InteractiveTube";
 import { ReturnJourney } from "../components/ReturnJourney";
 import { MissionTimeline } from "../components/MissionTimeline";
@@ -249,9 +249,7 @@ const CountingBody: FC = () => (
       than qualitative. The chamber scene shows you the difference; the ELISA gives
       you the number.
     </p>
-    <div className="diagram-frame">
-      <ElisaDiagram />
-    </div>
+    <InteractiveElisa />
   </>
 );
 
