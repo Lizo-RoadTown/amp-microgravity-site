@@ -4,6 +4,7 @@ import { InteractiveChipStack } from "../components/InteractiveChipStack";
 import { InteractiveElisa } from "../components/InteractiveElisa";
 import { InteractiveTube } from "../components/InteractiveTube";
 import { ReturnJourney } from "../components/ReturnJourney";
+import { FailureScenarios } from "../components/FailureScenarios";
 import { MissionTimeline } from "../components/MissionTimeline";
 import { MechanismCard } from "../components/MechanismComparison";
 import { BiofilmModule } from "../components/BiofilmModule";
@@ -283,15 +284,27 @@ const MissionTimelineBody: FC = () => (
 );
 
 const RiskBody: FC = () => (
-  <p>
-    A ground-based experiment can be repeated when something breaks. This one can't.
-    If a valve sticks, if a chip detaches, if the fixative leaks early — there's no
-    second sample on orbit and no way to send a correction. So a lot of our design
-    choices (freeze-drying the bacteria so they survive launch dormant, the BS3
-    crosslinker that covalently locks captured cells in place, the formalin fixation
-    before re-entry) are basically hedges against a single point of failure. The
-    design is disciplined because it has to be.
-  </p>
+  <>
+    <p>
+      A ground-based experiment can be repeated when something breaks. This one can't.
+      If a valve sticks, if a chip detaches, if the fixative leaks early — there's no
+      second sample on orbit and no way to send a correction. So a lot of our design
+      choices (freeze-drying the bacteria so they survive launch dormant, the BS3
+      crosslinker that covalently locks captured cells in place, the formalin
+      fixation before re-entry) are basically hedges against a single point of
+      failure.
+    </p>
+    <p>
+      Click any scenario below to see what would actually happen — and what we
+      designed to protect against it. Most have a hedge. One or two don't.
+    </p>
+    <FailureScenarios />
+    <p>
+      The design is disciplined because it has to be. None of these hedges are
+      heroic — they're the small, boring choices that compound across the whole
+      experiment so a single fault doesn't wipe the result.
+    </p>
+  </>
 );
 
 const OutcomesBody: FC = () => (

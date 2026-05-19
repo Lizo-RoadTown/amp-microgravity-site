@@ -824,6 +824,215 @@
 }
 
 /* ──────────────────────────────────────────────────────────────
+   Failure scenarios (What if something breaks? page)
+   ────────────────────────────────────────────────────────────── */
+
+.fail-scenes {
+  margin: 1.5rem 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  border: 1px solid #1a1d28;
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: #05070b;
+}
+
+.fail-scenes__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.55rem;
+}
+
+.fail-card {
+  font: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid #1a1d28;
+  border-radius: 10px;
+  background: #0a0d14;
+  color: #c5c8d4;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.fail-card:hover {
+  border-color: #2c3447;
+  background: #0e131e;
+}
+
+.fail-card:active {
+  transform: translateY(1px);
+}
+
+.fail-card--active {
+  border-color: #5a7fbf;
+  background: #0e131e;
+}
+
+.fail-card__icon {
+  display: inline-flex;
+  width: 26px;
+  height: 26px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: #15191f;
+  color: #8a8fa3;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.fail-card--active .fail-card__icon {
+  color: #c5d4ff;
+  background: #1a2030;
+}
+
+.fail-card__failure {
+  font-size: 0.88rem;
+  color: #f5f6fa;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+}
+
+.fail-card__outcome-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  background: #15191f;
+  border: 1px solid currentColor;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Outcome color tokens — applied to card + detail */
+.fail-out--mitigated {
+  color: #a3e4c4;
+}
+.fail-out--mitigated.fail-card,
+.fail-card.fail-out--mitigated .fail-card__outcome-tag {
+  color: #a3e4c4;
+}
+.fail-out--partial {
+  color: #e8c14a;
+}
+.fail-out--partial.fail-card,
+.fail-card.fail-out--partial .fail-card__outcome-tag {
+  color: #e8c14a;
+}
+.fail-out--lost {
+  color: #c47a8a;
+}
+.fail-out--lost.fail-card,
+.fail-card.fail-out--lost .fail-card__outcome-tag {
+  color: #c47a8a;
+}
+
+/* On a card, the outcome color only colors the tag, not the whole card text */
+.fail-card {
+  color: #c5c8d4;
+}
+
+.fail-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid #1a1d28;
+  border-radius: 10px;
+  background: #0a0d14;
+  animation: fail-detail-in 0.3s ease-out;
+}
+
+@keyframes fail-detail-in {
+  0%   { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.fail-detail__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.fail-detail__failure {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #f5f6fa;
+}
+
+.fail-detail__outcome {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: #15191f;
+  border: 1px solid currentColor;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.fail-detail__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 640px) {
+  .fail-detail__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fail-detail__col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.fail-detail__label {
+  margin: 0;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #6e7388;
+}
+
+.fail-detail__body {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #c5c8d4;
+  line-height: 1.55;
+  max-width: none;
+}
+
+.fail-detail__verdict {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  padding: 0.7rem 0.9rem;
+  border-left: 3px solid currentColor;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+  max-width: none;
+}
+
+/* ──────────────────────────────────────────────────────────────
    Interactive ELISA build (How do you count? page)
    ────────────────────────────────────────────────────────────── */
 
