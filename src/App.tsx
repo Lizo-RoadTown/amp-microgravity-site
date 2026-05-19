@@ -16,7 +16,7 @@ function Footer() {
   return (
     <footer className="site-footer">
       <p>
-        The student team: PI{" "}
+        The student team:{" "}
         <a
           href="https://www.linkedin.com/in/elizosborn/"
           target="_blank"
@@ -24,7 +24,7 @@ function Footer() {
         >
           Elizabeth Osborn
         </a>
-        , with{" "}
+        ,{" "}
         <a
           href="https://www.linkedin.com/in/frank-puga-raya-895568283/"
           target="_blank"
