@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { ChamberScene } from "../scenes/ChamberScene";
-import { ChipStackDiagram } from "../components/ChipStackDiagram";
+import { InteractiveChipStack } from "../components/InteractiveChipStack";
 import { ElisaDiagram } from "../components/ElisaDiagram";
 import { TubeDiagram } from "../components/TubeDiagram";
 import { CrewTimeline } from "../components/CrewTimeline";
@@ -210,9 +210,7 @@ const ChipBody: FC = () => (
       comparison is on-orbit vs on-orbit, not on-orbit vs lab — no calibration drift
       to argue about.
     </p>
-    <div className="diagram-frame">
-      <ChipStackDiagram />
-    </div>
+    <InteractiveChipStack />
   </>
 );
 
