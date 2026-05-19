@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { ChamberScene } from "../scenes/ChamberScene";
 import { InteractiveChipStack } from "../components/InteractiveChipStack";
 import { ElisaDiagram } from "../components/ElisaDiagram";
-import { TubeDiagram } from "../components/TubeDiagram";
+import { InteractiveTube } from "../components/InteractiveTube";
 import { MissionTimeline } from "../components/MissionTimeline";
 import { MechanismCard } from "../components/MechanismComparison";
 import { BiofilmModule } from "../components/BiofilmModule";
@@ -255,9 +255,7 @@ const TubeBody: FC = () => (
       capacity. Everything you've read about — the freeze-dried bacteria, the AMP chips
       and PBS/BS3 solution, the formalin — has to fit in this volume.
     </p>
-    <div className="diagram-frame">
-      <TubeDiagram />
-    </div>
+    <InteractiveTube />
   </>
 );
 

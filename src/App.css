@@ -824,6 +824,192 @@
 }
 
 /* ──────────────────────────────────────────────────────────────
+   Interactive tube (What does the testing tube look like? page)
+   ────────────────────────────────────────────────────────────── */
+
+.itube {
+  margin: 1.5rem 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid #1a1d28;
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: #05070b;
+}
+
+.itube__svg {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.itube-target {
+  cursor: pointer;
+  outline: none;
+}
+
+.itube-target:hover rect:last-of-type,
+.itube-target:hover circle {
+  filter: brightness(1.2);
+}
+
+.itube-target:focus rect:first-of-type {
+  outline: 2px solid #c5d4ff;
+}
+
+.itube-valve circle {
+  transition: r 0.3s ease;
+}
+
+.itube-valve--open circle {
+  animation: itube-valve-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes itube-valve-pop {
+  0%   { transform: scale(0.7); }
+  60%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+.itube__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.itube__valve-states {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.itube__valve-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: #11161f;
+  border: 1px solid #2c3447;
+  font-size: 0.78rem;
+  color: #8a8fa3;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.itube__valve-pill strong {
+  color: #c5c8d4;
+  font-weight: 600;
+}
+
+.itube__valve-pill--open {
+  background: rgba(163, 228, 196, 0.1);
+  border-color: #5fbf8c;
+  color: #a3e4c4;
+}
+
+.itube__valve-pill--open strong {
+  color: #a3e4c4;
+}
+
+.itube__buttons {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.itube__btn {
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 7px;
+  border: 1px solid #2c3447;
+  background: #11161f;
+  color: #c5d4ff;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.itube__btn:hover {
+  border-color: #5a7fbf;
+  background: #131a26;
+}
+
+.itube__btn:active {
+  transform: translateY(1px);
+}
+
+.itube__btn--primary {
+  background: linear-gradient(180deg, #2a4070 0%, #1e2f55 100%);
+  border-color: #5a7fbf;
+  color: #f5f6fa;
+}
+
+.itube__btn--primary:hover {
+  background: linear-gradient(180deg, #314a82 0%, #233763 100%);
+  border-color: #7a98d8;
+}
+
+.itube__btn--ghost {
+  background: transparent;
+  color: #8a8fa3;
+  border-color: #1a1d28;
+}
+
+.itube__btn--ghost:hover {
+  color: #c5d4ff;
+  border-color: #2c3447;
+}
+
+.itube__info {
+  padding: 1rem 1.2rem;
+  background: #0a0d14;
+  border: 1px solid #1a1d28;
+  border-radius: 10px;
+  min-height: 6rem;
+  transition: border-color 0.2s ease;
+}
+
+.itube__info--active {
+  border-color: #2c3447;
+}
+
+.itube__info-prompt {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #8a8fa3;
+  font-style: italic;
+}
+
+.itube__info-title {
+  margin: 0 0 0.45rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #f5f6fa;
+}
+
+.itube__info-detail {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #c5c8d4;
+  line-height: 1.55;
+  max-width: none;
+}
+
+.itube__info-hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.82rem;
+  color: #a3e4c4;
+  font-style: italic;
+}
+
+/* ──────────────────────────────────────────────────────────────
    Mission timeline (When does what happen? page)
    ────────────────────────────────────────────────────────────── */
 
