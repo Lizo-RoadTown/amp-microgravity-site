@@ -3,7 +3,7 @@ import { ChamberScene } from "../scenes/ChamberScene";
 import { InteractiveChipStack } from "../components/InteractiveChipStack";
 import { ElisaDiagram } from "../components/ElisaDiagram";
 import { TubeDiagram } from "../components/TubeDiagram";
-import { CrewTimeline } from "../components/CrewTimeline";
+import { MissionTimeline } from "../components/MissionTimeline";
 import { MechanismCard } from "../components/MechanismComparison";
 import { BiofilmModule } from "../components/BiofilmModule";
 import { AmpCaptureDemo } from "../components/AmpCaptureDemo";
@@ -182,16 +182,10 @@ const StrainBody: FC = () => (
     <StrainComparison />
     <p>
       So we picked the ΔfimA knockout strain — specifically <em>E. coli</em> K-12
-      (Keio Collection JW1881) — that lacks the major fimbrial subunit. Anything that
-      reaches the chip and stays there has to be AMP-mediated.
-    </p>
-    <p>
-      There's a second problem: living bacteria don't sit still. If we just packed a
-      tube of <em>E. coli</em> onto a rocket, they'd be growing, dying, and sticking
-      to things the whole way up. The experiment would be over before the experiment
-      started. So we freeze-dry them. They go dormant — alive but inert — until
-      astronauts rehydrate them on orbit by opening the first valve on the tube. Once
-      water hits them, they wake up and the clock starts.
+      (Keio Collection JW1881) — that lacks the major fimbrial subunit. Our hypothesis
+      was that with fimbriae out of the picture, anything that reaches the chip and
+      stays there would have to be AMP-mediated. (We never got to run this on chips
+      in the lab ourselves — that's part of what we'd have verified if we'd flown.)
     </p>
   </>
 );
@@ -267,17 +261,20 @@ const TubeBody: FC = () => (
   </>
 );
 
-const CrewBody: FC = () => (
+const MissionTimelineBody: FC = () => (
   <>
     <p>
-      Astronaut time on the ISS is rationed in minutes. SSEP experiments in particular
-      are designed assuming crew can spare almost none of it — they're essentially
-      passive once installed. Our entire interactive protocol is two valve turns,
-      fifteen seconds of gentle shaking each.
+      Our experiment isn't running for an hour. It's running across weeks — from
+      launch, through ascent, through stowage on the ISS, through a few days of
+      crew-triggered events, then back through reentry and recovery to our lab.
+      Almost every design choice we made was shaped by how long each of those
+      windows is.
     </p>
-    <div className="diagram-frame diagram-frame--narrow">
-      <CrewTimeline />
-    </div>
+    <p>
+      Click any event on the timeline to see what happens at that moment and the
+      design decision that drove it.
+    </p>
+    <MissionTimeline />
   </>
 );
 
@@ -360,7 +357,7 @@ export const SECTION_GROUPS: SectionGroup[] = [
   {
     label: "The procedure",
     blurb: "What happens once it's on orbit and how we'd read the result.",
-    sectionIds: ["crew", "return", "counting", "risk"],
+    sectionIds: ["timeline", "return", "counting", "risk"],
   },
   {
     label: "The physics",
@@ -411,11 +408,11 @@ export const SECTIONS: SectionDef[] = [
     Body: TubeBody,
   },
   {
-    id: "crew",
-    label: "Crew time",
-    title: "How much crew time does it take?",
-    summary: "Two valve turns, fifteen seconds of shaking each. About thirty total seconds of astronaut interaction across two days.",
-    Body: CrewBody,
+    id: "timeline",
+    label: "Timeline",
+    title: "When does what happen?",
+    summary: "Launch, transit, stowage, crew events, recovery — and the decisions that fell out of each window. Click any event for the why.",
+    Body: MissionTimelineBody,
   },
   {
     id: "return",
