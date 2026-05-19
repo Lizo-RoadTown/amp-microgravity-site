@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 type Outcome = "mitigated" | "partial" | "lost";
 type Mitigation = "hardware" | "preflight" | "inherent" | "ground";
 
@@ -224,12 +222,34 @@ function Icon({ kind }: { kind: Scenario["icon"] }) {
   );
 }
 
-const MITIGATION_META: Record<Mitigation, { label: string; cls: string }> = {
-  hardware: { label: "Hardware risk", cls: "fail-mit--hardware" },
-  preflight: { label: "Pre-flight test catches it", cls: "fail-mit--preflight" },
-  inherent: { label: "Inherent — accept or redesign", cls: "fail-mit--inherent" },
-  ground: { label: "Ground-system risk", cls: "fail-mit--ground" },
-};
+const SECTION_META: Array<{
+  mitigation: Mitigation;
+  title: string;
+  blurb: string;
+  cls: string;
+}> = [
+  {
+    mitigation: "hardware",
+    title: "Hardware risks",
+    blurb:
+      "Physical failures during flight — stuck valves, leaks, vibration, lost tube. Hedged with redundant controls and design margin; some leave a diagnostic signature, others don't.",
+    cls: "fail-section--hardware",
+  },
+  {
+    mitigation: "preflight",
+    title: "Pre-flight testing catches these",
+    blurb:
+      "Things where the right value isn't known until we test on the ground. Pre-flight validation locks them in before launch.",
+    cls: "fail-section--preflight",
+  },
+  {
+    mitigation: "inherent",
+    title: "Inherent design — accept or redesign for a re-fly",
+    blurb:
+      "Limitations baked into the v1 experiment that we knowingly accept. Fixing them needs different hardware on a future flight.",
+    cls: "fail-section--inherent",
+  },
+];
 
 const OUTCOME_META: Record<Outcome, { label: string; symbol: string; cls: string }> = {
   mitigated: { label: "Mitigated", symbol: "✓", cls: "fail-out--mitigated" },
@@ -238,65 +258,56 @@ const OUTCOME_META: Record<Outcome, { label: string; symbol: string; cls: string
 };
 
 export function FailureScenarios() {
-  const [selectedId, setSelectedId] = useState<string>(SCENARIOS[0].id);
-  const selected = SCENARIOS.find((s) => s.id === selectedId) ?? SCENARIOS[0];
-
   return (
     <div className="fail-scenes">
-      <div className="fail-scenes__legend" aria-hidden="true">
-        <span className="fail-legend__chip fail-mit--hardware">Hardware</span>
-        <span className="fail-legend__chip fail-mit--preflight">Pre-flight catches it</span>
-        <span className="fail-legend__chip fail-mit--inherent">Inherent — accept</span>
-      </div>
-
-      <div className="fail-scenes__layout">
-        <div className="fail-scenes__grid" role="tablist">
-          {SCENARIOS.map((s) => {
-            const isActive = s.id === selectedId;
-            const meta = OUTCOME_META[s.outcome];
-            const mit = MITIGATION_META[s.mitigation];
-            return (
-              <button
-                key={s.id}
-                type="button"
-                role="tab"
-                aria-selected={isActive ? "true" : "false"}
-                className={`fail-card ${isActive ? "fail-card--active" : ""} ${meta.cls} ${mit.cls}`}
-                onClick={() => setSelectedId(s.id)}
-              >
-                <span className="fail-card__icon" aria-hidden="true">
-                  <Icon kind={s.icon} />
-                </span>
-                <span className="fail-card__failure">{s.failure}</span>
-                <span className="fail-card__outcome-tag">
-                  <span aria-hidden="true">{meta.symbol}</span> {meta.label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        <div className="fail-detail" key={selected.id}>
-          <div className="fail-detail__head">
-            <h4 className="fail-detail__failure">{selected.failure}</h4>
-            <span className={`fail-detail__mit ${MITIGATION_META[selected.mitigation].cls}`}>
-              {MITIGATION_META[selected.mitigation].label}
-            </span>
-          </div>
-
-          <p className="fail-detail__body">{selected.whatHappens}</p>
-
-          <details className="fail-detail__hedge">
-            <summary>What we did about it</summary>
-            <p>{selected.hedge}</p>
-          </details>
-
-          <p className={`fail-detail__verdict ${OUTCOME_META[selected.outcome].cls}`}>
-            <span aria-hidden="true">{OUTCOME_META[selected.outcome].symbol}</span>{" "}
-            {selected.outcomeText}
-          </p>
-        </div>
-      </div>
+      {SECTION_META.map((section) => {
+        const scenarios = SCENARIOS.filter(
+          (s) => s.mitigation === section.mitigation,
+        );
+        if (scenarios.length === 0) return null;
+        return (
+          <section
+            key={section.mitigation}
+            className={`fail-section ${section.cls}`}
+          >
+            <header className="fail-section__head">
+              <h3 className="fail-section__title">{section.title}</h3>
+              <p className="fail-section__blurb">{section.blurb}</p>
+            </header>
+            <div className="fail-section__cards">
+              {scenarios.map((s) => {
+                const meta = OUTCOME_META[s.outcome];
+                return (
+                  <details key={s.id} className={`fail-card ${meta.cls}`}>
+                    <summary className="fail-card__summary">
+                      <span className="fail-card__icon" aria-hidden="true">
+                        <Icon kind={s.icon} />
+                      </span>
+                      <span className="fail-card__failure">{s.failure}</span>
+                      <span className="fail-card__outcome-tag">
+                        <span aria-hidden="true">{meta.symbol}</span> {meta.label}
+                      </span>
+                    </summary>
+                    <div className="fail-card__body">
+                      <p className="fail-card__what">{s.whatHappens}</p>
+                      <div className="fail-card__hedge">
+                        <span className="fail-card__hedge-label">
+                          What we did about it
+                        </span>
+                        <p>{s.hedge}</p>
+                      </div>
+                      <p className={`fail-card__verdict ${meta.cls}`}>
+                        <span aria-hidden="true">{meta.symbol}</span>{" "}
+                        {s.outcomeText}
+                      </p>
+                    </div>
+                  </details>
+                );
+              })}
+            </div>
+          </section>
+        );
+      })}
     </div>
   );
 }

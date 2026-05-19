@@ -95,7 +95,6 @@ const EVENTS: TimelineEvent[] = [
 
 const VIEW_W = 800;
 const VIEW_H = 200;
-const CAPTION_H = 100;
 const TIMELINE_Y = 90;
 const PAD_X = 60;
 
@@ -125,26 +124,19 @@ export function MissionTimeline() {
         </details>
       )}
 
+      <div className="mission-timeline__overlay">
+        <div className="mission-timeline__overlay-head">
+          <span className="mission-timeline__overlay-day">{selected.day}</span>
+          <span className="mission-timeline__overlay-label">{selected.label}</span>
+        </div>
+        <p className="mission-timeline__overlay-what">{selected.whatHappens}</p>
+      </div>
       <svg
-        viewBox={`0 -${CAPTION_H} ${VIEW_W} ${VIEW_H + CAPTION_H}`}
+        viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
         className="mission-timeline__svg"
         role="img"
         aria-label="Mission timeline from launch to splashdown."
       >
-        {/* Inline caption — lives INSIDE the visual */}
-        <foreignObject x={20} y={-(CAPTION_H - 6)} width={VIEW_W - 40} height={CAPTION_H - 12}>
-          <div
-            // @ts-expect-error xmlns required for HTML inside foreignObject
-            xmlns="http://www.w3.org/1999/xhtml"
-            className="mission-timeline__inline-caption"
-          >
-            <div className="mission-timeline__inline-caption-head">
-              <span className="mission-timeline__inline-caption-day">{selected.day}</span>
-              <span className="mission-timeline__inline-caption-label">{selected.label}</span>
-            </div>
-            <p className="mission-timeline__inline-caption-what">{selected.whatHappens}</p>
-          </div>
-        </foreignObject>
         <line
           x1={PAD_X}
           y1={TIMELINE_Y}

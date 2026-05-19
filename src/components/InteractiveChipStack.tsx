@@ -115,26 +115,20 @@ export function InteractiveChipStack() {
 
   return (
     <div className="chip-build">
+      <div className="chip-build__viewport">
+      <div className="chip-build__overlay">
+        <span className="chip-build__overlay-step">
+          Step {stepIdx + 1} / {STEPS.length}
+        </span>
+        <span className="chip-build__overlay-label">{step.label}</span>
+        <span className="chip-build__overlay-detail">{step.detail}</span>
+      </div>
       <svg
-        viewBox="-60 -60 840 580"
+        viewBox="-60 -70 840 590"
         className="chip-build__svg"
         role="img"
         aria-label={`Step ${stepIdx + 1} of ${STEPS.length}: ${step.label}`}
       >
-        {/* Inline caption — lives INSIDE the visual */}
-        <foreignObject x={-50} y={-58} width={820} height={54}>
-          <div
-            // @ts-expect-error xmlns required for HTML inside foreignObject
-            xmlns="http://www.w3.org/1999/xhtml"
-            className="chip-build__inline-caption"
-          >
-            <span className="chip-build__inline-caption-step">
-              Step {stepIdx + 1} / {STEPS.length}
-            </span>
-            <span className="chip-build__inline-caption-label">{step.label}</span>
-            <span className="chip-build__inline-caption-detail">{step.detail}</span>
-          </div>
-        </foreignObject>
         <defs>
           <linearGradient id="cb-cell-grad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#dde6ff" stopOpacity="0.95" />
@@ -246,6 +240,8 @@ export function InteractiveChipStack() {
           </g>
         </g>
       </svg>
+
+      </div>
 
       <div className="chip-build__controls">
         <div className="chip-build__nav">

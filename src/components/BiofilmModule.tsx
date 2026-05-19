@@ -54,40 +54,33 @@ export function BiofilmModule() {
 
   return (
     <div className="biofilm-module">
+      <div className="biofilm-module__overlay">
+        {selected ? (
+          <>
+            <div className="biofilm-module__overlay-head">
+              <span
+                className="biofilm-module__overlay-swatch"
+                style={{ background: selected.color }}
+                aria-hidden="true"
+              />
+              <span className="biofilm-module__overlay-name">{selected.name}</span>
+              <span className="biofilm-module__overlay-where">{selected.where}</span>
+            </div>
+            <p className="biofilm-module__overlay-detail">{selected.detail}</p>
+          </>
+        ) : (
+          <span className="biofilm-module__overlay-prompt">
+            Click one of the colored patches on the module to see what's been
+            found there.
+          </span>
+        )}
+      </div>
       <svg
-        viewBox="0 -80 600 380"
+        viewBox="0 0 600 300"
         className="biofilm-module__svg"
         role="img"
         aria-label="Interactive cross-section of an ISS-style module showing where biofilms have been documented."
       >
-        {/* Inline info — lives INSIDE the visual */}
-        <foreignObject x={14} y={-72} width={572} height={64}>
-          <div
-            // @ts-expect-error xmlns required for HTML inside foreignObject
-            xmlns="http://www.w3.org/1999/xhtml"
-            className="biofilm-module__inline-info"
-          >
-            {selected ? (
-              <>
-                <div className="biofilm-module__inline-info-head">
-                  <span
-                    className="biofilm-module__inline-info-swatch"
-                    style={{ background: selected.color }}
-                    aria-hidden="true"
-                  />
-                  <span className="biofilm-module__inline-info-name">{selected.name}</span>
-                  <span className="biofilm-module__inline-info-where">{selected.where}</span>
-                </div>
-                <p className="biofilm-module__inline-info-detail">{selected.detail}</p>
-              </>
-            ) : (
-              <span className="biofilm-module__inline-info-prompt">
-                Click one of the colored patches on the module to see what's been
-                found there.
-              </span>
-            )}
-          </div>
-        </foreignObject>
         <defs>
           <linearGradient id="bm-module-fill" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#0d1119" />

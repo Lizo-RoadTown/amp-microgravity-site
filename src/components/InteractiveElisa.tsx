@@ -392,6 +392,19 @@ export function InteractiveElisa() {
         </div>
       </div>
 
+      <div className="ielisa__viewport">
+      <div className="ielisa__overlay">
+        <div className="ielisa__overlay-head">
+          <span className="ielisa__overlay-step">
+            Step {stepIdx + 1} / {STEPS.length}
+          </span>
+          <span className="ielisa__overlay-label">{step.label}</span>
+          <span className="ielisa__overlay-time">
+            {step.duration} · elapsed {formatElapsed(step.elapsedMin)}
+          </span>
+        </div>
+        <p className="ielisa__overlay-detail">{step.detail}</p>
+      </div>
       <svg
         viewBox={`0 0 ${SVG_W} ${SVG_H}`}
         className="ielisa__svg"
@@ -567,7 +580,7 @@ export function InteractiveElisa() {
                 washing
               />
             ))}
-            <WashLabel y={120} />
+            <WashLabel y={140} />
           </>
         )}
 
@@ -605,11 +618,11 @@ export function InteractiveElisa() {
         {showSecondaryFlooding(stepIdx) && (
           <>
             {[
-              { x: 180, y: 110, r: 12, delay: 0 },
-              { x: 250, y: 90, r: -18, delay: 0.15 },
-              { x: 410, y: 100, r: -5, delay: 0.3 },
-              { x: 480, y: 130, r: 24, delay: 0.45 },
-              { x: 560, y: 110, r: -12, delay: 0.6 },
+              { x: 180, y: 175, r: 12, delay: 0 },
+              { x: 250, y: 155, r: -18, delay: 0.15 },
+              { x: 410, y: 165, r: -5, delay: 0.3 },
+              { x: 480, y: 195, r: 24, delay: 0.45 },
+              { x: 560, y: 175, r: -12, delay: 0.6 },
             ].map((p, i) => (
               <FloatingAntibody
                 key={`sec-free-${i}`}
@@ -631,9 +644,9 @@ export function InteractiveElisa() {
         {STEPS[stepIdx]?.id === "secondary-wash" && (
           <>
             {[
-              { x: 180, y: 110, r: 12, delay: 0 },
-              { x: 410, y: 100, r: -5, delay: 0.1 },
-              { x: 560, y: 110, r: -12, delay: 0.2 },
+              { x: 180, y: 175, r: 12, delay: 0 },
+              { x: 410, y: 165, r: -5, delay: 0.1 },
+              { x: 560, y: 175, r: -12, delay: 0.2 },
             ].map((p, i) => (
               <FloatingAntibody
                 key={`sec-wash-${i}`}
@@ -648,7 +661,7 @@ export function InteractiveElisa() {
                 washing
               />
             ))}
-            <WashLabel y={60} />
+            <WashLabel y={140} />
           </>
         )}
 
@@ -780,27 +793,9 @@ export function InteractiveElisa() {
           </g>
         </g>
 
-        {/* Inline caption — lives INSIDE the visual */}
-        <foreignObject x={20} y={12} width={SVG_W - 40} height={88}>
-          <div
-            // @ts-expect-error xmlns is required for HTML inside SVG foreignObject
-            xmlns="http://www.w3.org/1999/xhtml"
-            className="ielisa__inline-caption"
-          >
-            <div className="ielisa__inline-caption-head">
-              <span className="ielisa__inline-caption-step">
-                Step {stepIdx + 1} / {STEPS.length}
-              </span>
-              <span className="ielisa__inline-caption-label">{step.label}</span>
-              <span className="ielisa__inline-caption-time">
-                {step.duration} · elapsed {formatElapsed(step.elapsedMin)}
-              </span>
-            </div>
-            <p className="ielisa__inline-caption-detail">{step.detail}</p>
-          </div>
-        </foreignObject>
 
       </svg>
+      </div>
 
       <div className="ielisa__controls">
         <div className="ielisa__nav">

@@ -168,6 +168,11 @@ export function ReturnJourney() {
 
   return (
     <div className="rjourney">
+      <div className="rjourney__viewport">
+      <div className="rjourney__overlay">
+        <div className="rjourney__overlay-label">{stage.label}</div>
+        <p className="rjourney__overlay-detail">{stage.detail}</p>
+      </div>
       <svg
         viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
         className="rjourney__svg"
@@ -389,18 +394,6 @@ export function ReturnJourney() {
           <path d="M -22 18 L 22 18 L 18 22 L -18 22 Z" fill="#5a3a2a" stroke="#a83e26" strokeWidth="0.6" />
         </g>
 
-        {/* Inline caption — lives INSIDE the visual */}
-        <foreignObject x={14} y={VIEW_H - 110} width={VIEW_W - 28} height={96}>
-          <div
-            // @ts-expect-error xmlns required for HTML inside foreignObject
-            xmlns="http://www.w3.org/1999/xhtml"
-            className="rjourney__inline-caption"
-          >
-            <div className="rjourney__inline-caption-label">{stage.label}</div>
-            <p className="rjourney__inline-caption-detail">{stage.detail}</p>
-          </div>
-        </foreignObject>
-
         {/* Status indicator — persistent "cells locked" badge */}
         <g transform={`translate(14 ${stepIdx === 0 ? 90 : 60})`}>
           <rect
@@ -421,6 +414,7 @@ export function ReturnJourney() {
           </text>
         </g>
       </svg>
+      </div>
 
       <div className="rjourney__controls">
         <div className="rjourney__nav">
