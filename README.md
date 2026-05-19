@@ -1,6 +1,6 @@
 # AMP Capture in Microgravity — Site
 
-Companion website for the SSEP Mission 21 proposal *Comparative Capture of E. coli by Antimicrobial-Peptide Biosensors in Microgravity* (Cal Poly Pomona, Bronco Space Lab). Honorable mention; experiment is theoretical and was not selected to fly.
+Companion website for the SSEP Mission 21 proposal *Comparative Capture of E. coli by Antimicrobial-Peptide Biosensors in Microgravity* (AT3, Cal Poly Pomona, Bronco Space Lab). Honorable mention; experiment is theoretical and was not selected to fly.
 
 The site communicates the scientific reasoning behind the proposed experiment: the problem of biofilm contamination on the ISS, the transport-physics mechanism the experiment is designed to probe, and the design choices in the measurement.
 
