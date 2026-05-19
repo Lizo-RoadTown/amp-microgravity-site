@@ -19,7 +19,7 @@ const SCENARIOS: Scenario[] = [
     whatHappens:
       "Crew opens Valve A on Day U-5, but it doesn't release. Bacteria never rehydrate, every chip reads zero.",
     hedge:
-      "Six chips include streptavidin-only and AMP controls all sharing one buffer. If Valve A fails, ALL chips read zero — diagnostic of a hardware failure, not a microgravity result.",
+      "Pre-flight: we'd cycle the valve dozens of times on the bench to catch any sticking before integration. In flight: six chips include streptavidin-only and AMP controls all sharing one buffer, so if Valve A still fails, ALL chips read zero — diagnostic of a hardware failure, not a microgravity result.",
     outcome: "mitigated",
     outcomeText: "Diagnostic — we can tell the experiment didn't run.",
     mitigation: "hardware",
@@ -31,7 +31,7 @@ const SCENARIOS: Scenario[] = [
     whatHappens:
       "Valve B doesn't release on U-2. Cells stay alive in Chamber 2 during return — they keep growing, could detach.",
     hedge:
-      "BS3 crosslinker in Chamber 2's buffer covalently bonds AMPs to bound cells during the capture window. Cells captured on-orbit are already partially locked even without formalin.",
+      "Pre-flight: valve cycling tests on the flight unit catch sticky valves before launch. In flight: BS3 crosslinker in Chamber 2's buffer covalently bonds AMPs to bound cells during the capture window, so cells captured on-orbit are already partially locked even if formalin never releases.",
     outcome: "partial",
     outcomeText: "Partial — BS3 preserves some signal; counts noisier.",
     mitigation: "hardware",
@@ -55,7 +55,7 @@ const SCENARIOS: Scenario[] = [
     whatHappens:
       "Reentry vibrations could move chips inside Chamber 2 and slough off captured cells before recovery.",
     hedge:
-      "By U-2 the formalin has already covalently locked every bound cell. Even if chips slosh around during reentry, the cells stay put.",
+      "Pre-flight: vibration testing on a shaker table reproduces the launch + reentry profile so we can see whether the chips and chip holders stay put. In flight: by U-2 the formalin has already covalently locked every bound cell, so even if chips slosh around during reentry the cells stay put.",
     outcome: "mitigated",
     outcomeText: "Locked in — chemistry is done before the bumpy ride home.",
     mitigation: "hardware",
@@ -67,7 +67,7 @@ const SCENARIOS: Scenario[] = [
     whatHappens:
       "If Valve B's seal fails during launch vibration, formalin contaminates Chamber 2 before Valve A opens — capture never happens.",
     hedge:
-      "Valve B is rated for the full vibration + thermal profile of cargo flights; pre-flight integration includes leak testing. Hard to detect after-the-fact, though — low signal here is indistinguishable from a real low-capture result.",
+      "Pre-flight: leak testing under combined vibration + thermal cycling on the flight unit is the primary catch. Wouldn't know how the actual seal holds until we tested it. Even so, hard to detect after-the-fact in flight — low signal would look indistinguishable from a real low-capture result.",
     outcome: "partial",
     outcomeText: "Ambiguous — we'd want a follow-up flight.",
     mitigation: "hardware",
@@ -232,7 +232,7 @@ const SECTION_META: Array<{
     mitigation: "hardware",
     title: "Hardware risks",
     blurb:
-      "Physical failures during flight — stuck valves, leaks, vibration, lost tube. Hedged with redundant controls and design margin; some leave a diagnostic signature, others don't.",
+      "Physical failures during flight — stuck valves, leaks, vibration, lost tube. The biggest mitigator is actually pre-flight hardware testing — we wouldn't know if a valve cycled reliably or a seal held under launch vibration until we had the flight unit in hand to run those tests on the ground. Beyond that, the experiment uses redundant controls so some failures would still leave a diagnostic signature in the data.",
     cls: "fail-section--hardware",
   },
   {
