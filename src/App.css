@@ -2567,6 +2567,30 @@
   text-transform: none;
 }
 
+.mini-chamber__reset {
+  font: inherit;
+  align-self: flex-start;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #2c3447;
+  background: #11161f;
+  color: #9aa0b4;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+}
+
+.mini-chamber__reset:hover {
+  border-color: #5a7fbf;
+  color: #c5d4ff;
+  background: #131a26;
+}
+
+.mini-chamber__reset:active {
+  transform: translateY(1px);
+}
+
 @media (max-width: 720px) {
   .mini-chamber__canvas {
     height: 200px;

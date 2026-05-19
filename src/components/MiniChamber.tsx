@@ -14,6 +14,7 @@ interface Props {
 
 export function MiniChamber({ mechanism, cellColor = "#c5d4ff" }: Props) {
   const [gravity, setGravity] = useState(1);
+  const [resetKey, setResetKey] = useState(0);
 
   const controls: Controls = useMemo(
     () => ({
@@ -36,6 +37,7 @@ export function MiniChamber({ mechanism, cellColor = "#c5d4ff" }: Props) {
           <directionalLight position={[3, 4, 3]} intensity={0.9} />
           <ChamberShell />
           <BacteriaInstances
+            key={resetKey}
             controls={controls}
             columnGravity={controls.gravity}
             cellColor={cellColor}
@@ -60,6 +62,13 @@ export function MiniChamber({ mechanism, cellColor = "#c5d4ff" }: Props) {
           <span>1g</span>
         </div>
       </div>
+      <button
+        type="button"
+        className="mini-chamber__reset"
+        onClick={() => setResetKey((k) => k + 1)}
+      >
+        ↻ Reset cells
+      </button>
     </div>
   );
 }
