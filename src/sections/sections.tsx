@@ -255,20 +255,32 @@ const ReturnBody: FC = () => (
 const CountingBody: FC = () => (
   <>
     <p>
-      The chips come back fixed, and from there it's a standard{" "}
-      <strong>sandwich ELISA</strong> on the bench. A primary antibody specific to E.
-      coli surface antigens binds any bacterium stuck to the chip; a secondary antibody
-      linked to horseradish peroxidase (HRP) binds the primary; a colorless TMB
-      substrate is added and the enzyme turns it blue. The intensity of the blue, read
-      at 450 nm in a spectrophotometer, is proportional to how much enzyme is on the
-      chip, which is proportional to how many bacteria were captured. A standard curve
-      — built from chips dosed with known cell concentrations — converts the absorbance
-      number into <strong>cells per square centimeter</strong>.
+      The chips come back from orbit with whatever bacteria got caught on
+      them — frozen in place by the formalin. Now we need to actually count
+      them. The method is called a <strong>sandwich ELISA</strong>, and the
+      name is literal.
     </p>
     <p>
-      That last step is what makes the flight-vs-ground comparison quantitative rather
-      than qualitative. The chamber scene shows you the difference; the ELISA gives
-      you the number.
+      We set a trap and captured some bacteria — if any. To count them, we
+      sandwich each caught bacterium between two layers that grab onto it.
+      The bottom layer is the AMP on the chip — that's what caught the cell
+      in the first place. The top layer is an antibody that sticks to the
+      bacterium's outer surface. The bacterium is now sandwiched between
+      something underneath and something on top. Hence the name.
+    </p>
+    <p>
+      From there, a few more steps each take some time to process: another
+      antibody attaches to the first one, this one carrying a tiny enzyme.
+      A colorless chemical is poured on, and wherever the enzyme is sitting,
+      it turns that chemical blue. The more bacteria we caught, the more
+      enzyme is sitting on the chip, and the more blue the chip becomes. A
+      machine reads how dense and bright that blue is — and that number
+      tells us how many bacteria we captured per square centimeter.
+    </p>
+    <p>
+      That number is what makes the flight-vs-ground comparison real. The
+      chamber scene shows you the <em>difference</em>; the ELISA gives you
+      the <em>number</em>.
     </p>
     <InteractiveElisa />
   </>
