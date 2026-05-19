@@ -34,12 +34,13 @@ function spawnRandomVolume(b: BacteriaBuffers, i: number) {
 export function useBacteriaSim(
   controls: SceneControls,
   columnGravity: number,
+  cellCount: number = BACTERIA_COUNT,
 ): {
   buffers: BacteriaBuffers;
   tick: (deltaRaw: number) => void;
 } {
   const buffers = useMemo<BacteriaBuffers>(() => {
-    const n = BACTERIA_COUNT;
+    const n = cellCount;
     const b: BacteriaBuffers = {
       px: new Float32Array(n),
       py: new Float32Array(n),

@@ -6,7 +6,7 @@ import { InteractiveTube } from "../components/InteractiveTube";
 import { ReturnJourney } from "../components/ReturnJourney";
 import { FailureScenarios } from "../components/FailureScenarios";
 import { MissionTimeline } from "../components/MissionTimeline";
-import { MechanismCard } from "../components/MechanismComparison";
+import { MiniChamber } from "../components/MiniChamber";
 import { BiofilmModule } from "../components/BiofilmModule";
 import { AmpCaptureDemo } from "../components/AmpCaptureDemo";
 import { StrainComparison } from "../components/StrainComparison";
@@ -76,9 +76,15 @@ const HowTheyMoveBody: FC = () => (
 
     <p>The four mechanisms, in plain language:</p>
 
+    <p>
+      Each mini chamber below shows ONE mechanism only. Drag the gravity slider
+      from 1g toward µg and watch what happens. After you've played with all four,
+      head to <em>Watch what would happen</em> to see them combined.
+    </p>
+
     <h3>Sedimentation — dense stuff falls</h3>
-    <div className="mechanism-inline">
-      <MechanismCard name="Sedimentation" />
+    <div className="mechanism-inline mechanism-inline--wide">
+      <MiniChamber mechanism="sedimentation" />
       <p>
         Drop a handful of sand into a glass of water and the grains drift to the
         bottom. They drift because they're denser than water, and gravity pulls denser
@@ -92,38 +98,37 @@ const HowTheyMoveBody: FC = () => (
     </div>
 
     <h3>Buoyant convection — bubbles rise, currents form</h3>
-    <div className="mechanism-inline">
-      <MechanismCard name="Buoyant convection" />
+    <div className="mechanism-inline mechanism-inline--wide">
+      <MiniChamber mechanism="convection" />
       <p>
         If you heat the bottom of a pot of soup, the warm liquid at the bottom
         expands, becomes less dense, and rises; the cooler liquid at the top sinks to
         take its place. That's a convection current. The same physics is why air
         bubbles rise in carbonated water — the gas is less dense than the liquid
-        around it. In any real chamber on Earth, tiny density gradients (from
-        temperature, from dissolved stuff, from the bacteria themselves) drive slow
-        bulk flows that constantly stir the fluid and carry cells around. Take gravity
-        away and those flows stop. The bubbles stay where they are. The soup just sits
-        there.
+        around it. In any real chamber on Earth, tiny density gradients drive slow
+        bulk flows that constantly stir the fluid and carry cells around. Take
+        gravity away and those flows stop. The bubbles stay where they are. The soup
+        just sits there.
       </p>
     </div>
 
     <h3>Brownian diffusion — molecular jiggling (still works)</h3>
-    <div className="mechanism-inline">
-      <MechanismCard name="Brownian diffusion" />
+    <div className="mechanism-inline mechanism-inline--wide">
+      <MiniChamber mechanism="diffusion" cellColor="#a3e4c4" />
       <p>
         Even perfectly still water isn't actually still at small scales. Water
         molecules are in constant thermal motion, and they collide randomly with
         anything small enough to feel the impact — including bacteria. The result is a
-        jittery, unpredictable drift called Brownian motion. A bacterium suspended in
-        water is being kicked in every direction many thousands of times per second,
-        and the net effect is a slow random walk through the fluid. This is unchanged
-        in orbit. The molecules don't care about gravity.
+        jittery, unpredictable drift called Brownian motion. This is unchanged in
+        orbit — the molecules don't care about gravity. (You'll see the cells move at
+        any gravity setting on the slider. The fluid environment gets slightly
+        calmer as gravity drops, but the molecular jiggling itself doesn't stop.)
       </p>
     </div>
 
     <h3>Flagellar swimming — bacteria with little tails (still works)</h3>
-    <div className="mechanism-inline">
-      <MechanismCard name="Flagellar swimming" />
+    <div className="mechanism-inline mechanism-inline--wide">
+      <MiniChamber mechanism="swimming" cellColor="#a3e4c4" />
       <p>
         Many bacteria, including E. coli, grow long whip-like appendages called{" "}
         <strong>flagella</strong>. They spin them like propellers to push themselves

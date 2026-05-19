@@ -10,6 +10,7 @@ interface Props {
   columnGravity: number;
   cellColor: string;
   onCountChange?: (captured: number) => void;
+  cellCount?: number;
 }
 
 const tmpMatrix = new THREE.Matrix4();
@@ -17,16 +18,22 @@ const tmpPos = new THREE.Vector3();
 const tmpQuat = new THREE.Quaternion();
 const tmpScale = new THREE.Vector3(1, 1, 1);
 
-export function BacteriaInstances({ controls, columnGravity, cellColor, onCountChange }: Props) {
+export function BacteriaInstances({
+  controls,
+  columnGravity,
+  cellColor,
+  onCountChange,
+  cellCount = BACTERIA_COUNT,
+}: Props) {
   const meshRef = useRef<THREE.InstancedMesh>(null);
-  const { buffers, tick } = useBacteriaSim(controls, columnGravity);
+  const { buffers, tick } = useBacteriaSim(controls, columnGravity, cellCount);
   const frameCounter = useRef(0);
   const lastCount = useRef(-1);
 
   const writeMatrices = () => {
     const mesh = meshRef.current;
     if (!mesh) return;
-    for (let i = 0; i < BACTERIA_COUNT; i++) {
+    for (let i = 0; i < cellCount; i++) {
       tmpPos.set(buffers.px[i], buffers.py[i], buffers.pz[i]);
       tmpMatrix.compose(tmpPos, tmpQuat, tmpScale);
       mesh.setMatrixAt(i, tmpMatrix);
@@ -45,7 +52,7 @@ export function BacteriaInstances({ controls, columnGravity, cellColor, onCountC
     frameCounter.current++;
     if (onCountChange && frameCounter.current % 30 === 0) {
       let count = 0;
-      for (let i = 0; i < BACTERIA_COUNT; i++) {
+      for (let i = 0; i < cellCount; i++) {
         if (buffers.captured[i]) count++;
       }
       if (count !== lastCount.current) {
@@ -58,7 +65,7 @@ export function BacteriaInstances({ controls, columnGravity, cellColor, onCountC
   return (
     <instancedMesh
       ref={meshRef}
-      args={[undefined, undefined, BACTERIA_COUNT]}
+      args={[undefined, undefined, cellCount]}
       castShadow={false}
     >
       <sphereGeometry args={[CELL_VISUAL_RADIUS, 8, 8]} />

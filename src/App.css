@@ -2287,6 +2287,10 @@
   margin: 0.25rem 0 2.25rem;
 }
 
+.mechanism-inline--wide {
+  grid-template-columns: 300px 1fr;
+}
+
 .mechanism-inline .mechanism-card {
   display: block;
   width: 100%;
@@ -2299,12 +2303,71 @@
 }
 
 @media (max-width: 720px) {
-  .mechanism-inline {
+  .mechanism-inline,
+  .mechanism-inline--wide {
     grid-template-columns: 1fr;
     gap: 1rem;
   }
   .mechanism-inline .mechanism-card {
     max-width: 220px;
+    margin: 0 auto;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────
+   Mini 3D chamber (per-mechanism on How they move? page)
+   ────────────────────────────────────────────────────────────── */
+
+.mini-chamber {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  width: 100%;
+}
+
+.mini-chamber__canvas {
+  width: 100%;
+  height: 220px;
+  border: 1px solid #181b25;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #05070b;
+}
+
+.mini-chamber__slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0 0.15rem;
+}
+
+.mini-chamber__slider input[type="range"] {
+  width: 100%;
+  accent-color: #5a7fbf;
+}
+
+.mini-chamber__legend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  color: #6e7388;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.mini-chamber__value {
+  color: #c5d4ff;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@media (max-width: 720px) {
+  .mini-chamber__canvas {
+    height: 200px;
+    max-width: 360px;
     margin: 0 auto;
   }
 }
