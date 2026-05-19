@@ -22,13 +22,16 @@ export function SceneControls({ value, onChange }: Props) {
 
   return (
     <div className="scene-controls">
-      <p className="scene-controls__guide">
-        The <strong className="scene-controls__guide--earth">left chamber</strong> uses the
-        gravity slider's value. The{" "}
-        <strong className="scene-controls__guide--orbit">right chamber</strong> is
-        permanently at microgravity (0g). The toggles below turn each mechanism on
-        or off in <strong>both chambers</strong> at the same time.
-      </p>
+      <details className="scene-controls__guide">
+        <summary>How to read this</summary>
+        <p>
+          The <strong className="scene-controls__guide--earth">left chamber</strong> uses the
+          gravity slider's value. The{" "}
+          <strong className="scene-controls__guide--orbit">right chamber</strong> is
+          permanently at microgravity (0g). The toggles below turn each mechanism on
+          or off in <strong>both chambers</strong> at the same time.
+        </p>
+      </details>
 
       <div className="scene-controls__row">
         <label className="scene-controls__slider">

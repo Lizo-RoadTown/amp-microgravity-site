@@ -18,7 +18,7 @@ const STAGES: Stage[] = [
     id: "docked",
     label: "Day U-2 · fixed on orbit",
     detail:
-      "Two days before undocking, crew opens Valve B. Formalin floods the chip chamber and chemically locks every bound cell in place. From this moment, whatever's on the chips stays on the chips.",
+      "Crew opens Valve B. Formalin locks every bound cell — from now on, whatever's on the chips stays on the chips.",
     capsuleY: 0.08,
     capsuleScale: 1,
     plasma: false,
@@ -44,7 +44,7 @@ const STAGES: Stage[] = [
     id: "reentry",
     label: "Atmospheric reentry",
     detail:
-      "The capsule hits the upper atmosphere at ~28,000 km/h. Air friction superheats a plasma sheath around the heat shield — about 1,650°C outside. Inside, the cargo bay stays comfortable.",
+      "~28,000 km/h, ~1,650°C plasma sheath outside. Cargo bay stays comfortable.",
     capsuleY: 0.5,
     capsuleScale: 0.92,
     plasma: true,
@@ -57,7 +57,7 @@ const STAGES: Stage[] = [
     id: "parachute",
     label: "Parachute deploy",
     detail:
-      "Around 5–10 km up, drogue and main parachutes deploy. Descent slows from supersonic to about 25 km/h. The capsule swings under three orange-and-white canopies.",
+      "Drogue then mains deploy around 5–10 km up. Supersonic → ~25 km/h.",
     capsuleY: 0.72,
     capsuleScale: 0.95,
     plasma: false,
@@ -70,7 +70,7 @@ const STAGES: Stage[] = [
     id: "splashdown",
     label: "Splashdown",
     detail:
-      "Capsule splashes down off the coast of Florida (Dragon) or the California Pacific. Our tube hasn't moved — the formalin still has every cell locked in place.",
+      "Splashdown off Florida or California. The tube hasn't moved; the formalin held.",
     capsuleY: 0.93,
     capsuleScale: 0.9,
     plasma: false,
@@ -83,7 +83,7 @@ const STAGES: Stage[] = [
     id: "recovery",
     label: "Recovery",
     detail:
-      "SpaceX recovery boats reach the capsule within ~30 minutes. Cargo is unloaded and helicoptered to a coastal staging area, then flown to the destination lab.",
+      "Recovery boats in ~30 min. Cargo helicoptered to staging, then flown to the lab.",
     capsuleY: 0.95,
     capsuleScale: 0.85,
     plasma: false,
@@ -96,7 +96,7 @@ const STAGES: Stage[] = [
     id: "lab",
     label: "Back to the lab",
     detail:
-      "Our chips arrive on the bench. The cells were fixed on orbit, so what we image now is exactly what happened up there. From here it's a standard sandwich ELISA — see the Counting page.",
+      "Chips on the bench. What we image now is exactly what happened on orbit.",
     capsuleY: 0.95,
     capsuleScale: 0.8,
     plasma: false,
@@ -168,6 +168,7 @@ export function ReturnJourney() {
 
   return (
     <div className="rjourney">
+      <div className="rjourney__stage">
       <svg
         viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
         className="rjourney__svg"
@@ -413,6 +414,7 @@ export function ReturnJourney() {
       <div className="rjourney__caption">
         <div className="rjourney__stage-label">{stage.label}</div>
         <p className="rjourney__stage-detail">{stage.detail}</p>
+      </div>
       </div>
 
       <div className="rjourney__controls">

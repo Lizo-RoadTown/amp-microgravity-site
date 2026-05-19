@@ -175,6 +175,47 @@ export function AmpCaptureDemo() {
           </text>
         </g>
 
+        {/* Inline status text inside the SVG — keeps the reading eye on the visual */}
+        <g aria-hidden="true">
+          {phase === "idle" && (
+            <text
+              x={300}
+              y={185}
+              fill="#9aa0b4"
+              fontSize="13"
+              textAnchor="middle"
+              fontStyle="italic"
+            >
+              Click "Release" to drop a bacterium.
+            </text>
+          )}
+          {phase === "dropping" && (
+            <text
+              x={300}
+              y={185}
+              fill="#7a98d8"
+              fontSize="13"
+              textAnchor="middle"
+              fontWeight="600"
+            >
+              + AMPs pull on – charges…
+            </text>
+          )}
+          {phase === "captured" && (
+            <text
+              x={300}
+              y={195}
+              fill="#a3e4c4"
+              fontSize="13"
+              textAnchor="middle"
+              fontWeight="700"
+              letterSpacing="0.04em"
+            >
+              Stuck. Opposite charges attract.
+            </text>
+          )}
+        </g>
+
         {/* Capture flash — only visible briefly when captured */}
         {phase === "captured" && (
           <g className="amp-demo__flash">
@@ -210,20 +251,6 @@ export function AmpCaptureDemo() {
       </svg>
 
       <div className="amp-demo__controls">
-        <div className="amp-demo__status">
-          {phase === "idle" && <span>Click "Release" to drop a bacterium.</span>}
-          {phase === "dropping" && (
-            <span className="amp-demo__status--active">
-              The positive AMPs are pulling on the bacterium's negative charges…
-            </span>
-          )}
-          {phase === "captured" && (
-            <span className="amp-demo__status--done">
-              Stuck. That's the whole capture mechanism — opposite charges
-              attract.
-            </span>
-          )}
-        </div>
         <div className="amp-demo__buttons">
           {phase !== "idle" ? (
             <button

@@ -140,6 +140,7 @@ export function InteractiveTube() {
 
   return (
     <div className="itube">
+      <div className="itube__stage">
       <svg
         viewBox="0 0 800 280"
         className="itube__svg"
@@ -542,6 +543,21 @@ export function InteractiveTube() {
         </text>
       </svg>
 
+      <div className={`itube__info ${info ? "itube__info--active" : ""}`}>
+        {info ? (
+          <>
+            <h4 className="itube__info-title">{info.title}</h4>
+            <p className="itube__info-detail">{info.detail}</p>
+            {info.hint && <p className="itube__info-hint">{info.hint}</p>}
+          </>
+        ) : (
+          <p className="itube__info-prompt">
+            Click any chamber or valve. Click a valve a second time to open it.
+          </p>
+        )}
+      </div>
+      </div>
+
       <div className="itube__controls">
         <div className="itube__valve-states">
           <span className={vAState === "open" ? "itube__valve-pill itube__valve-pill--open" : "itube__valve-pill"}>
@@ -561,20 +577,6 @@ export function InteractiveTube() {
         </div>
       </div>
 
-      <div className={`itube__info ${info ? "itube__info--active" : ""}`}>
-        {info ? (
-          <>
-            <h4 className="itube__info-title">{info.title}</h4>
-            <p className="itube__info-detail">{info.detail}</p>
-            {info.hint && <p className="itube__info-hint">{info.hint}</p>}
-          </>
-        ) : (
-          <p className="itube__info-prompt">
-            Click any chamber or valve above. Click a valve a second time to open
-            it — fluid flows visibly between chambers.
-          </p>
-        )}
-      </div>
     </div>
   );
 }

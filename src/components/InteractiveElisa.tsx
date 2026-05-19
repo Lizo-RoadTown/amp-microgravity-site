@@ -20,7 +20,7 @@ const STEPS: Step[] = [
     id: "cell",
     label: "Captured cell on the chip",
     detail:
-      "The flight chips come back fixed in formalin. A bacterium stuck to an AMP is locked in place. Now we want to count it.",
+      "Flight chips come back fixed in formalin — one bacterium per AMP, locked in place.",
     mechanism:
       "The cell is held to the AMP layer by electrostatic and hydrophobic attraction — the peptide's positive charges grip the negatively-charged bacterial membrane. Formalin then cross-links proteins inside the cell to each other and to the surface, so the bacterium can't drift off later when the wash steps come through.",
     options: [
@@ -39,7 +39,7 @@ const STEPS: Step[] = [
     id: "primary-flood",
     label: "Flood with primary antibody",
     detail:
-      "Pour primary antibodies over the chip. They need TIME to find the cells — most of an hour at room temperature is standard.",
+      "Pour primary antibodies over the chip — an hour for them to find the cells.",
     mechanism:
       "The Y-shaped tips (the Fab regions) are precisely shaped to fit specific E. coli surface antigens — LPS, OmpA, flagellin. Binding is hydrogen bonds plus shape-fit, no enzyme reaction yet. Each cell ends up with multiple primaries stuck to it because it has many copies of each antigen.",
     options: [
@@ -53,7 +53,7 @@ const STEPS: Step[] = [
     id: "primary-wash",
     label: "Wash off unbound primary",
     detail:
-      "Rinse the chip 3–5 times with buffer. Free antibodies get carried away; ones gripping a cell stay.",
+      "Rinse 3–5 times. Free antibodies wash away; ones gripping a cell stay.",
     mechanism:
       "Wash buffer (PBS + Tween-20) dilutes unbound antibodies into the bulk solution. The detergent disrupts loose, non-specific contacts but is too weak to break the antibody-antigen lock. Only antibodies actually clamped to a cell survive.",
     options: [
@@ -70,7 +70,7 @@ const STEPS: Step[] = [
     id: "secondary-flood",
     label: "Flood with HRP-secondary antibody",
     detail:
-      "Another hour. The secondary antibody carries an enzyme — that's the amplification step.",
+      "Another hour. Each secondary carries an HRP enzyme — that's the amplification step.",
     mechanism:
       "The secondary recognizes the CONSTANT base (Fc region) of the primary — e.g., anti-rabbit IgG if the primary was raised in rabbits. Horseradish peroxidase (HRP) is covalently linked to it. Each primary can be bound by several secondaries, and each secondary carries one HRP, so one captured cell turns into many enzymes.",
     options: [
@@ -84,7 +84,7 @@ const STEPS: Step[] = [
     id: "secondary-wash",
     label: "Wash off unbound secondary",
     detail:
-      "Wash again, 3–5 times. Now everything left on the chip is part of the sandwich.",
+      "Wash again. Everything left is anchored: surface → AMP → cell → primary → secondary → HRP.",
     mechanism:
       "Same chemistry as the primary wash. After this step, every HRP enzyme on the chip is anchored: surface → AMP → cell → primary → secondary → HRP. Free HRP would make color without a cell underneath, so getting this wash right is what makes the assay specific.",
     risks: [
@@ -97,7 +97,7 @@ const STEPS: Step[] = [
     id: "substrate",
     label: "Add TMB substrate",
     detail:
-      "TMB is colorless. Wherever HRP is sitting, the enzyme starts converting TMB into a blue product.",
+      "TMB is colorless. Where HRP sits, it starts turning blue.",
     mechanism:
       "TMB (3,3′,5,5′-tetramethylbenzidine) is HRP's substrate. HRP uses the hydrogen peroxide also in the buffer to oxidize TMB into a blue charge-transfer complex. No enzyme → no oxidation → no color. The reaction is the count.",
     options: [
@@ -110,7 +110,7 @@ const STEPS: Step[] = [
     id: "color",
     label: "Color develops",
     detail:
-      "Over 10 to 30 minutes the blue gets darker. Stop the reaction with sulfuric acid at a fixed time so every chip is read at the same exposure.",
+      "The blue gets darker over 10–30 min. Stop with sulfuric acid so every chip is read at the same exposure.",
     mechanism:
       "Each HRP enzyme converts thousands of TMB molecules per second. Color intensity is proportional to enzyme count, enzyme count is proportional to secondaries, secondaries to primaries, primaries to surface antigens, and antigens to captured cells. That chain is why color = cell count, as long as nothing along it is saturated.",
     options: [
@@ -126,7 +126,7 @@ const STEPS: Step[] = [
     id: "read",
     label: "Read at 450 nm and convert",
     detail:
-      "A spectrophotometer measures the optical density at 450 nm — about two minutes for a whole plate.",
+      "Spectrophotometer reads OD₄₅₀ in about two minutes; standard curve turns OD into cells/cm².",
     mechanism:
       "The acid-stopped product is yellow and absorbs strongly at 450 nm. OD = log₁₀(I₀/I), so absorbance is linear in concentration over a useful range. The standard curve — built pre-flight from chips dosed with KNOWN cell concentrations — converts OD into cells per square centimeter.",
     options: [
@@ -336,6 +336,7 @@ export function InteractiveElisa() {
 
   return (
     <div className="ielisa">
+      <div className="ielisa__stage">
       <svg
         viewBox={`0 0 ${SVG_W} ${SVG_H}`}
         className="ielisa__svg"
@@ -808,32 +809,35 @@ export function InteractiveElisa() {
           </div>
         </div>
         <p className="ielisa__step-detail">{step.detail}</p>
+      </div>
+      </div>
 
-        <div className="ielisa__why">
-          <span className="ielisa__why-tag">How this actually counts cells</span>
+      <div className="ielisa__drawers">
+        <details className="ielisa__drawer ielisa__drawer--why">
+          <summary>How this actually counts cells</summary>
           <p>{step.mechanism}</p>
-        </div>
+        </details>
 
         {step.options && step.options.length > 0 && (
-          <div className="ielisa__options">
-            <span className="ielisa__options-tag">Options we weighed</span>
+          <details className="ielisa__drawer ielisa__drawer--options">
+            <summary>Options we weighed</summary>
             <ul>
               {step.options.map((o, i) => (
                 <li key={i}>{o}</li>
               ))}
             </ul>
-          </div>
+          </details>
         )}
 
         {step.risks && step.risks.length > 0 && (
-          <div className="ielisa__risks">
-            <span className="ielisa__risks-tag">Where the count could be wrong</span>
+          <details className="ielisa__drawer ielisa__drawer--risks">
+            <summary>Where the count could be wrong</summary>
             <ul>
               {step.risks.map((r, i) => (
                 <li key={i}>{r}</li>
               ))}
             </ul>
-          </div>
+          </details>
         )}
       </div>
 

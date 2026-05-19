@@ -54,6 +54,7 @@ export function BiofilmModule() {
 
   return (
     <div className="biofilm-module">
+      <div className="biofilm-module__stage">
       <svg
         viewBox="0 0 600 300"
         className="biofilm-module__svg"
@@ -282,6 +283,7 @@ export function BiofilmModule() {
             found there.
           </p>
         )}
+      </div>
       </div>
     </div>
   );

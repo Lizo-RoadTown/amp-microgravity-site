@@ -115,6 +115,7 @@ export function InteractiveChipStack() {
 
   return (
     <div className="chip-build">
+      <div className="chip-build__stage">
       <svg
         viewBox="-60 0 840 520"
         className="chip-build__svg"
@@ -236,6 +237,7 @@ export function InteractiveChipStack() {
       <div className="chip-build__caption">
         <div className="chip-build__step-label">{step.label}</div>
         <p className="chip-build__step-detail">{step.detail}</p>
+      </div>
       </div>
 
       <div className="chip-build__controls">

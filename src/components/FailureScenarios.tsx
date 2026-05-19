@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 type Outcome = "mitigated" | "partial" | "lost";
+type Mitigation = "hardware" | "preflight" | "inherent" | "ground";
 
 interface Scenario {
   id: string;
@@ -9,7 +10,8 @@ interface Scenario {
   hedge: string;
   outcome: Outcome;
   outcomeText: string;
-  icon: "valve" | "freeze" | "shake" | "leak" | "damage";
+  mitigation: Mitigation;
+  icon: "valve" | "freeze" | "shake" | "leak" | "damage" | "titer" | "crosslink" | "clock" | "blind";
 }
 
 const SCENARIOS: Scenario[] = [
@@ -17,73 +19,123 @@ const SCENARIOS: Scenario[] = [
     id: "valve-a-stuck",
     failure: "Valve A sticks shut",
     whatHappens:
-      "Crew opens Valve A on Day U-5, but it doesn't actually release. The bacteria never rehydrate, never reach the chips, and we get a zero signal across every chip.",
+      "Crew opens Valve A on Day U-5, but it doesn't release. Bacteria never rehydrate, every chip reads zero.",
     hedge:
-      "Our six chips include controls (streptavidin-only and AMP-coated) that all share the same buffer. If Valve A fails, ALL chips read zero — that's diagnostic. We'd know it was a hardware failure, not a microgravity result.",
+      "Six chips include streptavidin-only and AMP controls all sharing one buffer. If Valve A fails, ALL chips read zero — diagnostic of a hardware failure, not a microgravity result.",
     outcome: "mitigated",
-    outcomeText:
-      "Diagnostic: we can tell the experiment didn't run, so we don't mistake it for a real signal.",
+    outcomeText: "Diagnostic — we can tell the experiment didn't run.",
+    mitigation: "hardware",
     icon: "valve",
   },
   {
     id: "valve-b-stuck",
     failure: "Valve B sticks shut",
     whatHappens:
-      "Crew opens Valve B on Day U-2, but the formalin doesn't release. Cells stay alive in Chamber 2 during return — could keep growing, could detach, could move around.",
+      "Valve B doesn't release on U-2. Cells stay alive in Chamber 2 during return — they keep growing, could detach.",
     hedge:
-      "The BS3 crosslinker in Chamber 2's buffer covalently bonds AMPs to bound bacterial proteins during the capture window itself. So cells that bound during the on-orbit exposure are already partially locked, even without formalin.",
+      "BS3 crosslinker in Chamber 2's buffer covalently bonds AMPs to bound cells during the capture window. Cells captured on-orbit are already partially locked even without formalin.",
     outcome: "partial",
-    outcomeText:
-      "Partial: BS3 preserves some signal, but counts will be noisy. We'd flag this run and trust the controls less.",
+    outcomeText: "Partial — BS3 preserves some signal; counts noisier.",
+    mitigation: "hardware",
     icon: "valve",
   },
   {
     id: "freeze-dry-dead",
     failure: "Freeze-drying kills the bacteria",
     whatHappens:
-      "The freeze-drying process is hard on cells. If the prep isn't right, every cell in Chamber 1 is dead before launch. Valve A opens to a useless slurry.",
+      "Freeze-drying is hard on cells. Bad prep → every cell dead before launch → Valve A opens to a useless slurry.",
     hedge:
-      "Pre-flight viability test. We rehydrate a sample of the same freeze-dried batch in the lab and confirm cell count + motility before the experiment ever gets integrated for launch. SSEP standard protocol.",
+      "We rehydrate a sample of the same freeze-dried batch on the ground and confirm cell count + motility before the experiment is integrated for launch.",
     outcome: "mitigated",
-    outcomeText:
-      "Caught on the ground: we never fly a non-viable batch.",
+    outcomeText: "Caught on the ground — we don't fly a non-viable batch.",
+    mitigation: "preflight",
     icon: "freeze",
   },
   {
     id: "reentry-stress",
     failure: "Reentry shakes the chips loose",
     whatHappens:
-      "Reentry forces could vibrate the chips inside Chamber 2. If chips move, captured cells could be sloughed off by fluid motion before we get to the bench.",
+      "Reentry vibrations could move chips inside Chamber 2 and slough off captured cells before recovery.",
     hedge:
-      "By Day U-2, formalin has already cross-linked every bound cell to its chip surface — the bond is covalent. Even if chips slosh around during reentry, the cells stay put.",
+      "By U-2 the formalin has already covalently locked every bound cell. Even if chips slosh around during reentry, the cells stay put.",
     outcome: "mitigated",
-    outcomeText:
-      "Locked in: the chemistry is done before the bumpy ride home.",
+    outcomeText: "Locked in — chemistry is done before the bumpy ride home.",
+    mitigation: "hardware",
     icon: "shake",
   },
   {
     id: "early-leak",
     failure: "Formalin leaks into Chamber 2 too early",
     whatHappens:
-      "If the seal on Valve B fails during launch vibration or thermal expansion, formalin could contaminate Chamber 2 before crew opens Valve A. Every cell that enters the chamber gets fixed immediately — capture never happens.",
+      "If Valve B's seal fails during launch vibration, formalin contaminates Chamber 2 before Valve A opens — capture never happens.",
     hedge:
-      "Valve B's seal is rated for the full vibration + thermal profile of cargo flights. Pre-flight integration includes leak testing. Beyond that, this one is hard to detect after the fact — all chips would read low, and we couldn't distinguish from a real low-capture result.",
+      "Valve B is rated for the full vibration + thermal profile of cargo flights; pre-flight integration includes leak testing. Hard to detect after-the-fact, though — low signal here is indistinguishable from a real low-capture result.",
     outcome: "partial",
-    outcomeText:
-      "Survives but is ambiguous: low signal would be indistinguishable from a real microgravity effect. We'd want a follow-up flight.",
+    outcomeText: "Ambiguous — we'd want a follow-up flight.",
+    mitigation: "hardware",
     icon: "leak",
   },
   {
     id: "tube-lost",
-    failure: "Tube physically lost during recovery",
+    failure: "Tube lost during recovery",
     whatHappens:
-      "The capsule is recovered, but in handling — at sea, at the staging area, in transport — our tube is damaged or misplaced. We have no chips to image.",
+      "Capsule recovered but the tube is damaged or misplaced in handling — at sea, at staging, in transport.",
     hedge:
-      "Honestly, this is just bad luck. No hedge. SSEP's recovery chain is well-established but it's not zero-risk. Our only protection is that we'd have a second flight opportunity in a future SSEP mission.",
+      "No hedge — just bad luck. SSEP's recovery chain is well-established but not zero-risk. Only protection is a second flight opportunity.",
     outcome: "lost",
-    outcomeText:
-      "Lost: no chips, no data. Re-fly required.",
+    outcomeText: "Lost — no chips, no data. Re-fly required.",
+    mitigation: "hardware",
     icon: "damage",
+  },
+  // Pre-flight-mitigated risks (assay layer) ------------------------------
+  {
+    id: "antibody-titer",
+    failure: "Primary or secondary antibody titer is wrong",
+    whatHappens:
+      "Too concentrated → every well saturates the reader and high counts look the same as medium counts. Too dilute → real cells fall below detection.",
+    hedge:
+      "Pre-flight: we'd run a dilution series against chips dosed with known cell concentrations, pick the titer that keeps OD inside the linear range, and build the standard curve from it.",
+    outcome: "mitigated",
+    outcomeText: "Caught pre-flight — titer locked before launch.",
+    mitigation: "preflight",
+    icon: "titer",
+  },
+  {
+    id: "bs3-concentration",
+    failure: "BS3 crosslinker concentration is off",
+    whatHappens:
+      "Too high and BS3 blocks the AMP binding sites — cells can't grab on. Too low and partially-bound cells slip off during washes.",
+    hedge:
+      "Pre-flight: BS3 concentration sweep (1–5 mM) on bench-side AMP chips with known E. coli loads. Pick the value with the highest stuck-fraction.",
+    outcome: "mitigated",
+    outcomeText: "Caught pre-flight — concentration locked before integration.",
+    mitigation: "preflight",
+    icon: "crosslink",
+  },
+  // Inherent design risks --------------------------------------------------
+  {
+    id: "single-timepoint",
+    failure: "One time point only — no kinetics",
+    whatHappens:
+      "We get a single snapshot of capture (the count at Valve B open + ~3 days). We can't tell 'fast then plateau' from 'slow but steady' at the same total count.",
+    hedge:
+      "Accepted for v1. Would need a multi-chamber re-fly with staggered fixation times — out of scope for a student tube.",
+    outcome: "partial",
+    outcomeText: "Accepted — re-fly with multi-chamber for kinetics.",
+    mitigation: "inherent",
+    icon: "clock",
+  },
+  {
+    id: "no-inflight-readout",
+    failure: "No in-flight readout",
+    whatHappens:
+      "We don't know capture succeeded until splashdown. If anything goes wrong on orbit, we don't learn about it for weeks.",
+    hedge:
+      "Accepted. On-orbit imaging would need flight-qualified hardware and crew time beyond student-budget scope.",
+    outcome: "partial",
+    outcomeText: "Accepted — needs on-orbit hardware to fix.",
+    mitigation: "inherent",
+    icon: "blind",
   },
 ];
 
@@ -124,6 +176,46 @@ function Icon({ kind }: { kind: Scenario["icon"] }) {
       </svg>
     );
   }
+  if (kind === "titer") {
+    return (
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <rect x="9" y="3" width="6" height="14" rx="1" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        <rect x="9" y="13" width="6" height="4" fill="currentColor" />
+        <line x1="9" y1="9" x2="6" y2="9" stroke="currentColor" strokeWidth="1.2" />
+        <line x1="9" y1="13" x2="6" y2="13" stroke="currentColor" strokeWidth="1.2" />
+        <path d="M 6 19 Q 12 21 18 19" fill="none" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    );
+  }
+  if (kind === "crosslink") {
+    return (
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <circle cx="7" cy="12" r="3.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="17" cy="12" r="3.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="10.5" y1="12" x2="13.5" y2="12" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="7" y1="8.5" x2="7" y2="5" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="17" y1="8.5" x2="17" y2="5" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    );
+  }
+  if (kind === "clock") {
+    return (
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="12" y1="12" x2="12" y2="7" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="12" y1="12" x2="15" y2="14" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    );
+  }
+  if (kind === "blind") {
+    return (
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <path d="M 3 12 Q 12 4 21 12 Q 12 20 3 12 Z" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        <line x1="4" y1="20" x2="20" y2="4" stroke="currentColor" strokeWidth="1.5" />
+      </svg>
+    );
+  }
   // damage
   return (
     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
@@ -131,6 +223,13 @@ function Icon({ kind }: { kind: Scenario["icon"] }) {
     </svg>
   );
 }
+
+const MITIGATION_META: Record<Mitigation, { label: string; cls: string }> = {
+  hardware: { label: "Hardware risk", cls: "fail-mit--hardware" },
+  preflight: { label: "Pre-flight test catches it", cls: "fail-mit--preflight" },
+  inherent: { label: "Inherent — accept or redesign", cls: "fail-mit--inherent" },
+  ground: { label: "Ground-system risk", cls: "fail-mit--ground" },
+};
 
 const OUTCOME_META: Record<Outcome, { label: string; symbol: string; cls: string }> = {
   mitigated: { label: "Mitigated", symbol: "✓", cls: "fail-out--mitigated" },
@@ -144,54 +243,59 @@ export function FailureScenarios() {
 
   return (
     <div className="fail-scenes">
-      <div className="fail-scenes__grid" role="tablist">
-        {SCENARIOS.map((s) => {
-          const isActive = s.id === selectedId;
-          const meta = OUTCOME_META[s.outcome];
-          return (
-            <button
-              key={s.id}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              className={`fail-card ${isActive ? "fail-card--active" : ""} ${meta.cls}`}
-              onClick={() => setSelectedId(s.id)}
-            >
-              <span className="fail-card__icon" aria-hidden="true">
-                <Icon kind={s.icon} />
-              </span>
-              <span className="fail-card__failure">{s.failure}</span>
-              <span className="fail-card__outcome-tag">
-                <span aria-hidden="true">{meta.symbol}</span> {meta.label}
-              </span>
-            </button>
-          );
-        })}
+      <div className="fail-scenes__legend" aria-hidden="true">
+        <span className="fail-legend__chip fail-mit--hardware">Hardware</span>
+        <span className="fail-legend__chip fail-mit--preflight">Pre-flight catches it</span>
+        <span className="fail-legend__chip fail-mit--inherent">Inherent — accept</span>
       </div>
 
-      <div className="fail-detail" key={selected.id}>
-        <div className="fail-detail__head">
-          <h4 className="fail-detail__failure">{selected.failure}</h4>
-          <span className={`fail-detail__outcome ${OUTCOME_META[selected.outcome].cls}`}>
+      <div className="fail-scenes__layout">
+        <div className="fail-scenes__grid" role="tablist">
+          {SCENARIOS.map((s) => {
+            const isActive = s.id === selectedId;
+            const meta = OUTCOME_META[s.outcome];
+            const mit = MITIGATION_META[s.mitigation];
+            return (
+              <button
+                key={s.id}
+                type="button"
+                role="tab"
+                aria-selected={isActive ? "true" : "false"}
+                className={`fail-card ${isActive ? "fail-card--active" : ""} ${meta.cls} ${mit.cls}`}
+                onClick={() => setSelectedId(s.id)}
+              >
+                <span className="fail-card__icon" aria-hidden="true">
+                  <Icon kind={s.icon} />
+                </span>
+                <span className="fail-card__failure">{s.failure}</span>
+                <span className="fail-card__outcome-tag">
+                  <span aria-hidden="true">{meta.symbol}</span> {meta.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="fail-detail" key={selected.id}>
+          <div className="fail-detail__head">
+            <h4 className="fail-detail__failure">{selected.failure}</h4>
+            <span className={`fail-detail__mit ${MITIGATION_META[selected.mitigation].cls}`}>
+              {MITIGATION_META[selected.mitigation].label}
+            </span>
+          </div>
+
+          <p className="fail-detail__body">{selected.whatHappens}</p>
+
+          <details className="fail-detail__hedge">
+            <summary>What we did about it</summary>
+            <p>{selected.hedge}</p>
+          </details>
+
+          <p className={`fail-detail__verdict ${OUTCOME_META[selected.outcome].cls}`}>
             <span aria-hidden="true">{OUTCOME_META[selected.outcome].symbol}</span>{" "}
-            {OUTCOME_META[selected.outcome].label}
-          </span>
+            {selected.outcomeText}
+          </p>
         </div>
-
-        <div className="fail-detail__row">
-          <div className="fail-detail__col">
-            <h5 className="fail-detail__label">What would go wrong</h5>
-            <p className="fail-detail__body">{selected.whatHappens}</p>
-          </div>
-          <div className="fail-detail__col">
-            <h5 className="fail-detail__label">What we did about it</h5>
-            <p className="fail-detail__body">{selected.hedge}</p>
-          </div>
-        </div>
-
-        <p className={`fail-detail__verdict ${OUTCOME_META[selected.outcome].cls}`}>
-          {selected.outcomeText}
-        </p>
       </div>
     </div>
   );

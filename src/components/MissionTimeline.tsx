@@ -231,14 +231,12 @@ export function MissionTimeline() {
         </div>
         <p className="mission-timeline__info-what">{selected.whatHappens}</p>
         {selected.decision && (
-          <div className="mission-timeline__decision">
-            <div className="mission-timeline__decision-head">
-              {selected.decision.headline}
-            </div>
+          <details className="mission-timeline__decision">
+            <summary>{selected.decision.headline}</summary>
             <p className="mission-timeline__decision-detail">
               {selected.decision.detail}
             </p>
-          </div>
+          </details>
         )}
       </div>
 

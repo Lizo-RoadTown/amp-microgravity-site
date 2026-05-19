@@ -12,7 +12,34 @@ interface Props {
   cellColor?: string;
 }
 
+const MECH_META: Record<
+  MechanismKind,
+  { title: string; oneLiner: string; gNote: string }
+> = {
+  sedimentation: {
+    title: "Sedimentation",
+    oneLiner: "Gravity pulls cells straight down to the chip.",
+    gNote: "Scales with g — vanishes in µg.",
+  },
+  convection: {
+    title: "Buoyant convection",
+    oneLiner: "Warmer fluid rises, colder sinks — cells ride the loop.",
+    gNote: "Scales with g — vanishes in µg.",
+  },
+  diffusion: {
+    title: "Brownian diffusion",
+    oneLiner: "Random jitter from water molecule collisions.",
+    gNote: "Unchanged in µg.",
+  },
+  swimming: {
+    title: "Flagellar swimming",
+    oneLiner: "Active propulsion — cells choose where to go.",
+    gNote: "Unchanged in µg.",
+  },
+};
+
 export function MiniChamber({ mechanism, cellColor = "#c5d4ff" }: Props) {
+  const meta = MECH_META[mechanism];
   const [gravity, setGravity] = useState(1);
   const [resetKey, setResetKey] = useState(0);
 
@@ -31,6 +58,11 @@ export function MiniChamber({ mechanism, cellColor = "#c5d4ff" }: Props) {
 
   return (
     <div className="mini-chamber">
+      <div className="mini-chamber__header">
+        <span className="mini-chamber__title">{meta.title}</span>
+        <span className="mini-chamber__gnote">{meta.gNote}</span>
+      </div>
+      <p className="mini-chamber__one-liner">{meta.oneLiner}</p>
       <div className="mini-chamber__canvas">
         <Canvas camera={{ position: [0, 0.4, 3.5], fov: 50 }}>
           <ambientLight intensity={0.5} />
