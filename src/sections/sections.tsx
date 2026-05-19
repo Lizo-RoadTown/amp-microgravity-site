@@ -7,6 +7,7 @@ import { CrewTimeline } from "../components/CrewTimeline";
 import { MechanismCard } from "../components/MechanismComparison";
 import { BiofilmModule } from "../components/BiofilmModule";
 import { AmpCaptureDemo } from "../components/AmpCaptureDemo";
+import { StrainComparison } from "../components/StrainComparison";
 
 export interface SectionDef {
   id: string;
@@ -169,13 +170,20 @@ const StrainBody: FC = () => (
     <p>
       For this experiment we needed bacteria that would behave themselves — meaning,
       anything that ended up stuck to the chip should have stuck because of the AMPs,
-      not because the cells were just naturally clingy. Wild-type <em>E. coli</em> get
-      to surfaces two ways: passive transport (drifting, swimming, the physics we get
-      into later) and active adhesion through fimbriae — hair-like appendages that
-      bind to almost any surface. The fimbriae would muddy our results. So we picked
-      a ΔfimA knockout strain — specifically <em>E. coli</em> K-12 (Keio Collection
-      JW1881) — that lacks the major fimbrial subunit. Anything that reaches the chip
-      and stays there has to be AMP-mediated.
+      not because the cells were just naturally clingy. Wild-type <em>E. coli</em>
+      have <strong>fimbriae</strong> — hair-like appendages that bind to almost any
+      surface. That makes them sticky on glass, on plastic, on the AMP chip, on the
+      walls of the tube. We can't tell which captures came from the AMPs.
+    </p>
+    <p>
+      Try it both ways: click each cell in the table to test that strain on that
+      surface and see what sticks.
+    </p>
+    <StrainComparison />
+    <p>
+      So we picked the ΔfimA knockout strain — specifically <em>E. coli</em> K-12
+      (Keio Collection JW1881) — that lacks the major fimbrial subunit. Anything that
+      reaches the chip and stays there has to be AMP-mediated.
     </p>
     <p>
       There's a second problem: living bacteria don't sit still. If we just packed a
