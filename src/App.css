@@ -658,6 +658,37 @@
   background: #05070b;
 }
 
+.watch-disclaimer {
+  margin: 1.5rem 0 1.75rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid #3a4258;
+  border-left: 3px solid #e8c14a;
+  border-radius: 8px;
+  background: rgba(232, 193, 74, 0.05);
+}
+
+.watch-disclaimer__head {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #e8c14a;
+  margin-bottom: 0.5rem;
+}
+
+.watch-disclaimer p {
+  margin: 0;
+  font-size: 0.93rem;
+  color: #c5c8d4;
+  line-height: 1.6;
+  max-width: none;
+}
+
+.watch-disclaimer strong {
+  color: #f5f6fa;
+  font-weight: 600;
+}
+
 .chamber-scene {
   display: flex;
   flex-direction: column;

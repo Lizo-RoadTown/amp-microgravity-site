@@ -154,18 +154,32 @@ const HowTheyMoveBody: FC = () => (
 
 const WatchBody: FC = () => (
   <>
+    <div className="watch-disclaimer">
+      <div className="watch-disclaimer__head">A hypothesis, not a result</div>
+      <p>
+        Important: what you're about to see is our <strong>educated guess</strong>{" "}
+        about how the experiment would have played out. It's built on solid physics —
+        the four transport mechanisms are real, the parameters come from published
+        E. coli numbers, and the gravity dependence is straightforward to derive — but
+        we never got to fly the experiment, so we never actually observed the result.
+        Treat this as a <strong>simulation of the hypothesis</strong>, not flight
+        data.
+      </p>
+    </div>
     <p>
-      We built this so you don't have to take our word for it — here are the four
-      mechanisms running side by side. 1g on the left, microgravity on the right. Drag
-      the gravity slider toward zero and watch the 1g pile-up at the chip stop. Toggle
-      individual mechanisms to see how each one contributes (or doesn't). The capture
-      counter on each chamber is the number of cells that have stuck to the chip so far.
+      With that said: here are the four mechanisms running side by side. 1g on the
+      left, microgravity on the right. Drag the gravity slider toward zero and watch
+      the 1g pile-up at the chip stop. Toggle individual mechanisms to see how each
+      one contributes (or doesn't). The capture counter on each chamber is the number
+      of cells that have stuck to the chip so far.
     </p>
     <p>
-      Worth saying out loud: this is an illustrative simulation, not a physical model
-      of the experiment. The transport math is right in shape, but the numbers are tuned
-      for what reads well on screen. The real exposure window in the proposal is three
-      days, not eighty seconds.
+      Two more honesty notes about the visual: the transport math is right in
+      <em> shape</em>, but the numbers are tuned for what reads well on screen — the
+      real exposure window in the proposal is three days, not eighty seconds — and
+      the µg side has a small ambient damping factor so the chamber reads visibly
+      calmer than the 1g side, matching everyday intuition even though at the
+      single-cell scale gravity doesn't directly slow swimming or diffusion.
     </p>
     <div className="scene-frame">
       <ChamberScene />
