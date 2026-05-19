@@ -54,13 +54,40 @@ export function BiofilmModule() {
 
   return (
     <div className="biofilm-module">
-      <div className="biofilm-module__stage">
       <svg
-        viewBox="0 0 600 300"
+        viewBox="0 -80 600 380"
         className="biofilm-module__svg"
         role="img"
         aria-label="Interactive cross-section of an ISS-style module showing where biofilms have been documented."
       >
+        {/* Inline info — lives INSIDE the visual */}
+        <foreignObject x={14} y={-72} width={572} height={64}>
+          <div
+            // @ts-expect-error xmlns required for HTML inside foreignObject
+            xmlns="http://www.w3.org/1999/xhtml"
+            className="biofilm-module__inline-info"
+          >
+            {selected ? (
+              <>
+                <div className="biofilm-module__inline-info-head">
+                  <span
+                    className="biofilm-module__inline-info-swatch"
+                    style={{ background: selected.color }}
+                    aria-hidden="true"
+                  />
+                  <span className="biofilm-module__inline-info-name">{selected.name}</span>
+                  <span className="biofilm-module__inline-info-where">{selected.where}</span>
+                </div>
+                <p className="biofilm-module__inline-info-detail">{selected.detail}</p>
+              </>
+            ) : (
+              <span className="biofilm-module__inline-info-prompt">
+                Click one of the colored patches on the module to see what's been
+                found there.
+              </span>
+            )}
+          </div>
+        </foreignObject>
         <defs>
           <linearGradient id="bm-module-fill" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#0d1119" />
@@ -259,32 +286,6 @@ export function BiofilmModule() {
         ))}
       </svg>
 
-      <div
-        className={
-          selected
-            ? "biofilm-module__info biofilm-module__info--active"
-            : "biofilm-module__info"
-        }
-      >
-        {selected ? (
-          <>
-            <div
-              className="biofilm-module__swatch"
-              style={{ background: selected.color }}
-              aria-hidden="true"
-            />
-            <h4 className="biofilm-module__name">{selected.name}</h4>
-            <p className="biofilm-module__where">{selected.where}</p>
-            <p className="biofilm-module__detail">{selected.detail}</p>
-          </>
-        ) : (
-          <p className="biofilm-module__prompt">
-            Click one of the colored patches on the module to see what's been
-            found there.
-          </p>
-        )}
-      </div>
-      </div>
     </div>
   );
 }

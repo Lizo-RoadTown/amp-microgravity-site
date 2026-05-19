@@ -140,13 +140,32 @@ export function InteractiveTube() {
 
   return (
     <div className="itube">
-      <div className="itube__stage">
       <svg
-        viewBox="0 0 800 280"
+        viewBox="0 -80 800 360"
         className="itube__svg"
         role="img"
         aria-label="Interactive cross-section of the RhFET-01 tube. Click chambers and valves to learn what they do; click valves to open them."
       >
+        {/* Inline info — lives INSIDE the visual */}
+        <foreignObject x={20} y={-72} width={760} height={64}>
+          <div
+            // @ts-expect-error xmlns required for HTML inside foreignObject
+            xmlns="http://www.w3.org/1999/xhtml"
+            className="itube__inline-info"
+          >
+            {info ? (
+              <>
+                <span className="itube__inline-info-title">{info.title}</span>
+                <span className="itube__inline-info-detail">{info.detail}</span>
+                {info.hint && <span className="itube__inline-info-hint">{info.hint}</span>}
+              </>
+            ) : (
+              <span className="itube__inline-info-prompt">
+                Click any chamber or valve below. Click a valve a second time to open it.
+              </span>
+            )}
+          </div>
+        </foreignObject>
         <defs>
           <linearGradient id="itube-body" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#1a1d28" />
@@ -542,21 +561,6 @@ export function InteractiveTube() {
           29 cm total · 12 mm outer diameter · 20 mL total fluid
         </text>
       </svg>
-
-      <div className={`itube__info ${info ? "itube__info--active" : ""}`}>
-        {info ? (
-          <>
-            <h4 className="itube__info-title">{info.title}</h4>
-            <p className="itube__info-detail">{info.detail}</p>
-            {info.hint && <p className="itube__info-hint">{info.hint}</p>}
-          </>
-        ) : (
-          <p className="itube__info-prompt">
-            Click any chamber or valve. Click a valve a second time to open it.
-          </p>
-        )}
-      </div>
-      </div>
 
       <div className="itube__controls">
         <div className="itube__valve-states">

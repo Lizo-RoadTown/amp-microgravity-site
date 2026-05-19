@@ -336,7 +336,62 @@ export function InteractiveElisa() {
 
   return (
     <div className="ielisa">
-      <div className="ielisa__stage">
+      <div className="ielisa__above">
+        <div className="ielisa__callouts">
+          <details className="ielisa__callout ielisa__callout--preflight">
+            <summary>Pre-flight testing</summary>
+            <p>
+              The times in this walkthrough are typical sandwich-ELISA ranges
+              from the literature. Several of our exact choices — antibody
+              titer, wash cycle count, BS3 crosslinker concentration, stop
+              time — were targets to lock down during pre-flight validation,
+              not final decisions. Pre-flight work was about finding the best
+              method, not running the final one.
+            </p>
+          </details>
+          <details className="ielisa__callout ielisa__callout--sticking">
+            <summary>Will the cells stay stuck?</summary>
+            <p>
+              Every cell we count has to survive four shaking events:
+              <strong> (1) launch vibration</strong> on the way up,
+              <strong> (2) capture and fixation in microgravity</strong>,
+              <strong> (3) re-entry and parachute deployment</strong> on the
+              way down, and <strong>(4) the assay itself</strong> — every wash
+              cycle is a chance to lose what we're trying to count.
+            </p>
+          </details>
+        </div>
+
+        <div className="ielisa__drawers">
+          <details className="ielisa__drawer ielisa__drawer--why">
+            <summary>How this actually counts cells</summary>
+            <p>{step.mechanism}</p>
+          </details>
+
+          {step.options && step.options.length > 0 && (
+            <details className="ielisa__drawer ielisa__drawer--options">
+              <summary>Options we weighed</summary>
+              <ul>
+                {step.options.map((o, i) => (
+                  <li key={i}>{o}</li>
+                ))}
+              </ul>
+            </details>
+          )}
+
+          {step.risks && step.risks.length > 0 && (
+            <details className="ielisa__drawer ielisa__drawer--risks">
+              <summary>Where the count could be wrong</summary>
+              <ul>
+                {step.risks.map((r, i) => (
+                  <li key={i}>{r}</li>
+                ))}
+              </ul>
+            </details>
+          )}
+        </div>
+      </div>
+
       <svg
         viewBox={`0 0 ${SVG_W} ${SVG_H}`}
         className="ielisa__svg"
@@ -725,147 +780,27 @@ export function InteractiveElisa() {
           </g>
         </g>
 
-        {/* Step badge — top left */}
-        <g transform="translate(30 30)">
-          <circle r={18} fill="#11161f" stroke="#5a7fbf" strokeWidth="1.5" />
-          <text
-            y={5}
-            fontSize="15"
-            fontWeight="700"
-            fill="#c5d4ff"
-            textAnchor="middle"
+        {/* Inline caption — lives INSIDE the visual */}
+        <foreignObject x={20} y={12} width={SVG_W - 40} height={88}>
+          <div
+            // @ts-expect-error xmlns is required for HTML inside SVG foreignObject
+            xmlns="http://www.w3.org/1999/xhtml"
+            className="ielisa__inline-caption"
           >
-            {stepIdx + 1}
-          </text>
-        </g>
-        <text
-          x={62}
-          y={28}
-          fill="#c5d4ff"
-          fontSize="12"
-          fontWeight="600"
-          letterSpacing="0.05em"
-        >
-          STEP {stepIdx + 1} / {STEPS.length}
-        </text>
-        <text x={62} y={42} fill="#8a8fa3" fontSize="10">
-          {step.label}
-        </text>
+            <div className="ielisa__inline-caption-head">
+              <span className="ielisa__inline-caption-step">
+                Step {stepIdx + 1} / {STEPS.length}
+              </span>
+              <span className="ielisa__inline-caption-label">{step.label}</span>
+              <span className="ielisa__inline-caption-time">
+                {step.duration} · elapsed {formatElapsed(step.elapsedMin)}
+              </span>
+            </div>
+            <p className="ielisa__inline-caption-detail">{step.detail}</p>
+          </div>
+        </foreignObject>
 
-        {/* Elapsed-time badge — top right */}
-        <g transform={`translate(${SVG_W - 30} 30)`}>
-          <rect
-            x={-110}
-            y={-18}
-            width={110}
-            height={38}
-            rx={8}
-            fill="#11161f"
-            stroke="#5a7fbf"
-            strokeWidth="1.2"
-          />
-          <text
-            x={-100}
-            y={-3}
-            fill="#8a8fa3"
-            fontSize="9"
-            letterSpacing="0.1em"
-            fontWeight="600"
-          >
-            ELAPSED
-          </text>
-          <text
-            x={-100}
-            y={14}
-            fill="#c5d4ff"
-            fontSize="13"
-            fontWeight="700"
-          >
-            {formatElapsed(step.elapsedMin)}
-          </text>
-          <text
-            x={-10}
-            y={14}
-            fill="#6e7388"
-            fontSize="9"
-            textAnchor="end"
-          >
-            of ~{formatElapsed(STEPS[STEPS.length - 1].elapsedMin)}
-          </text>
-        </g>
       </svg>
-
-      <div className="ielisa__caption">
-        <div className="ielisa__caption-head">
-          <div className="ielisa__step-label">
-            {stepIdx + 1}. {step.label}
-          </div>
-          <div className="ielisa__step-time">
-            <span className="ielisa__step-time-dur">{step.duration}</span>
-            <span className="ielisa__step-time-sep">·</span>
-            <span className="ielisa__step-time-elapsed">
-              elapsed {formatElapsed(step.elapsedMin)}
-            </span>
-          </div>
-        </div>
-        <p className="ielisa__step-detail">{step.detail}</p>
-      </div>
-      </div>
-
-      <div className="ielisa__drawers">
-        <details className="ielisa__drawer ielisa__drawer--why">
-          <summary>How this actually counts cells</summary>
-          <p>{step.mechanism}</p>
-        </details>
-
-        {step.options && step.options.length > 0 && (
-          <details className="ielisa__drawer ielisa__drawer--options">
-            <summary>Options we weighed</summary>
-            <ul>
-              {step.options.map((o, i) => (
-                <li key={i}>{o}</li>
-              ))}
-            </ul>
-          </details>
-        )}
-
-        {step.risks && step.risks.length > 0 && (
-          <details className="ielisa__drawer ielisa__drawer--risks">
-            <summary>Where the count could be wrong</summary>
-            <ul>
-              {step.risks.map((r, i) => (
-                <li key={i}>{r}</li>
-              ))}
-            </ul>
-          </details>
-        )}
-      </div>
-
-      <div className="ielisa__callouts">
-        <div className="ielisa__callout ielisa__callout--preflight">
-          <span className="ielisa__callout-tag">Pre-flight testing</span>
-          <p>
-            The times in this walkthrough are typical sandwich-ELISA ranges from
-            the literature. Several of our exact choices — antibody titer, wash
-            cycle count, BS3 crosslinker concentration, stop time — were
-            <strong> targets to lock down during pre-flight validation</strong>,
-            not final decisions. Pre-flight work was about finding the best
-            method, not running the final one.
-          </p>
-        </div>
-        <div className="ielisa__callout ielisa__callout--sticking">
-          <span className="ielisa__callout-tag">Will the cells stay stuck?</span>
-          <p>
-            Every cell we count has to survive four shaking events:
-            <strong> (1) launch vibration</strong> on the way up,
-            <strong> (2) capture and fixation in microgravity</strong>,
-            <strong> (3) re-entry and parachute deployment</strong> on the way
-            down, and <strong>(4) the assay itself</strong> — every wash cycle
-            is a chance to lose what we're trying to count. Fixation chemistry
-            and AMP grip have to hold through all four.
-          </p>
-        </div>
-      </div>
 
       <div className="ielisa__controls">
         <div className="ielisa__nav">
