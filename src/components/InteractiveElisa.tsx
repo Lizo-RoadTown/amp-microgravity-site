@@ -4,58 +4,146 @@ interface Step {
   id: string;
   label: string;
   detail: string;
+  mechanism: string; // WHY this step actually moves the count forward
+  options?: string[]; // alternatives the team weighed; pre-flight would have picked one
+  risks?: string[]; // ways this step can drop a real cell and bias the count low
+  duration: string;
+  elapsedMin: number; // running clock — minutes from start of assay
 }
 
+// Durations and elapsed time pulled from Thermo Fisher's standard sandwich-
+// ELISA reference times: ~1 hr primary incubation, 3–5 washes (~15 min total),
+// ~1 hr secondary incubation, more washing, 10–30 min color development,
+// ~2 min plate read. Typical total: ~3 hours hands-on after chip arrives.
 const STEPS: Step[] = [
   {
     id: "cell",
     label: "Captured cell on the chip",
     detail:
       "The flight chips come back fixed in formalin. A bacterium stuck to an AMP is locked in place. Now we want to count it.",
+    mechanism:
+      "The cell is held to the AMP layer by electrostatic and hydrophobic attraction — the peptide's positive charges grip the negatively-charged bacterial membrane. Formalin then cross-links proteins inside the cell to each other and to the surface, so the bacterium can't drift off later when the wash steps come through.",
+    options: [
+      "Fixative: formalin vs glutaraldehyde vs paraformaldehyde",
+      "BS3 crosslinker concentration (1–5 mM) to make the AMP-cell contact stronger before fixation",
+    ],
+    risks: [
+      "Launch vibration could shake a freshly-captured cell off before the µg chamber even opens.",
+      "Capture and fixation has to finish in microgravity — if a cell touches and lets go before the formalin valve opens, we never counted it.",
+      "Re-entry and parachute deployment shake the chamber a second time; fixative has to hold through that.",
+    ],
+    duration: "Starting point",
+    elapsedMin: 0,
   },
   {
     id: "primary-flood",
     label: "Flood with primary antibody",
     detail:
-      "Primary antibodies that specifically recognize E. coli surface molecules flood the chip. Many of them just drift past; a few find a cell and lock onto it. The two arms of the antibody Y are the recognition sites.",
+      "Pour primary antibodies over the chip. They need TIME to find the cells — most of an hour at room temperature is standard.",
+    mechanism:
+      "The Y-shaped tips (the Fab regions) are precisely shaped to fit specific E. coli surface antigens — LPS, OmpA, flagellin. Binding is hydrogen bonds plus shape-fit, no enzyme reaction yet. Each cell ends up with multiple primaries stuck to it because it has many copies of each antigen.",
+    options: [
+      "Polyclonal anti-E. coli (covers more antigens, more robust) vs monoclonal (more reproducible)",
+      "Antibody titer / dilution — set by a pre-flight dilution series, not picked from a catalog",
+    ],
+    duration: "~1 hour incubation",
+    elapsedMin: 60,
   },
   {
     id: "primary-wash",
     label: "Wash off unbound primary",
     detail:
-      "Rinse the chip. Free primary antibodies — the ones that didn't find a cell — get carried away. Only the ones gripping a cell stay behind.",
+      "Rinse the chip 3–5 times with buffer. Free antibodies get carried away; ones gripping a cell stay.",
+    mechanism:
+      "Wash buffer (PBS + Tween-20) dilutes unbound antibodies into the bulk solution. The detergent disrupts loose, non-specific contacts but is too weak to break the antibody-antigen lock. Only antibodies actually clamped to a cell survive.",
+    options: [
+      "Tween-20 concentration (0.05% vs 0.1%)",
+      "Number of cycles — 3 wash steps under-clean; 5 risks shearing real cells. Pre-flight would pick.",
+    ],
+    risks: [
+      "Shear force from too many washes can detach cells whose fixation didn't fully lock — biasing the count low.",
+    ],
+    duration: "3–5 wash cycles · ~15 min",
+    elapsedMin: 75,
   },
   {
     id: "secondary-flood",
     label: "Flood with HRP-secondary antibody",
     detail:
-      "Now a second antibody — this one carries an enzyme called horseradish peroxidase (HRP) as a passenger. Its job is to find and bind the primary antibody. Each captured cell ends up with several HRP enzymes parked on top.",
+      "Another hour. The secondary antibody carries an enzyme — that's the amplification step.",
+    mechanism:
+      "The secondary recognizes the CONSTANT base (Fc region) of the primary — e.g., anti-rabbit IgG if the primary was raised in rabbits. Horseradish peroxidase (HRP) is covalently linked to it. Each primary can be bound by several secondaries, and each secondary carries one HRP, so one captured cell turns into many enzymes.",
+    options: [
+      "Reporter enzyme: HRP (fast, sensitive) vs alkaline phosphatase (more stable)",
+      "Indirect (two-step) detection vs direct-labeled primary (one step, less amplification)",
+    ],
+    duration: "~1 hour incubation",
+    elapsedMin: 135,
   },
   {
     id: "secondary-wash",
     label: "Wash off unbound secondary",
     detail:
-      "Rinse again. Anything not anchored to a cell-then-primary-antibody gets carried away.",
+      "Wash again, 3–5 times. Now everything left on the chip is part of the sandwich.",
+    mechanism:
+      "Same chemistry as the primary wash. After this step, every HRP enzyme on the chip is anchored: surface → AMP → cell → primary → secondary → HRP. Free HRP would make color without a cell underneath, so getting this wash right is what makes the assay specific.",
+    risks: [
+      "Any free HRP that survives this wash makes color with no cell underneath — biasing the count high.",
+    ],
+    duration: "3–5 wash cycles · ~15 min",
+    elapsedMin: 150,
   },
   {
     id: "substrate",
     label: "Add TMB substrate",
     detail:
-      "TMB is a colorless small molecule. Wherever HRP is sitting, it starts converting TMB into a blue product. No bacterium → no HRP → no color.",
+      "TMB is colorless. Wherever HRP is sitting, the enzyme starts converting TMB into a blue product.",
+    mechanism:
+      "TMB (3,3′,5,5′-tetramethylbenzidine) is HRP's substrate. HRP uses the hydrogen peroxide also in the buffer to oxidize TMB into a blue charge-transfer complex. No enzyme → no oxidation → no color. The reaction is the count.",
+    options: [
+      "Substrate chemistry: TMB (most sensitive) vs OPD vs ABTS — TMB also happens to be the safest of the three",
+    ],
+    duration: "Substrate added · timer starts",
+    elapsedMin: 152,
   },
   {
     id: "color",
     label: "Color develops",
     detail:
-      "After a few minutes the blue gets darker. More cells captured = more HRP enzymes = more blue. Stop the reaction with acid at a fixed time so every chip is read at the same point.",
+      "Over 10 to 30 minutes the blue gets darker. Stop the reaction with sulfuric acid at a fixed time so every chip is read at the same exposure.",
+    mechanism:
+      "Each HRP enzyme converts thousands of TMB molecules per second. Color intensity is proportional to enzyme count, enzyme count is proportional to secondaries, secondaries to primaries, primaries to surface antigens, and antigens to captured cells. That chain is why color = cell count, as long as nothing along it is saturated.",
+    options: [
+      "Stop time — 10, 15, or 30 minutes. Shorter = less sensitive but linear; longer = sensitive but saturates high-count wells. Pre-flight standard curves set this.",
+    ],
+    risks: [
+      "If you wait too long, dense wells saturate the reader and the curve goes non-linear — high counts get squashed.",
+    ],
+    duration: "10–30 min · stop with acid",
+    elapsedMin: 175,
   },
   {
     id: "read",
     label: "Read at 450 nm and convert",
     detail:
-      "A spectrophotometer measures the optical density at 450 nm. Plug that into a standard curve built from chips dosed with known cell concentrations and you get cells per square centimeter.",
+      "A spectrophotometer measures the optical density at 450 nm — about two minutes for a whole plate.",
+    mechanism:
+      "The acid-stopped product is yellow and absorbs strongly at 450 nm. OD = log₁₀(I₀/I), so absorbance is linear in concentration over a useful range. The standard curve — built pre-flight from chips dosed with KNOWN cell concentrations — converts OD into cells per square centimeter.",
+    options: [
+      "Single-wavelength 450 nm read vs 450/630 nm dual-wavelength subtraction to cancel plate artifacts",
+    ],
+    duration: "~2 min on the plate reader",
+    elapsedMin: 177,
   },
 ];
+
+function formatElapsed(min: number): string {
+  if (min === 0) return "0 min";
+  if (min < 60) return `${min} min`;
+  const h = Math.floor(min / 60);
+  const m = min % 60;
+  return m === 0 ? `${h} hr` : `${h} hr ${m} min`;
+}
 
 // Antibody binding positions on the cell (top half of the captured ellipse)
 const ANTIBODY_POSITIONS = [
@@ -662,13 +750,117 @@ export function InteractiveElisa() {
         <text x={62} y={42} fill="#8a8fa3" fontSize="10">
           {step.label}
         </text>
+
+        {/* Elapsed-time badge — top right */}
+        <g transform={`translate(${SVG_W - 30} 30)`}>
+          <rect
+            x={-110}
+            y={-18}
+            width={110}
+            height={38}
+            rx={8}
+            fill="#11161f"
+            stroke="#5a7fbf"
+            strokeWidth="1.2"
+          />
+          <text
+            x={-100}
+            y={-3}
+            fill="#8a8fa3"
+            fontSize="9"
+            letterSpacing="0.1em"
+            fontWeight="600"
+          >
+            ELAPSED
+          </text>
+          <text
+            x={-100}
+            y={14}
+            fill="#c5d4ff"
+            fontSize="13"
+            fontWeight="700"
+          >
+            {formatElapsed(step.elapsedMin)}
+          </text>
+          <text
+            x={-10}
+            y={14}
+            fill="#6e7388"
+            fontSize="9"
+            textAnchor="end"
+          >
+            of ~{formatElapsed(STEPS[STEPS.length - 1].elapsedMin)}
+          </text>
+        </g>
       </svg>
 
       <div className="ielisa__caption">
-        <div className="ielisa__step-label">
-          {stepIdx + 1}. {step.label}
+        <div className="ielisa__caption-head">
+          <div className="ielisa__step-label">
+            {stepIdx + 1}. {step.label}
+          </div>
+          <div className="ielisa__step-time">
+            <span className="ielisa__step-time-dur">{step.duration}</span>
+            <span className="ielisa__step-time-sep">·</span>
+            <span className="ielisa__step-time-elapsed">
+              elapsed {formatElapsed(step.elapsedMin)}
+            </span>
+          </div>
         </div>
         <p className="ielisa__step-detail">{step.detail}</p>
+
+        <div className="ielisa__why">
+          <span className="ielisa__why-tag">How this actually counts cells</span>
+          <p>{step.mechanism}</p>
+        </div>
+
+        {step.options && step.options.length > 0 && (
+          <div className="ielisa__options">
+            <span className="ielisa__options-tag">Options we weighed</span>
+            <ul>
+              {step.options.map((o, i) => (
+                <li key={i}>{o}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {step.risks && step.risks.length > 0 && (
+          <div className="ielisa__risks">
+            <span className="ielisa__risks-tag">Where the count could be wrong</span>
+            <ul>
+              {step.risks.map((r, i) => (
+                <li key={i}>{r}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <div className="ielisa__callouts">
+        <div className="ielisa__callout ielisa__callout--preflight">
+          <span className="ielisa__callout-tag">Pre-flight testing</span>
+          <p>
+            The times in this walkthrough are typical sandwich-ELISA ranges from
+            the literature. Several of our exact choices — antibody titer, wash
+            cycle count, BS3 crosslinker concentration, stop time — were
+            <strong> targets to lock down during pre-flight validation</strong>,
+            not final decisions. Pre-flight work was about finding the best
+            method, not running the final one.
+          </p>
+        </div>
+        <div className="ielisa__callout ielisa__callout--sticking">
+          <span className="ielisa__callout-tag">Will the cells stay stuck?</span>
+          <p>
+            Every cell we count has to survive four shaking events:
+            <strong> (1) launch vibration</strong> on the way up,
+            <strong> (2) capture and fixation in microgravity</strong>,
+            <strong> (3) re-entry and parachute deployment</strong> on the way
+            down, and <strong>(4) the assay itself</strong> — every wash cycle
+            is a chance to lose what we're trying to count. Fixation chemistry
+            and AMP grip have to hold through all four.
+          </p>
+        </div>
       </div>
 
       <div className="ielisa__controls">
