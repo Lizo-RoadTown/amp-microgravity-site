@@ -5,6 +5,7 @@ import { InteractiveElisa } from "../components/InteractiveElisa";
 import { InteractiveTube } from "../components/InteractiveTube";
 import { ReturnJourney } from "../components/ReturnJourney";
 import { FailureScenarios } from "../components/FailureScenarios";
+import { OutcomesToggle } from "../components/OutcomesToggle";
 import { MissionTimeline } from "../components/MissionTimeline";
 import { MiniChamber } from "../components/MiniChamber";
 import { BiofilmModule } from "../components/BiofilmModule";
@@ -315,29 +316,11 @@ const RiskBody: FC = () => (
 const OutcomesBody: FC = () => (
   <>
     <p>
-      Both possible outcomes from this experiment are useful. Here's what each one
-      would tell us about how AMP biosensors behave in space.
+      Both possible outcomes from this experiment are useful. Toggle between them
+      below to see what each one would mean for spacecraft biosensor design.
     </p>
 
-    <h3>If microgravity reduces capture</h3>
-    <p>
-      That would mean diffusion + swimming alone can't do the job sedimentation +
-      convection were doing on Earth, and every AMP biosensor that was calibrated on
-      a benchtop is reading the wrong number in orbit. Practically: spacecraft
-      biosensors would need longer exposure windows, denser AMP coatings, or
-      recalibrated detection thresholds before they're trustworthy for contamination
-      monitoring. That's not a small adjustment — it's a different engineering brief.
-    </p>
-
-    <h3>If capture is statistically equivalent</h3>
-    <p>
-      That would mean active bacterial swimming is doing enough work on its own to
-      compensate for the missing transport modes, and current Earth-tested designs
-      can probably deploy as-is. It would also be quietly interesting on its own
-      terms: it would say something specific about how much active microbial
-      transport contributes relative to the passive mechanisms, which isn't well
-      characterized.
-    </p>
+    <OutcomesToggle />
 
     <h3>Where this experiment would stop</h3>
     <p>

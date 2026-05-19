@@ -824,6 +824,209 @@
 }
 
 /* ──────────────────────────────────────────────────────────────
+   Outcomes toggle (What we hoped to learn page)
+   ────────────────────────────────────────────────────────────── */
+
+.outcome-toggle {
+  margin: 1.5rem 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  border: 1px solid #1a1d28;
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: #05070b;
+  --outcome-accent: #5a7fbf;
+}
+
+.outcome-toggle--reduced {
+  --outcome-accent: #c47a8a;
+}
+
+.outcome-toggle--equivalent {
+  --outcome-accent: #a3e4c4;
+}
+
+.outcome-toggle__switch {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.3rem;
+  background: #0a0d14;
+  border: 1px solid #1a1d28;
+  border-radius: 10px;
+}
+
+.outcome-toggle__opt {
+  font: inherit;
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #8a8fa3;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.outcome-toggle__opt:hover {
+  color: #c5d4ff;
+  background: rgba(138, 180, 255, 0.04);
+}
+
+.outcome-toggle__opt--active {
+  background: rgba(90, 127, 191, 0.18);
+  color: #f5f6fa;
+  border-color: var(--outcome-accent);
+}
+
+.outcome-toggle__opt-label {
+  display: inline-block;
+}
+
+.outcome-toggle__panel {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+@media (max-width: 640px) {
+  .outcome-toggle__panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+.outcome-toggle__chart {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  align-items: end;
+  padding: 1rem 0.75rem 0.5rem;
+  position: relative;
+  background: #0a0d14;
+  border: 1px solid #1a1d28;
+  border-radius: 10px;
+  min-height: 220px;
+}
+
+.outcome-toggle__yaxis {
+  position: absolute;
+  bottom: -22px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.7rem;
+  color: #6e7388;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+.outcome-bar {
+  display: flex;
+  flex-direction: column;
+  height: 160px;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: 0.4rem;
+}
+
+.outcome-bar__column {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+}
+
+.outcome-bar__fill {
+  width: 100%;
+  background: linear-gradient(180deg, var(--outcome-accent), color-mix(in srgb, var(--outcome-accent) 60%, #0a0d14));
+  border-radius: 6px 6px 0 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.4rem;
+  transition: height 0.5s cubic-bezier(0.4, 1.4, 0.6, 1);
+  min-height: 12px;
+}
+
+.outcome-bar--muted .outcome-bar__fill {
+  background: linear-gradient(180deg, #5a7fbf, #2c3447);
+}
+
+.outcome-bar--primary .outcome-bar__fill {
+  background: linear-gradient(180deg, var(--outcome-accent), color-mix(in srgb, var(--outcome-accent) 50%, #0a0d14));
+}
+
+.outcome-bar__value {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #f5f6fa;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.outcome-bar__label {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #c5c8d4;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+.outcome-toggle__story {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.outcome-toggle__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--outcome-accent);
+}
+
+.outcome-toggle__blurb {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #c5c8d4;
+  line-height: 1.55;
+  max-width: none;
+}
+
+.outcome-toggle__implications-head {
+  margin: 0.4rem 0 0.1rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #8a8fa3;
+}
+
+.outcome-toggle__implications {
+  margin: 0;
+  padding: 0 0 0 1.1rem;
+  list-style: disc;
+}
+
+.outcome-toggle__implications li {
+  font-size: 0.9rem;
+  color: #c5c8d4;
+  line-height: 1.55;
+  margin-bottom: 0.3rem;
+}
+
+.outcome-toggle__implications li::marker {
+  color: var(--outcome-accent);
+}
+
+/* ──────────────────────────────────────────────────────────────
    Failure scenarios (What if something breaks? page)
    ────────────────────────────────────────────────────────────── */
 
