@@ -3,6 +3,7 @@ import { ChamberScene } from "../scenes/ChamberScene";
 import { InteractiveChipStack } from "../components/InteractiveChipStack";
 import { ElisaDiagram } from "../components/ElisaDiagram";
 import { InteractiveTube } from "../components/InteractiveTube";
+import { ReturnJourney } from "../components/ReturnJourney";
 import { MissionTimeline } from "../components/MissionTimeline";
 import { MechanismCard } from "../components/MechanismComparison";
 import { BiofilmModule } from "../components/BiofilmModule";
@@ -209,18 +210,25 @@ const ChipBody: FC = () => (
 );
 
 const ReturnBody: FC = () => (
-  <p>
-    The capture itself happens on orbit, but we deliberately do all the measurement on
-    the ground. The fix-on-orbit-then-return choice is what makes that possible. On
-    Day U-2 — two days before the capsule undocks from the ISS — the crew opens Valve
-    B, and formalin (10% neutral buffered formalin, the standard tissue fixative)
-    floods the chamber where the chips are. Formalin crosslinks proteins in place, so
-    every bacterium that's bound to the chip at that moment is chemically locked there.
-    Anything that hasn't stuck yet gets killed before it can stick on the trip down. So
-    when the chips come back to the lab, they're frozen — not literally, chemically —
-    in whatever state they actually reached on orbit. No risk of re-entry conditions
-    mucking up the numbers.
-  </p>
+  <>
+    <p>
+      The capture itself happens on orbit, but we deliberately do all the measurement
+      on the ground. The fix-on-orbit-then-return choice is what makes that possible.
+      On Day U-2 — two days before the capsule undocks from the ISS — the crew opens
+      Valve B, and formalin (10% neutral buffered formalin, the standard tissue
+      fixative) floods the chamber where the chips are. Formalin crosslinks proteins
+      in place, so every bacterium that's bound to the chip at that moment is
+      chemically locked there. Anything that hasn't stuck yet gets killed before it
+      can stick on the trip down.
+    </p>
+    <p>Click <em>Play journey</em> to watch the trip back to the lab.</p>
+    <ReturnJourney />
+    <p>
+      The key thing: the green "cells: locked since U-2" badge stays on for the
+      entire trip. Reentry doesn't change the chip. Splashdown doesn't change the
+      chip. Whatever state the cells reached on orbit is exactly what comes home.
+    </p>
+  </>
 );
 
 const CountingBody: FC = () => (

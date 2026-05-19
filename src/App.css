@@ -824,6 +824,146 @@
 }
 
 /* ──────────────────────────────────────────────────────────────
+   Return journey (How does it come back? page)
+   ────────────────────────────────────────────────────────────── */
+
+.rjourney {
+  margin: 1.5rem 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid #1a1d28;
+  border-radius: 12px;
+  padding: 1.25rem;
+  background: #05070b;
+}
+
+.rjourney__svg {
+  display: block;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.rj-fade-in {
+  animation: rj-fade 0.7s ease-out both;
+}
+
+@keyframes rj-fade {
+  0%   { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.rjourney__caption {
+  padding: 0.75rem 0.9rem;
+  border-left: 3px solid #5a7fbf;
+  background: rgba(90, 127, 191, 0.06);
+  border-radius: 4px;
+  min-height: 5rem;
+}
+
+.rjourney__stage-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #c5d4ff;
+  margin-bottom: 0.25rem;
+}
+
+.rjourney__stage-detail {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #c5c8d4;
+  line-height: 1.55;
+  max-width: none;
+}
+
+.rjourney__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.rjourney__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.rjourney__btn {
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.45rem 0.95rem;
+  border-radius: 7px;
+  border: 1px solid #2c3447;
+  background: #11161f;
+  color: #c5d4ff;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.rjourney__btn:hover:not(:disabled) {
+  border-color: #5a7fbf;
+  background: #131a26;
+}
+
+.rjourney__btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.rjourney__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.rjourney__btn--primary {
+  background: linear-gradient(180deg, #2a4070 0%, #1e2f55 100%);
+  border-color: #5a7fbf;
+  color: #f5f6fa;
+}
+
+.rjourney__btn--primary:hover:not(:disabled) {
+  background: linear-gradient(180deg, #314a82 0%, #233763 100%);
+  border-color: #7a98d8;
+}
+
+.rjourney__btn--ghost {
+  background: transparent;
+  color: #8a8fa3;
+  border-color: #1a1d28;
+}
+
+.rjourney__btn--ghost:hover {
+  color: #c5d4ff;
+  border-color: #2c3447;
+}
+
+.rjourney__progress {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.rjourney__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1a1d28;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.rjourney__dot--on {
+  background: #5a7fbf;
+  transform: scale(1.15);
+}
+
+/* ──────────────────────────────────────────────────────────────
    Interactive tube (What does the testing tube look like? page)
    ────────────────────────────────────────────────────────────── */
 
